@@ -1,0 +1,138 @@
+<html>
+<!--
+ * AtPack visualizer for Atmel (Microchip) MCU
+ * Copyright (C) 2018 B. Stultiens
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ -->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Atmel Pack Visualizer</title>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="atpackbase.js"></script>
+  <script type="text/javascript" src="atpackrun.js"></script>
+  <script type="text/javascript" src="atpackpkgs.js"></script>
+  <style>
+    table { border-collapse: collapse; }
+    td { border: 1px solid black; }
+    .al { text-align: left; }
+    .ar { text-align: right; }
+    .at { vertical-align: top; }
+  </style>
+</head>
+<body>
+<table>
+  <tr>
+    <td>AtPacks</td>
+    <td>
+      <select id="avrpacks">
+        <option selected="1" value="-1">-</option>
+      </select>
+   </td>
+  </tr>
+  <tr>
+    <td>Devices</td>
+    <td>
+      <select id="avrdevices">
+        <option selected="1" value="-1">-</option>
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <td>Show</td>
+    <td>
+      <table>
+        <tr>
+          <td><input class="showpart" name="showDoc" onChange="changeShow(this,'#rowDoc','table-row')" type="checkbox" checked="1"/>&nbsp;Documentation</td>
+          <td><input class="showpart" name="showVar" onChange="changeShow(this,'#rowVar','table-row')" type="checkbox" checked="1"/>&nbsp;Variants</td>
+          <td><input class="showpart" name="showMod" onChange="changeShow(this,'#rowMod','table-row')" type="checkbox"/>&nbsp;Modules</td>
+          <td><input class="showpart" name="showInt" onChange="changeShow(this,'#rowInt','table-row')" type="checkbox" checked="1"/>&nbsp;Interface</td>
+        </tr>
+        <tr>
+          <td><input class="showpart" name="showMem" onChange="changeShow(this,'#rowMem','table-row')" type="checkbox"/>&nbsp;Memory</td>
+          <td><input class="showpart" name="showFus" onChange="changeShow(this,'#rowFus','table-row')" type="checkbox" checked="1"/>&nbsp;Fuses</td>
+          <td><input class="showpart" name="showLck" onChange="changeShow(this,'#rowLck','table-row')" type="checkbox" checked="1"/>&nbsp;Lockbits</td>
+          <td><input class="showpart" name="showPkg" onChange="changeShow(this,'#rowPkg','inline')" type="checkbox"/>&nbsp;Packages</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<table id="avrdevice">
+<tr id="rowDev">
+  <td>Device</td>
+  <td id="device"></td>
+</tr>
+<tr id="rowDoc">
+  <td class="at">Documentation</td>
+  <td id="books">
+    <table>
+      <tr id="bookshead"></tr>
+    </table>
+  </td>
+<tr id="rowVar">
+  <td class="at">Variants</td>
+  <td id="variants">
+    <table>
+      <tr id="variantshead"><th>Ordercode</th><th>Package</th><th>Speed</th><th>VccMin</th><th>VccMax</th><th>TempMin</th><th>TempMax</th></tr>
+    </table>
+  </td>
+</tr>
+<tr id="rowMod">
+  <td class="at">Modules</td>
+  <td id="modules">
+    <table>
+      <tr id="moduleshead"><th></th></tr>
+    </table>
+  </td>
+</tr>
+<tr id="rowInt">
+  <td class="at">Interface</td>
+  <td>
+    <table id="interface">
+    </table>
+  </td>
+</tr>
+<tr id="rowMem">
+  <td class="at">Memory</td>
+  <td id="memories">
+    <table>
+      <tr id="memorieshead"><th>Name</th><th>Start</th><th>Size</th></tr>
+    </table>
+  </td>
+</tr>
+<tr id="rowFus">
+  <td class="at">Fuses</td>
+  <td id="fuses">
+    <form id="fuseform">
+      <table id="fusetable">
+      </table>
+    </form>
+  </td>
+</tr>
+<tr id="rowLck">
+  <td class="at">Lockbits</td>
+  <td id="lockbits">
+    <form id="lockbitform">
+      <table id="lockbittable">
+      </table>
+    </form>
+  </td>
+</tr>
+</table>
+<div id="rowPkg">
+  <div id="canvas"></div>
+</div>
+</body>
+</html>

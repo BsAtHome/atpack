@@ -1,0 +1,84 @@
+Atmel Pack parser interpreter and visualizer
+============================================
+AtPack will show the contents of the Atmel (Microchip) AtPack XML files, which
+describe all the MCUs from their product-range. All calculation is done
+client-side using some crude jQuery magic.
+
+Atmel Packs can be download from: http://packs.download.atmel.com/
+
+
+Features
+========
+- Selectable AtPack (device list)
+- Select a device
+- Fuse calculator
+- Lockbit calculator
+- Show various properties:
+	* Documentation (links to datasheet and product page)
+	* Variants (package, temperature range, voltage range, ...)
+	* Programmer interface
+	* Signatures
+	* Memory layout
+	* Modules
+	* Fuses
+	* Lockbits
+	* Package outlines and pin-assignments
+
+PLEASE NOTE: Only stuff in the device description XML file are shown (files
+atdf/*.atdf). Do not complain about the lack of information. This program can
+only show what it is fed with. If you need more information then you have the
+options a) to read the datasheet, b) complain to Atmel/Microchip or c) fix the
+files yourself ;-).
+
+
+Installation and use
+====================
+0 - It is assumed you know how to download from github
+1 - Get the source-code and put it somewhere on your computer
+2 - Point your browser to:
+	file:///<your_install_dir>/atpack.html
+3 - Have fun.
+
+If you want more/other/newer atpacks, then:
+a - goto http://packs.download.atmel.com/
+b - get the pack you want
+c - make a directory <your_install_dir>/<atpack_name_you_downloaded>
+d - unzip the pack into the created directory
+e - add a line in file atpackbase.js pointing to the newly extracted pack's
+    pdsc file
+f - reload you browser window
+
+All AtPacks are loaded when you load the page. The device descriptions are
+loaded when you select the device. That means, if you have really many AtPacks
+in the list, it may take a while and eat memory in your browser. Caveat Emptor.
+
+
+Which AtPacks
+=============
+The code has been tested with the packs:
+- Atmel ATmega Series Device Support (1.2.209)
+- Atmel ATtiny Series Device Support (1.3.172)
+- Atmel XMEGAA Series Device Support (1.1.68)
+- Atmel XMEGAB Series Device Support (1.1.55)
+- Atmel XMEGAC Series Device Support (1.1.50)
+- Atmel XMEGAD Series Device Support (1.1.63)
+- Atmel XMEGAE Series Device Support (1.2.51)
+- Atmel ATautomotive Series Device Support (1.2.118)
+- Atmel SAM3A Series Device Support (1.0.50)
+- Atmel SAME51 Series Device Support (1.0.65)
+- Atmel UC3A Series Device Support (1.0.53)
+
+Other packs should work, but there might be some quirks here and there. Let me
+know of any bugs...
+
+
+Copyrights & Licenses
+=====================
+The AtPack parser/interpreter/visualizer is copyright B. Stultiens and licensed
+under AGPL 3.0 (see LICENSE.txt).
+
+The AtPack data files are copyright Atmel/Microchip and licensed under Apache
+2.0 from Atmel/Microchip (see LICENSE.atpack)
+
+jQuery is Copyright JS Foundation and other contributors,
+https://js.foundation/ (see LICENSE.jquery).
