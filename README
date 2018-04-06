@@ -72,6 +72,13 @@ Other packs should work, but there might be some quirks here and there. Let me
 know of any bugs...
 
 
+Bugs
+====
+If you find any bugs, you have the option to ignore it completely. If you
+decide not to ignore the bug, then you may, at your option, fix it and send me
+a pull-request, or file a bug-report.
+
+
 Copyrights & Licenses
 =====================
 The AtPack parser/interpreter/visualizer is copyright B. Stultiens and licensed
