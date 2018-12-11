@@ -56,8 +56,8 @@ in the list, it may take a while and eat memory in your browser. Caveat Emptor.
 Which AtPacks
 =============
 The code has been tested with the packs:
-- Atmel ATmega Series Device Support (1.2.209)
-- Atmel ATtiny Series Device Support (1.3.172)
+- Atmel ATmega Series Device Support (1.3.300)
+- Atmel ATtiny Series Device Support (1.3.229)
 - Atmel XMEGAA Series Device Support (1.1.68)
 - Atmel XMEGAB Series Device Support (1.1.55)
 - Atmel XMEGAC Series Device Support (1.1.50)

@@ -412,7 +412,7 @@
     </module>
     <module caption="Lockbits" name="LOCKBIT">
       <register-group caption="Lockbits" name="LOCKBIT">
-        <register caption="" name="LOCKBIT" offset="0x00" size="1">
+        <register caption="" name="LOCKBIT" offset="0x00" size="1" initval="0xFF">
           <bitfield caption="Memory Lock" mask="0x03" name="LB" values="ENUM_LB"/>
         </register>
       </register-group>
@@ -462,7 +462,10 @@
     </module>
     <module caption="Analog-to-Digital Converter" name="ADC">
       <register-group caption="Analog-to-Digital Converter" name="ADC">
-        <register caption="ADC Multiplexer Selection Register" name="ADMUX" offset="0x27" size="1" mask="0xFF"/>
+        <register caption="ADC Multiplexer Selection Register" name="ADMUX" offset="0x27" size="1" mask="0xFF">
+          <bitfield caption="Reference Selection Bits" mask="0xC0" name="REFS" values="ANALOG_ADC_V_REF"/>
+          <bitfield caption="Analog Channel and Gain Selection Bits" mask="0x3F" name="MUX"/>
+        </register>
         <register caption="ADC Control and Status Register A" name="ADCSRA" offset="0x26" size="1" ocd-rw="R">
           <bitfield caption="ADC Enable" mask="0x80" name="ADEN"/>
           <bitfield caption="ADC Start Conversion" mask="0x40" name="ADSC"/>
@@ -479,6 +482,12 @@
         </register>
         <register caption="Digital Input Disable Register 0" name="DIDR0" offset="0x21" size="1" mask="0xFF"/>
       </register-group>
+      <value-group caption="" name="ANALOG_ADC_V_REF">
+        <value caption="VCC used as analog reference, disconnected from PA0 (AREF)" name="VAL_0x00" value="0x00"/>
+        <value caption="External voltage reference at PA0 (AREF) pin, internal reference turned off" name="VAL_0x01" value="0x01"/>
+        <value caption="Internal 1.1V voltage reference" name="VAL_0x02" value="0x02"/>
+        <value caption="Reserved" name="VAL_0x03" value="0x03"/>
+      </value-group>
       <value-group caption="" name="ANALOG_ADC_PRESCALER">
         <value caption="2" name="VAL_0x00" value="0x00"/>
         <value caption="2" name="VAL_0x01" value="0x01"/>

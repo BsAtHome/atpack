@@ -683,15 +683,14 @@
         <register caption="MCLK Lock" name="MCLKLOCK" offset="0x02" rw="RW" size="1">
           <bitfield caption="lock ebable" mask="0x1" name="LOCKEN" rw="RW"/>
         </register>
-        <register caption="MCLK Status" initval="0x00" name="MCLKSTATUS" offset="0x03" rw="RW" size="1">
-          <bitfield caption="External Clock status" mask="0x80" name="EXTS" rw="RW"/>
-          <bitfield caption="20MHz oscillator status" mask="0x10" name="OSC20MS" rw="RW"/>
-          <bitfield caption="32KHz oscillator status" mask="0x20" name="OSC32KS" rw="RW"/>
-          <bitfield caption="System Oscillator changing" mask="0x1" name="SOSC" rw="RW"/>
-          <bitfield caption="32.768 kHz Crystal Oscillator status" mask="0x40" name="XOSC32KS" rw="RW"/>
+        <register caption="MCLK Status" initval="0x00" name="MCLKSTATUS" offset="0x03" rw="R" size="1">
+          <bitfield caption="External Clock status" mask="0x80" name="EXTS" rw="R"/>
+          <bitfield caption="20MHz oscillator status" mask="0x10" name="OSC20MS" rw="R"/>
+          <bitfield caption="32KHz oscillator status" mask="0x20" name="OSC32KS" rw="R"/>
+          <bitfield caption="System Oscillator changing" mask="0x1" name="SOSC" rw="R"/>
+          <bitfield caption="32.768 kHz Crystal Oscillator status" mask="0x40" name="XOSC32KS" rw="R"/>
         </register>
         <register caption="OSC20M Calibration A" initval="0x00" name="OSC20MCALIBA" offset="0x11" rw="RW" size="1">
-          <bitfield caption="Calibration freq select" mask="0xc0" name="CALSEL20M" rw="RW"/>
           <bitfield caption="Calibration" mask="0x3f" name="CAL20M" rw="RW"/>
         </register>
         <register caption="OSC20M Calibration B" initval="0x00" name="OSC20MCALIBB" offset="0x12" rw="RW" size="1">
@@ -804,7 +803,7 @@
         <register caption="Asynchronous Channel 1 Generator Selection" initval="0x00" name="ASYNCCH1" offset="0x03" rw="RW" size="1">
           <bitfield caption="Asynchronous Channel 1 Generator Selection" mask="0xff" name="ASYNCCH1" rw="RW" values="EVSYS_ASYNCCH1"/>
         </register>
-        <register caption="Asynchronous Channel Strobe" initval="0x00" name="ASYNCSTROBE" offset="0x00" rw="RW" size="1"/>
+        <register caption="Asynchronous Channel Strobe" initval="0x00" name="ASYNCSTROBE" offset="0x00" rw="W" size="1"/>
         <register caption="Asynchronous User Ch 0 Input Selection - TCB0" initval="0x00" name="ASYNCUSER0" offset="0x12" rw="RW" size="1">
           <bitfield caption="Asynchronous User Ch 0 Input Selection - TCB0" mask="0xff" name="ASYNCUSER0" rw="RW" values="EVSYS_ASYNCUSER0"/>
         </register>
@@ -841,7 +840,7 @@
         <register caption="Synchronous Channel 0 Generator Selection" initval="0x00" name="SYNCCH0" offset="0x0A" rw="RW" size="1">
           <bitfield caption="Synchronous Channel 0 Generator Selection" mask="0xff" name="SYNCCH0" rw="RW" values="EVSYS_SYNCCH0"/>
         </register>
-        <register caption="Synchronous Channel Strobe" initval="0x00" name="SYNCSTROBE" offset="0x01" rw="RW" size="1"/>
+        <register caption="Synchronous Channel Strobe" initval="0x00" name="SYNCSTROBE" offset="0x01" rw="W" size="1"/>
         <register caption="Synchronous User Ch 0 Input Selection - TCA0" initval="0x00" name="SYNCUSER0" offset="0x22" rw="RW" size="1">
           <bitfield caption="Synchronous User Ch 0 Input Selection - TCA0" mask="0xff" name="SYNCUSER0" rw="RW" values="EVSYS_SYNCUSER0"/>
         </register>
@@ -1025,15 +1024,15 @@
     </module>
     <module caption="Fuses" id="I2601" name="FUSE">
       <register-group caption="Fuses" name="FUSE" size="0x09">
-        <register caption="Application Code Section End" name="APPEND" offset="0x7" rw="RW" size="1"/>
+        <register caption="Application Code Section End" name="APPEND" offset="0x7" rw="RW" size="1" initval="0x00"/>
         <register caption="BOD Configuration" initval="0x00" name="BODCFG" offset="0x1" rw="RW" size="1">
           <bitfield caption="BOD Operation in Active Mode" mask="0xc" name="ACTIVE" rw="RW" values="FUSE_ACTIVE"/>
           <bitfield caption="BOD Level" mask="0xe0" name="LVL" rw="RW" values="FUSE_LVL"/>
           <bitfield caption="BOD Sample Frequency" mask="0x10" name="SAMPFREQ" rw="RW" values="FUSE_SAMPFREQ"/>
           <bitfield caption="BOD Operation in Sleep Mode" mask="0x3" name="SLEEP" rw="RW" values="FUSE_SLEEP"/>
         </register>
-        <register caption="Boot Section End" name="BOOTEND" offset="0x8" rw="RW" size="1"/>
-        <register caption="Oscillator Configuration" initval="0x00" name="OSCCFG" offset="0x2" rw="RW" size="1">
+        <register caption="Boot Section End" name="BOOTEND" offset="0x8" rw="RW" size="1" initval="0x00"/>
+        <register caption="Oscillator Configuration" initval="0x02" name="OSCCFG" offset="0x2" rw="RW" size="1">
           <bitfield caption="Frequency Select" mask="0x3" name="FREQSEL" rw="RW" values="FUSE_FREQSEL"/>
           <bitfield caption="Oscillator Lock" mask="0x80" name="OSCLOCK" rw="RW"/>
         </register>
@@ -1042,7 +1041,7 @@
           <bitfield caption="EEPROM Save" mask="0x1" name="EESAVE" rw="RW"/>
           <bitfield caption="Reset Pin Configuration" mask="0xc" name="RSTPINCFG" rw="RW" values="FUSE_RSTPINCFG"/>
         </register>
-        <register caption="System Configuration 1" initval="0x00" name="SYSCFG1" offset="0x6" rw="RW" size="1">
+        <register caption="System Configuration 1" initval="0x07" name="SYSCFG1" offset="0x6" rw="RW" size="1">
           <bitfield caption="Startup Time" mask="0x7" name="SUT" rw="RW" values="FUSE_SUT"/>
         </register>
         <register caption="TCD0 Configuration" initval="0x00" name="TCD0CFG" offset="0x4" rw="RW" size="1">
@@ -1149,7 +1148,7 @@
     </module>
     <module caption="Lockbit" id="I2601" name="LOCKBIT">
       <register-group caption="Lockbit" name="LOCKBIT" size="0x01">
-        <register caption="Lock bits" initval="0x00" name="LOCKBIT" offset="0x0" rw="RW" size="1">
+        <register caption="Lock bits" initval="0xC5" name="LOCKBIT" offset="0x0" rw="RW" size="1">
           <bitfield caption="Lock Bits" mask="0xff" name="LB" rw="RW" values="LOCKBIT_LB"/>
         </register>
       </register-group>
@@ -1248,7 +1247,7 @@
         </register>
       </register-group>
       <value-group caption="Input/Sense Configuration select" name="PORT_ISC">
-        <value caption="Iterrupt disabled but input buffer enabled" name="INTDISABLE" value="0x00"/>
+        <value caption="Interrupt disabled but input buffer enabled" name="INTDISABLE" value="0x00"/>
         <value caption="Sense Both Edges" name="BOTHEDGES" value="0x01"/>
         <value caption="Sense Rising Edge" name="RISING" value="0x02"/>
         <value caption="Sense Falling Edge" name="FALLING" value="0x03"/>

@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><edc:PIC xmlns:edc="http://crownking/edc" xmlns:atdf="http://crownking/atdf" xmlns:ltx="http://crownking/ltx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" atdf:architecture="AVR8" atdf:family="megaAVR" edc:arch="avr8" edc:hasfreeze="false" edc:name="ATmega162" edc:procid="0x0000" xsi:schemaLocation="http://crownking/edc edc/PIC.xsd">
+  <edc:Properties>
+    <edc:Property edc:propkey="file.registers.are.odd.address.accessible" edc:propvalue="true"/>
+  </edc:Properties>
   <edc:Power>
-    <edc:VDD edc:maxvoltage="5.5" edc:minvoltage="1.8"/>
+    <edc:VDD edc:maxvoltage="5.5" edc:minvoltage="1.8" edc:nominalvoltage="5.000"/>
   </edc:Power>
-  <edc:Programming>
+  <edc:Programming edc:haschecksum="false" edc:haslvp2="true">
     <edc:ProgrammingRowSize edc:nzsize="128" edc:progop="pgm"/>
     <edc:ProgrammingRowSize edc:nzsize="1" edc:progop="cfg"/>
     <edc:ProgrammingRowSize edc:nzsize="4" edc:progop="eedata"/>
@@ -11,9 +14,20 @@
     <edc:MemTraits>
       <edc:ProgramMemTraits edc:addrinc="0x1" edc:locsize="0x2" edc:wordimpl="0xFFFF" edc:wordinit="0xFFFF" edc:wordsafe="0xFFFF" edc:wordsize="0xFFFF"/>
       <edc:DataMemTraits edc:addrinc="0x1" edc:locsize="0x1" edc:wordimpl="0xFF" edc:wordinit="0xFF" edc:wordsafe="0xFF" edc:wordsize="0x1"/>
+      <edc:EEDataMemTraits edc:magicoffset="0x810000"/>
     </edc:MemTraits>
   </edc:ArchDef>
-  <edc:InstructionSet edc:instructionsetid="avr8"/>
+  <edc:InstructionSet edc:instructionsetid="avr8">
+    <edc:InstructionSet edc:instructionsetid="avr8base"/>
+    <edc:InstructionSet edc:instructionsetid="avr8brk"/>
+    <edc:InstructionSet edc:instructionsetid="avr8movw"/>
+    <edc:InstructionSet edc:instructionsetid="avr8lpm"/>
+    <edc:InstructionSet edc:instructionsetid="avr8lpmx"/>
+    <edc:InstructionSet edc:instructionsetid="avr8mega"/>
+    <edc:InstructionSet edc:instructionsetid="avr8sram"/>
+    <edc:InstructionSet edc:instructionsetid="avr8mul"/>
+    <edc:InstructionSet edc:instructionsetid="avr8spm"/>
+  </edc:InstructionSet>
   <edc:InterruptList>
     <edc:Interrupt edc:cname="RESET" edc:desc="External Pin,Power-on Reset,Brown-out Reset,Watchdog Reset,and JTAG AVR Reset. See Datasheet.     " edc:irq="0"/>
     <edc:Interrupt edc:cname="INT0" edc:desc="External Interrupt Request 0" edc:irq="1"/>
@@ -44,17 +58,40 @@
     <edc:Interrupt edc:cname="ANA_COMP" edc:desc="Analog Comparator" edc:irq="26"/>
     <edc:Interrupt edc:cname="SPM_RDY" edc:desc="Store Program Memory Read" edc:irq="27"/>
   </edc:InterruptList>
+  <edc:PeripheralList>
+    <edc:Peripheral edc:cname="TC1" edc:desc="Timer/Counter, 16-bit"/>
+    <edc:Peripheral edc:cname="TC3" edc:desc="Timer/Counter, 16-bit"/>
+    <edc:Peripheral edc:cname="TC2" edc:desc="Timer/Counter, 8-bit Async"/>
+    <edc:Peripheral edc:cname="AC" edc:desc="Analog Comparator"/>
+    <edc:Peripheral edc:cname="USART0" edc:desc="USART"/>
+    <edc:Peripheral edc:cname="USART1" edc:desc="USART"/>
+    <edc:Peripheral edc:cname="SPI" edc:desc="Serial Peripheral Interface"/>
+    <edc:Peripheral edc:cname="CPU" edc:desc="CPU Registers"/>
+    <edc:Peripheral edc:cname="JTAG" edc:desc="JTAG Interface"/>
+    <edc:Peripheral edc:cname="BOOT_LOAD" edc:desc="Bootloader"/>
+    <edc:Peripheral edc:cname="EEPROM" edc:desc="EEPROM"/>
+    <edc:Peripheral edc:cname="PORTA" edc:desc="I/O Port"/>
+    <edc:Peripheral edc:cname="PORTB" edc:desc="I/O Port"/>
+    <edc:Peripheral edc:cname="PORTC" edc:desc="I/O Port"/>
+    <edc:Peripheral edc:cname="PORTD" edc:desc="I/O Port"/>
+    <edc:Peripheral edc:cname="PORTE" edc:desc="I/O Port"/>
+    <edc:Peripheral edc:cname="TC0" edc:desc="Timer/Counter, 8-bit"/>
+    <edc:Peripheral edc:cname="WDT" edc:desc="Watchdog Timer"/>
+    <edc:Peripheral edc:cname="EXINT" edc:desc="External Interrupts"/>
+    <edc:Peripheral edc:cname="FUSE" edc:desc="Fuses"/>
+    <edc:Peripheral edc:cname="LOCKBIT" edc:desc="Lockbits"/>
+  </edc:PeripheralList>
   <edc:ProgramSpace>
-    <edc:CodeSector edc:beginaddr="0x0" edc:endaddr="0x2000" edc:regionid="FLASH"/>
-    <edc:CodeSector edc:beginaddr="0x1F80" edc:endaddr="0x2000" edc:regionid="BOOT_SECTION_1"/>
-    <edc:CodeSector edc:beginaddr="0x1F00" edc:endaddr="0x2000" edc:regionid="BOOT_SECTION_2"/>
-    <edc:CodeSector edc:beginaddr="0x1E00" edc:endaddr="0x2000" edc:regionid="BOOT_SECTION_3"/>
-    <edc:CodeSector edc:beginaddr="0x1C00" edc:endaddr="0x2000" edc:regionid="BOOT_SECTION_4"/>
+    <edc:CodeSector atdf:pagesize="0x80" edc:beginaddr="0x0" edc:endaddr="0x2000" edc:regionid="IFLASH"/>
+    <edc:CodeSector atdf:pagesize="0x80" edc:beginaddr="0x1F80" edc:endaddr="0x2000" edc:regionid="BOOT_SECTION_1"/>
+    <edc:CodeSector atdf:pagesize="0x80" edc:beginaddr="0x1F00" edc:endaddr="0x2000" edc:regionid="BOOT_SECTION_2"/>
+    <edc:CodeSector atdf:pagesize="0x80" edc:beginaddr="0x1E00" edc:endaddr="0x2000" edc:regionid="BOOT_SECTION_3"/>
+    <edc:CodeSector atdf:pagesize="0x80" edc:beginaddr="0x1C00" edc:endaddr="0x2000" edc:regionid="BOOT_SECTION_4"/>
   </edc:ProgramSpace>
   <edc:DataSpace edc:magicoffset="0x800000">
     <edc:RegardlessOfMode>
       <edc:NMMRPlace edc:regionid="corenmmrs">
-        <edc:SFRDef edc:access="nnnnnnnnnnnnnn" edc:cname="PC" edc:desc="Program Counter" edc:impl="0x3FFF" edc:mclr="00000000000000000000000000000000" edc:nmmrid="60" edc:nzwidth="0xE" edc:por="00000000000000000000000000000000"/>
+        <edc:SFRDef edc:access="nnnnnnnnnnnnnnnn" edc:cname="PC" edc:desc="Program Counter" edc:impl="0xFFFF" edc:mclr="0000000000000000" edc:nmmrid="60" edc:nzwidth="0x10" edc:por="0000000000000000"/>
       </edc:NMMRPlace>
       <edc:SFRDataSector edc:beginaddr="0x0" edc:endaddr="0x20" edc:regionid="REGISTERS">
         <edc:SFRDef edc:_addr="0x0" edc:access="nnnnnnnn" edc:cname="R0" edc:desc="General-Purpose Register" edc:impl="0xFF" edc:mclr="xxxxxxxx" edc:nzwidth="0x8" edc:por="xxxxxxxx"/>
@@ -93,14 +130,14 @@
       <edc:SFRDataSector edc:beginaddr="0x20" edc:endaddr="0x8C" edc:regionid="MAPPED_IO">
         <edc:SFRDef edc:_addr="0x20" edc:access="nnnnnnnn" edc:cname="UBRR1L" edc:nzwidth="0x8" ltx:memberofperipheral="USART1">
           <edc:SFRModeList>
-            <edc:SFRMode edc:id="DS.0">
+            <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="USART1">
               <edc:SFRFieldDef edc:cname="UBRR1" edc:desc="USART Baud Rate Register Low bits" edc:nzwidth="0x8"/>
             </edc:SFRMode>
           </edc:SFRModeList>
         </edc:SFRDef>
         <edc:SFRDef edc:_addr="0x21" edc:access="nnnnnnnn" edc:cname="UCSR1B" edc:nzwidth="0x8" ltx:memberofperipheral="USART1">
           <edc:SFRModeList>
-            <edc:SFRMode edc:id="DS.0">
+            <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="USART1">
               <edc:SFRFieldDef edc:cname="TXB81" edc:desc="Transmit Data Bit 8" edc:nzwidth="0x1"/>
               <edc:SFRFieldDef edc:cname="RXB81" edc:desc="Receive Data Bit 8" edc:nzwidth="0x1"/>
               <edc:SFRFieldDef edc:cname="UCSZ12" edc:desc="Character Size" edc:nzwidth="0x1"/>
@@ -114,7 +151,7 @@
         </edc:SFRDef>
         <edc:SFRDef edc:_addr="0x22" edc:access="nnnnnnnn" edc:cname="UCSR1A" edc:nzwidth="0x8" ltx:memberofperipheral="USART1">
           <edc:SFRModeList>
-            <edc:SFRMode edc:id="DS.0">
+            <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="USART1">
               <edc:SFRFieldDef edc:cname="MPCM1" edc:desc="Multi-processor Communication Mode" edc:nzwidth="0x1"/>
               <edc:SFRFieldDef edc:cname="U2X1" edc:desc="Double the USART transmission speed" edc:nzwidth="0x1"/>
               <edc:SFRFieldDef edc:cname="UPE1" edc:desc="Parity Error" edc:nzwidth="0x1"/>
@@ -127,19 +164,32 @@
           </edc:SFRModeList>
         </edc:SFRDef>
         <edc:SFRDef edc:_addr="0x23" edc:access="nnnnnnnn" edc:cname="UDR1" edc:nzwidth="0x8" ltx:memberofperipheral="USART1"/>
-        <edc:SFRDef edc:_addr="0x24" edc:access="nnnnnnnn" edc:cname="OCDR" edc:nzwidth="0x8" ltx:memberofperipheral="JTAG">
-          <edc:SFRModeList>
-            <edc:SFRMode edc:id="DS.0">
-              <edc:SFRFieldDef edc:cname="OCDR" edc:desc="On-Chip Debug Register Bits" edc:nzwidth="0x8"/>
-            </edc:SFRMode>
-          </edc:SFRModeList>
-        </edc:SFRDef>
+        <edc:MuxedSFRDef edc:_addr="0x24" edc:nzwidth="0x8">
+          <edc:SelectSFR>
+            <edc:SFRDef edc:_addr="0x24" edc:access="nnnnnnnn" edc:cname="OSCCAL" edc:nzwidth="0x8" ltx:memberofperipheral="CPU">
+              <edc:SFRModeList>
+                <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="CPU">
+                  <edc:SFRFieldDef edc:cname="OSCCAL" edc:desc="Oscillator Calibration " edc:nzwidth="0x8"/>
+                </edc:SFRMode>
+              </edc:SFRModeList>
+            </edc:SFRDef>
+          </edc:SelectSFR>
+          <edc:SelectSFR>
+            <edc:SFRDef edc:_addr="0x24" edc:access="nnnnnnnn" edc:cname="OCDR" edc:nzwidth="0x8" ltx:memberofperipheral="JTAG">
+              <edc:SFRModeList>
+                <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="JTAG">
+                  <edc:SFRFieldDef edc:cname="OCDR" edc:desc="On-Chip Debug Register Bits" edc:nzwidth="0x8"/>
+                </edc:SFRMode>
+              </edc:SFRModeList>
+            </edc:SFRDef>
+          </edc:SelectSFR>
+        </edc:MuxedSFRDef>
         <edc:SFRDef edc:_addr="0x25" edc:access="nnnnnnnn" edc:cname="PINE" edc:nzwidth="0x8" ltx:memberofperipheral="PORTE"/>
         <edc:SFRDef edc:_addr="0x26" edc:access="nnnnnnnn" edc:cname="DDRE" edc:nzwidth="0x8" ltx:memberofperipheral="PORTE"/>
         <edc:SFRDef edc:_addr="0x27" edc:access="nnnnnnnn" edc:cname="PORTE" edc:nzwidth="0x8" ltx:memberofperipheral="PORTE"/>
         <edc:SFRDef edc:_addr="0x28" edc:access="nnnnnnnn" edc:cname="ACSR" edc:nzwidth="0x8" ltx:memberofperipheral="AC">
           <edc:SFRModeList>
-            <edc:SFRMode edc:id="DS.0">
+            <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="AC">
               <edc:SFRFieldDef edc:cname="ACIS" edc:desc="Analog Comparator Interrupt Mode Select bits" edc:nzwidth="0x2">
                 <edc:SFRFieldSemantic edc:cname="VAL_0x00" edc:desc="Interrupt on Toggle" edc:when="(field &amp; 0x3) == 0x00"/>
                 <edc:SFRFieldSemantic edc:cname="VAL_0x01" edc:desc="Reserved" edc:when="(field &amp; 0x3) == 0x01"/>
@@ -157,14 +207,14 @@
         </edc:SFRDef>
         <edc:SFRDef edc:_addr="0x29" edc:access="nnnnnnnn" edc:cname="UBRR0L" edc:nzwidth="0x8" ltx:memberofperipheral="USART0">
           <edc:SFRModeList>
-            <edc:SFRMode edc:id="DS.0">
+            <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="USART0">
               <edc:SFRFieldDef edc:cname="UBRR0" edc:desc="USART Baud Rate Register Low bits" edc:nzwidth="0x8"/>
             </edc:SFRMode>
           </edc:SFRModeList>
         </edc:SFRDef>
         <edc:SFRDef edc:_addr="0x2A" edc:access="nnnnnnnn" edc:cname="UCSR0B" edc:nzwidth="0x8" ltx:memberofperipheral="USART0">
           <edc:SFRModeList>
-            <edc:SFRMode edc:id="DS.0">
+            <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="USART0">
               <edc:SFRFieldDef edc:cname="TXB80" edc:desc="Transmit Data Bit 8" edc:nzwidth="0x1"/>
               <edc:SFRFieldDef edc:cname="RXB80" edc:desc="Receive Data Bit 8" edc:nzwidth="0x1"/>
               <edc:SFRFieldDef edc:cname="UCSZ02" edc:desc="Character Size" edc:nzwidth="0x1"/>
@@ -178,7 +228,7 @@
         </edc:SFRDef>
         <edc:SFRDef edc:_addr="0x2B" edc:access="nnnnnnnn" edc:cname="UCSR0A" edc:nzwidth="0x8" ltx:memberofperipheral="USART0">
           <edc:SFRModeList>
-            <edc:SFRMode edc:id="DS.0">
+            <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="USART0">
               <edc:SFRFieldDef edc:cname="MPCM0" edc:desc="Multi-processor Communication Mode" edc:nzwidth="0x1"/>
               <edc:SFRFieldDef edc:cname="U2X0" edc:desc="Double the USART transmission speed" edc:nzwidth="0x1"/>
               <edc:SFRFieldDef edc:cname="UPE0" edc:desc="Parity Error" edc:nzwidth="0x1"/>
@@ -193,7 +243,7 @@
         <edc:SFRDef edc:_addr="0x2C" edc:access="nnnnnnnn" edc:cname="UDR0" edc:nzwidth="0x8" ltx:memberofperipheral="USART0"/>
         <edc:SFRDef edc:_addr="0x2D" edc:access="nnnnnnnn" edc:cname="SPCR" edc:nzwidth="0x8" ltx:memberofperipheral="SPI">
           <edc:SFRModeList>
-            <edc:SFRMode edc:id="DS.0">
+            <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="SPI">
               <edc:SFRFieldDef edc:cname="SPR" edc:desc="SPI Clock Rate Selects" edc:nzwidth="0x2">
                 <edc:SFRFieldSemantic edc:cname="VAL_0x00" edc:desc="fosc/4" edc:when="(field &amp; 0x3) == 0x00"/>
                 <edc:SFRFieldSemantic edc:cname="VAL_0x01" edc:desc="fosc/16" edc:when="(field &amp; 0x3) == 0x01"/>
@@ -213,9 +263,9 @@
             </edc:SFRMode>
           </edc:SFRModeList>
         </edc:SFRDef>
-        <edc:SFRDef edc:_addr="0x2E" edc:access="nn-----n" edc:cname="SPSR" edc:nzwidth="0x8" ltx:memberofperipheral="SPI">
+        <edc:SFRDef edc:_addr="0x2E" edc:access="nn-----n" edc:cname="SPSR" edc:impl="0xC1" edc:nzwidth="0x8" ltx:memberofperipheral="SPI">
           <edc:SFRModeList>
-            <edc:SFRMode edc:id="DS.0">
+            <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="SPI">
               <edc:SFRFieldDef edc:cname="SPI2X" edc:desc="Double SPI Speed Bit" edc:nzwidth="0x1"/>
               <edc:AdjustPoint edc:offset="0x5"/>
               <edc:SFRFieldDef edc:cname="WCOL" edc:desc="Write Collision Flag" edc:nzwidth="0x1"/>
@@ -236,9 +286,9 @@
         <edc:SFRDef edc:_addr="0x39" edc:access="nnnnnnnn" edc:cname="PINA" edc:nzwidth="0x8" ltx:memberofperipheral="PORTA"/>
         <edc:SFRDef edc:_addr="0x3A" edc:access="nnnnnnnn" edc:cname="DDRA" edc:nzwidth="0x8" ltx:memberofperipheral="PORTA"/>
         <edc:SFRDef edc:_addr="0x3B" edc:access="nnnnnnnn" edc:cname="PORTA" edc:nzwidth="0x8" ltx:memberofperipheral="PORTA"/>
-        <edc:SFRDef edc:_addr="0x3C" edc:access="----nnnn" edc:cname="EECR" edc:nzwidth="0x8" ltx:memberofperipheral="EEPROM">
+        <edc:SFRDef edc:_addr="0x3C" edc:access="----nnnn" edc:cname="EECR" edc:impl="0xF" edc:nzwidth="0x8" ltx:memberofperipheral="EEPROM">
           <edc:SFRModeList>
-            <edc:SFRMode edc:id="DS.0">
+            <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="EEPROM">
               <edc:SFRFieldDef edc:cname="EERE" edc:desc="EEPROM Read Enable" edc:nzwidth="0x1"/>
               <edc:SFRFieldDef edc:cname="EEWE" edc:desc="EEPROM Write Enable" edc:nzwidth="0x1"/>
               <edc:SFRFieldDef edc:cname="EEMWE" edc:desc="EEPROM Master Write Enable" edc:nzwidth="0x1"/>
@@ -248,30 +298,59 @@
         </edc:SFRDef>
         <edc:SFRDef edc:_addr="0x3D" edc:access="nnnnnnnn" edc:cname="EEDR" edc:nzwidth="0x8" ltx:memberofperipheral="EEPROM">
           <edc:SFRModeList>
-            <edc:SFRMode edc:id="DS.0">
+            <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="EEPROM">
               <edc:SFRFieldDef edc:cname="EEDR" edc:desc="EEPROM Data Register bits" edc:nzwidth="0x8"/>
             </edc:SFRMode>
           </edc:SFRModeList>
         </edc:SFRDef>
-        <edc:SFRDef edc:_addr="0x3E" edc:access="-------nnnnnnnnn" edc:cname="EEAR" edc:nzwidth="0x10" ltx:memberofperipheral="EEPROM">
+        <edc:SFRDef edc:_addr="0x3E" edc:access="-------nnnnnnnnn" edc:cname="EEAR" edc:impl="0x1FF" edc:nzwidth="0x10" ltx:memberofperipheral="EEPROM">
           <edc:SFRModeList>
-            <edc:SFRMode edc:id="DS.0">
+            <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="EEPROM">
               <edc:SFRFieldDef edc:cname="EEAR" edc:desc="EEPROM Address Register bits" edc:nzwidth="0x9"/>
             </edc:SFRMode>
           </edc:SFRModeList>
         </edc:SFRDef>
-        <edc:SFRDef edc:_addr="0x40" edc:access="n---nnnn" edc:cname="UBRR0H" edc:nzwidth="0x8" ltx:memberofperipheral="USART0">
+        <edc:MuxedSFRDef edc:_addr="0x40" edc:nzwidth="0x8">
+          <edc:SelectSFR>
+            <edc:SFRDef edc:_addr="0x40" edc:access="nnnnnnnn" edc:cname="UCSR0C" edc:nzwidth="0x8" ltx:memberofperipheral="USART0">
+              <edc:SFRModeList>
+                <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="USART0">
+                  <edc:SFRFieldDef edc:cname="UCPOL0" edc:desc="Clock Polarity" edc:nzwidth="0x1"/>
+                  <edc:SFRFieldDef edc:cname="UCSZ0" edc:desc="Character Size" edc:nzwidth="0x2"/>
+                  <edc:SFRFieldDef edc:cname="USBS0" edc:desc="Stop Bit Select" edc:nzwidth="0x1">
+                    <edc:SFRFieldSemantic edc:cname="VAL_0x00" edc:desc="1-bit" edc:when="(field &amp; 0x1) == 0x00"/>
+                    <edc:SFRFieldSemantic edc:cname="VAL_0x01" edc:desc="2-bit" edc:when="(field &amp; 0x1) == 0x01"/>
+                  </edc:SFRFieldDef>
+                  <edc:SFRFieldDef edc:cname="UPM0" edc:desc="Parity Mode Bits" edc:nzwidth="0x2">
+                    <edc:SFRFieldSemantic edc:cname="VAL_0x00" edc:desc="Disabled" edc:when="(field &amp; 0x3) == 0x00"/>
+                    <edc:SFRFieldSemantic edc:cname="VAL_0x01" edc:desc="Reserved" edc:when="(field &amp; 0x3) == 0x01"/>
+                    <edc:SFRFieldSemantic edc:cname="VAL_0x02" edc:desc="Enabled, Even Parity" edc:when="(field &amp; 0x3) == 0x02"/>
+                    <edc:SFRFieldSemantic edc:cname="VAL_0x03" edc:desc="Enabled, Odd Parity" edc:when="(field &amp; 0x3) == 0x03"/>
+                  </edc:SFRFieldDef>
+                  <edc:SFRFieldDef edc:cname="UMSEL0" edc:desc="USART Mode Select" edc:nzwidth="0x1">
+                    <edc:SFRFieldSemantic edc:cname="VAL_0x00" edc:desc="Asynchronous Operation" edc:when="(field &amp; 0x1) == 0x00"/>
+                    <edc:SFRFieldSemantic edc:cname="VAL_0x01" edc:desc="Synchronous Operation" edc:when="(field &amp; 0x1) == 0x01"/>
+                  </edc:SFRFieldDef>
+                  <edc:SFRFieldDef edc:cname="URSEL0" edc:desc="Register Select" edc:nzwidth="0x1"/>
+                </edc:SFRMode>
+              </edc:SFRModeList>
+            </edc:SFRDef>
+          </edc:SelectSFR>
+          <edc:SelectSFR>
+            <edc:SFRDef edc:_addr="0x40" edc:access="n---nnnn" edc:cname="UBRR0H" edc:impl="0x8F" edc:nzwidth="0x8" ltx:memberofperipheral="USART0">
+              <edc:SFRModeList>
+                <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="USART0">
+                  <edc:SFRFieldDef edc:cname="UBRR0" edc:desc="USART Baud Rate Register High bits" edc:nzwidth="0x4"/>
+                  <edc:AdjustPoint edc:offset="0x3"/>
+                  <edc:SFRFieldDef edc:cname="URSEL0" edc:desc="Register Select" edc:nzwidth="0x1"/>
+                </edc:SFRMode>
+              </edc:SFRModeList>
+            </edc:SFRDef>
+          </edc:SelectSFR>
+        </edc:MuxedSFRDef>
+        <edc:SFRDef edc:_addr="0x41" edc:access="---nnnnn" edc:cname="WDTCR" edc:impl="0x1F" edc:nzwidth="0x8" ltx:memberofperipheral="WDT">
           <edc:SFRModeList>
-            <edc:SFRMode edc:id="DS.0">
-              <edc:SFRFieldDef edc:cname="UBRR0" edc:desc="USART Baud Rate Register High bits" edc:nzwidth="0x4"/>
-              <edc:AdjustPoint edc:offset="0x3"/>
-              <edc:SFRFieldDef edc:cname="URSEL0" edc:desc="Register Select" edc:nzwidth="0x1"/>
-            </edc:SFRMode>
-          </edc:SFRModeList>
-        </edc:SFRDef>
-        <edc:SFRDef edc:_addr="0x41" edc:access="---nnnnn" edc:cname="WDTCR" edc:nzwidth="0x8" ltx:memberofperipheral="WDT">
-          <edc:SFRModeList>
-            <edc:SFRMode edc:id="DS.0">
+            <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="WDT">
               <edc:SFRFieldDef edc:cname="WDP" edc:desc="Watch Dog Timer Prescaler bits" edc:nzwidth="0x3">
                 <edc:SFRFieldSemantic edc:cname="VAL_0x00" edc:desc="Oscillator Cycles 16K" edc:when="(field &amp; 0x7) == 0x00"/>
                 <edc:SFRFieldSemantic edc:cname="VAL_0x01" edc:desc="Oscillator Cycles 32K" edc:when="(field &amp; 0x7) == 0x01"/>
@@ -290,9 +369,9 @@
         <edc:SFRDef edc:_addr="0x42" edc:access="nnnnnnnn" edc:cname="OCR2" edc:nzwidth="0x8" ltx:memberofperipheral="TC2"/>
         <edc:SFRDef edc:_addr="0x43" edc:access="nnnnnnnn" edc:cname="TCNT2" edc:nzwidth="0x8" ltx:memberofperipheral="TC2"/>
         <edc:SFRDef edc:_addr="0x44" edc:access="nnnnnnnnnnnnnnnn" edc:cname="ICR1" edc:nzwidth="0x10" ltx:memberofperipheral="TC1"/>
-        <edc:SFRDef edc:_addr="0x46" edc:access="----nnnn" edc:cname="ASSR" edc:nzwidth="0x8" ltx:memberofperipheral="TC2">
+        <edc:SFRDef edc:_addr="0x46" edc:access="----nnnn" edc:cname="ASSR" edc:impl="0xF" edc:nzwidth="0x8" ltx:memberofperipheral="TC2">
           <edc:SFRModeList>
-            <edc:SFRMode edc:id="DS.0">
+            <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="TC2">
               <edc:SFRFieldDef edc:cname="TCR2UB" edc:desc="Timer/Counter Control Register2 Update Busy" edc:nzwidth="0x1"/>
               <edc:SFRFieldDef edc:cname="OCR2UB" edc:desc="Output Compare Register2 Update Busy" edc:nzwidth="0x1"/>
               <edc:SFRFieldDef edc:cname="TCN2UB" edc:desc="Timer/Counter2 Update Busy" edc:nzwidth="0x1"/>
@@ -302,7 +381,7 @@
         </edc:SFRDef>
         <edc:SFRDef edc:_addr="0x47" edc:access="nnnnnnnn" edc:cname="TCCR2" edc:nzwidth="0x8" ltx:memberofperipheral="TC2">
           <edc:SFRModeList>
-            <edc:SFRMode edc:id="DS.0">
+            <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="TC2">
               <edc:SFRFieldDef edc:cname="CS2" edc:desc="Clock Select" edc:nzwidth="0x3">
                 <edc:SFRFieldSemantic edc:cname="VAL_0x00" edc:desc="No Clock Source (Stopped)" edc:when="(field &amp; 0x7) == 0x00"/>
                 <edc:SFRFieldSemantic edc:cname="VAL_0x01" edc:desc="Running, No Prescaling" edc:when="(field &amp; 0x7) == 0x01"/>
@@ -328,9 +407,9 @@
         <edc:SFRDef edc:_addr="0x48" edc:access="nnnnnnnnnnnnnnnn" edc:cname="OCR1B" edc:nzwidth="0x10" ltx:memberofperipheral="TC1"/>
         <edc:SFRDef edc:_addr="0x4A" edc:access="nnnnnnnnnnnnnnnn" edc:cname="OCR1A" edc:nzwidth="0x10" ltx:memberofperipheral="TC1"/>
         <edc:SFRDef edc:_addr="0x4C" edc:access="nnnnnnnnnnnnnnnn" edc:cname="TCNT1" edc:nzwidth="0x10" ltx:memberofperipheral="TC1"/>
-        <edc:SFRDef edc:_addr="0x4E" edc:access="nn-nnnnn" edc:cname="TCCR1B" edc:nzwidth="0x8" ltx:memberofperipheral="TC1">
+        <edc:SFRDef edc:_addr="0x4E" edc:access="nn-nnnnn" edc:cname="TCCR1B" edc:impl="0xDF" edc:nzwidth="0x8" ltx:memberofperipheral="TC1">
           <edc:SFRModeList>
-            <edc:SFRMode edc:id="DS.0">
+            <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="TC1">
               <edc:SFRFieldDef edc:cname="CS1" edc:desc="Clock Select1 bits" edc:nzwidth="0x3">
                 <edc:SFRFieldSemantic edc:cname="VAL_0x00" edc:desc="No Clock Source (Stopped)" edc:when="(field &amp; 0x7) == 0x00"/>
                 <edc:SFRFieldSemantic edc:cname="VAL_0x01" edc:desc="Running, No Prescaling" edc:when="(field &amp; 0x7) == 0x01"/>
@@ -350,7 +429,7 @@
         </edc:SFRDef>
         <edc:SFRDef edc:_addr="0x4F" edc:access="nnnnnnnn" edc:cname="TCCR1A" edc:nzwidth="0x8" ltx:memberofperipheral="TC1">
           <edc:SFRModeList>
-            <edc:SFRMode edc:id="DS.0">
+            <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="TC1">
               <edc:SFRFieldDef edc:cname="WGM1" edc:desc="Pulse Width Modulator Select Bits" edc:nzwidth="0x2"/>
               <edc:SFRFieldDef edc:cname="FOC1B" edc:desc="Force Output Compare for Channel B" edc:nzwidth="0x1"/>
               <edc:SFRFieldDef edc:cname="FOC1A" edc:desc="Force Output Compare for Channel A" edc:nzwidth="0x1"/>
@@ -361,7 +440,7 @@
         </edc:SFRDef>
         <edc:SFRDef edc:_addr="0x50" edc:access="nnnnnnnn" edc:cname="SFIOR" edc:nzwidth="0x8" ltx:memberofperipheral="CPU">
           <edc:SFRModeList>
-            <edc:SFRMode edc:id="DS.0">
+            <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="CPU">
               <edc:SFRFieldDef edc:cname="PSR310" edc:desc="Prescaler Reset Timer/Counter3, Timer/Counter1 and Timer/Counter0" edc:nzwidth="0x1"/>
               <edc:SFRFieldDef edc:cname="PSR2" edc:desc="Prescaler Reset Timer/Counter2" edc:nzwidth="0x1"/>
               <edc:SFRFieldDef edc:cname="PUD" edc:desc="Pull-up Disable" edc:nzwidth="0x1"/>
@@ -375,7 +454,7 @@
         <edc:SFRDef edc:_addr="0x52" edc:access="nnnnnnnn" edc:cname="TCNT0" edc:nzwidth="0x8" ltx:memberofperipheral="TC0"/>
         <edc:SFRDef edc:_addr="0x53" edc:access="nnnnnnnn" edc:cname="TCCR0" edc:nzwidth="0x8" ltx:memberofperipheral="TC0">
           <edc:SFRModeList>
-            <edc:SFRMode edc:id="DS.0">
+            <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="TC0">
               <edc:SFRFieldDef edc:cname="CS0" edc:desc="Clock Selects" edc:nzwidth="0x3">
                 <edc:SFRFieldSemantic edc:cname="VAL_0x00" edc:desc="No Clock Source (Stopped)" edc:when="(field &amp; 0x7) == 0x00"/>
                 <edc:SFRFieldSemantic edc:cname="VAL_0x01" edc:desc="Running, No Prescaling" edc:when="(field &amp; 0x7) == 0x01"/>
@@ -398,9 +477,19 @@
             </edc:SFRMode>
           </edc:SFRModeList>
         </edc:SFRDef>
-        <edc:SFRDef edc:_addr="0x54" edc:access="n--n----" edc:cname="MCUCSR" edc:nzwidth="0x8" ltx:memberofperipheral="JTAG">
+        <edc:SFRDef edc:_addr="0x54" edc:access="n-nnnnnn" edc:cname="MCUCSR" edc:impl="0xBF" edc:nzwidth="0x8" ltx:memberofperipheral="CPU JTAG">
           <edc:SFRModeList>
-            <edc:SFRMode edc:id="DS.0">
+            <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="CPU">
+              <edc:SFRFieldDef edc:cname="PORF" edc:desc="Power-on reset flag" edc:nzwidth="0x1"/>
+              <edc:SFRFieldDef edc:cname="EXTRF" edc:desc="External Reset Flag" edc:nzwidth="0x1"/>
+              <edc:SFRFieldDef edc:cname="BORF" edc:desc="Brown-out Reset Flag" edc:nzwidth="0x1"/>
+              <edc:SFRFieldDef edc:cname="WDRF" edc:desc="Watchdog Reset Flag" edc:nzwidth="0x1"/>
+              <edc:SFRFieldDef edc:cname="JTRF" edc:desc="JTAG Reset Flag" edc:nzwidth="0x1"/>
+              <edc:SFRFieldDef edc:cname="SM2" edc:desc="Sleep Mode Select Bit 2" edc:nzwidth="0x1"/>
+              <edc:AdjustPoint edc:offset="0x1"/>
+              <edc:SFRFieldDef edc:cname="JTD" edc:desc="JTAG Interface Disable" edc:nzwidth="0x1"/>
+            </edc:SFRMode>
+            <edc:SFRMode edc:id="DS.1" ltx:memberofperipheral="JTAG">
               <edc:AdjustPoint edc:offset="0x4"/>
               <edc:SFRFieldDef edc:cname="JTRF" edc:desc="JTAG Reset Flag" edc:nzwidth="0x1"/>
               <edc:AdjustPoint edc:offset="0x2"/>
@@ -408,9 +497,27 @@
             </edc:SFRMode>
           </edc:SFRModeList>
         </edc:SFRDef>
-        <edc:SFRDef edc:_addr="0x55" edc:access="----nnnn" edc:cname="MCUCR" edc:nzwidth="0x8" ltx:memberofperipheral="EXINT">
+        <edc:SFRDef edc:_addr="0x55" edc:access="nnnnnnnn" edc:cname="MCUCR" edc:nzwidth="0x8" ltx:memberofperipheral="CPU EXINT">
           <edc:SFRModeList>
-            <edc:SFRMode edc:id="DS.0">
+            <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="CPU">
+              <edc:SFRFieldDef edc:cname="ISC0" edc:desc="Interrupt Sense Control 0 bits" edc:nzwidth="0x2">
+                <edc:SFRFieldSemantic edc:cname="VAL_0x00" edc:desc="Low Level of INTX" edc:when="(field &amp; 0x3) == 0x00"/>
+                <edc:SFRFieldSemantic edc:cname="VAL_0x01" edc:desc="Any Logical Change in INTX" edc:when="(field &amp; 0x3) == 0x01"/>
+                <edc:SFRFieldSemantic edc:cname="VAL_0x02" edc:desc="Falling Edge of INTX" edc:when="(field &amp; 0x3) == 0x02"/>
+                <edc:SFRFieldSemantic edc:cname="VAL_0x03" edc:desc="Rising Edge of INTX" edc:when="(field &amp; 0x3) == 0x03"/>
+              </edc:SFRFieldDef>
+              <edc:SFRFieldDef edc:cname="ISC1" edc:desc="Interrupt Sense Control 1 bits" edc:nzwidth="0x2">
+                <edc:SFRFieldSemantic edc:cname="VAL_0x00" edc:desc="Low Level of INTX" edc:when="(field &amp; 0x3) == 0x00"/>
+                <edc:SFRFieldSemantic edc:cname="VAL_0x01" edc:desc="Any Logical Change in INTX" edc:when="(field &amp; 0x3) == 0x01"/>
+                <edc:SFRFieldSemantic edc:cname="VAL_0x02" edc:desc="Falling Edge of INTX" edc:when="(field &amp; 0x3) == 0x02"/>
+                <edc:SFRFieldSemantic edc:cname="VAL_0x03" edc:desc="Rising Edge of INTX" edc:when="(field &amp; 0x3) == 0x03"/>
+              </edc:SFRFieldDef>
+              <edc:SFRFieldDef edc:cname="SM1" edc:desc="Sleep Mode Select" edc:nzwidth="0x1"/>
+              <edc:SFRFieldDef edc:cname="SE" edc:desc="Sleep Enable" edc:nzwidth="0x1"/>
+              <edc:SFRFieldDef edc:cname="SRW10" edc:desc="External SRAM Wait State Select" edc:nzwidth="0x1"/>
+              <edc:SFRFieldDef edc:cname="SRE" edc:desc="External SRAM Enable" edc:nzwidth="0x1"/>
+            </edc:SFRMode>
+            <edc:SFRMode edc:id="DS.1" ltx:memberofperipheral="EXINT">
               <edc:SFRFieldDef edc:cname="ISC0" edc:desc="Interrupt Sense Control 0 Bits" edc:nzwidth="0x2">
                 <edc:SFRFieldSemantic edc:cname="VAL_0x00" edc:desc="Low Level of INTX" edc:when="(field &amp; 0x3) == 0x00"/>
                 <edc:SFRFieldSemantic edc:cname="VAL_0x01" edc:desc="Any Logical Change of INTX" edc:when="(field &amp; 0x3) == 0x01"/>
@@ -426,16 +533,37 @@
             </edc:SFRMode>
           </edc:SFRModeList>
         </edc:SFRDef>
-        <edc:SFRDef edc:_addr="0x56" edc:access="-------n" edc:cname="EMCUCR" edc:nzwidth="0x8" ltx:memberofperipheral="EXINT">
+        <edc:SFRDef edc:_addr="0x56" edc:access="nnnnnnnn" edc:cname="EMCUCR" edc:nzwidth="0x8" ltx:memberofperipheral="CPU EXINT">
           <edc:SFRModeList>
-            <edc:SFRMode edc:id="DS.0">
+            <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="CPU">
+              <edc:SFRFieldDef edc:cname="ISC2" edc:desc="Interrupt Sense Control 2" edc:nzwidth="0x1"/>
+              <edc:SFRFieldDef edc:cname="SRW11" edc:desc="Wait State Select Bit 1 for Upper Sector" edc:nzwidth="0x1"/>
+              <edc:SFRFieldDef edc:cname="SRW0" edc:desc="Wait State Select Bit 1 for Lower Sector" edc:nzwidth="0x2">
+                <edc:SFRFieldSemantic edc:cname="VAL_0x00" edc:desc="No wait-states" edc:when="(field &amp; 0x3) == 0x00"/>
+                <edc:SFRFieldSemantic edc:cname="VAL_0x01" edc:desc="Wait one cycle during read/write strobe" edc:when="(field &amp; 0x3) == 0x01"/>
+                <edc:SFRFieldSemantic edc:cname="VAL_0x02" edc:desc="Wait two cycles during read/write strobe" edc:when="(field &amp; 0x3) == 0x02"/>
+                <edc:SFRFieldSemantic edc:cname="VAL_0x03" edc:desc="Wait two cycles during read/write and wait one cycle before driving out new address" edc:when="(field &amp; 0x3) == 0x03"/>
+              </edc:SFRFieldDef>
+              <edc:SFRFieldDef edc:cname="SRL" edc:desc="Wait State Sector Limit Bits" edc:nzwidth="0x3">
+                <edc:SFRFieldSemantic edc:cname="VAL_0x00" edc:desc="LS = N/A, US = 0x1100 - 0xFFFF" edc:when="(field &amp; 0x7) == 0x00"/>
+                <edc:SFRFieldSemantic edc:cname="VAL_0x01" edc:desc="LS = 0x1100 - 0x1FFF, US = 0x2000 - 0xFFFF" edc:when="(field &amp; 0x7) == 0x01"/>
+                <edc:SFRFieldSemantic edc:cname="VAL_0x02" edc:desc="LS = 0x1100 - 0x3FFF, US = 0x4000 - 0xFFFF" edc:when="(field &amp; 0x7) == 0x02"/>
+                <edc:SFRFieldSemantic edc:cname="VAL_0x03" edc:desc="LS = 0x1100 - 0x5FFF, US = 0x6000 - 0xFFFF" edc:when="(field &amp; 0x7) == 0x03"/>
+                <edc:SFRFieldSemantic edc:cname="VAL_0x04" edc:desc="LS = 0x1100 - 0x7FFF, US = 0x8000 - 0xFFFF" edc:when="(field &amp; 0x7) == 0x04"/>
+                <edc:SFRFieldSemantic edc:cname="VAL_0x05" edc:desc="LS = 0x1100 - 0x9FFF, US = 0xA000 - 0xFFFF" edc:when="(field &amp; 0x7) == 0x05"/>
+                <edc:SFRFieldSemantic edc:cname="VAL_0x06" edc:desc="LS = 0x1100 - 0xBFFF, US = 0xC000 - 0xFFFF" edc:when="(field &amp; 0x7) == 0x06"/>
+                <edc:SFRFieldSemantic edc:cname="VAL_0x07" edc:desc="LS = 0x1100 - 0xDFFF, US = 0xE000 - 0xFFFF" edc:when="(field &amp; 0x7) == 0x07"/>
+              </edc:SFRFieldDef>
+              <edc:SFRFieldDef edc:cname="SM0" edc:desc="Sleep mode Select Bit 0" edc:nzwidth="0x1"/>
+            </edc:SFRMode>
+            <edc:SFRMode edc:id="DS.1" ltx:memberofperipheral="EXINT">
               <edc:SFRFieldDef edc:cname="ISC2" edc:desc="Interrupt Sense Control 2" edc:nzwidth="0x1"/>
             </edc:SFRMode>
           </edc:SFRModeList>
         </edc:SFRDef>
-        <edc:SFRDef edc:_addr="0x57" edc:access="nn-nnnnn" edc:cname="SPMCR" edc:nzwidth="0x8" ltx:memberofperipheral="BOOT_LOAD">
+        <edc:SFRDef edc:_addr="0x57" edc:access="nn-nnnnn" edc:cname="SPMCR" edc:impl="0xDF" edc:nzwidth="0x8" ltx:memberofperipheral="BOOT_LOAD">
           <edc:SFRModeList>
-            <edc:SFRMode edc:id="DS.0">
+            <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="BOOT_LOAD">
               <edc:SFRFieldDef edc:cname="SPMEN" edc:desc="Store Program Memory Enable" edc:nzwidth="0x1"/>
               <edc:SFRFieldDef edc:cname="PGERS" edc:desc="Page Erase" edc:nzwidth="0x1"/>
               <edc:SFRFieldDef edc:cname="PGWRT" edc:desc="Page Write" edc:nzwidth="0x1"/>
@@ -447,25 +575,53 @@
             </edc:SFRMode>
           </edc:SFRModeList>
         </edc:SFRDef>
-        <edc:SFRDef edc:_addr="0x58" edc:access="------nn" edc:cname="TIFR" edc:nzwidth="0x8" ltx:memberofperipheral="TC0">
+        <edc:SFRDef edc:_addr="0x58" edc:access="nnnnnnnn" edc:cname="TIFR" edc:nzwidth="0x8" ltx:memberofperipheral="TC1 TC2 TC0">
           <edc:SFRModeList>
-            <edc:SFRMode edc:id="DS.0">
+            <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="TC1">
+              <edc:AdjustPoint edc:offset="0x3"/>
+              <edc:SFRFieldDef edc:cname="ICF1" edc:desc="Input Capture Flag 1" edc:nzwidth="0x1"/>
+              <edc:AdjustPoint edc:offset="0x1"/>
+              <edc:SFRFieldDef edc:cname="OCF1B" edc:desc="Output Compare Flag 1B" edc:nzwidth="0x1"/>
+              <edc:SFRFieldDef edc:cname="OCF1A" edc:desc="Output Compare Flag 1A" edc:nzwidth="0x1"/>
+              <edc:SFRFieldDef edc:cname="TOV1" edc:desc="Timer/Counter1 Overflow Flag" edc:nzwidth="0x1"/>
+            </edc:SFRMode>
+            <edc:SFRMode edc:id="DS.1" ltx:memberofperipheral="TC2">
+              <edc:AdjustPoint edc:offset="0x2"/>
+              <edc:SFRFieldDef edc:cname="TOV2" edc:desc="Timer/Counter2 Overflow Flag" edc:nzwidth="0x1"/>
+              <edc:AdjustPoint edc:offset="0x1"/>
+              <edc:SFRFieldDef edc:cname="OCF2" edc:desc="Output Compare Flag 2" edc:nzwidth="0x1"/>
+            </edc:SFRMode>
+            <edc:SFRMode edc:id="DS.2" ltx:memberofperipheral="TC0">
               <edc:SFRFieldDef edc:cname="OCF0" edc:desc="Output Compare Flag 0" edc:nzwidth="0x1"/>
               <edc:SFRFieldDef edc:cname="TOV0" edc:desc="Timer/Counter0 Overflow Flag" edc:nzwidth="0x1"/>
             </edc:SFRMode>
           </edc:SFRModeList>
         </edc:SFRDef>
-        <edc:SFRDef edc:_addr="0x59" edc:access="------nn" edc:cname="TIMSK" edc:nzwidth="0x8" ltx:memberofperipheral="TC0">
+        <edc:SFRDef edc:_addr="0x59" edc:access="nnnnnnnn" edc:cname="TIMSK" edc:nzwidth="0x8" ltx:memberofperipheral="TC1 TC2 TC0">
           <edc:SFRModeList>
-            <edc:SFRMode edc:id="DS.0">
+            <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="TC1">
+              <edc:AdjustPoint edc:offset="0x3"/>
+              <edc:SFRFieldDef edc:cname="TICIE1" edc:desc="Timer/Counter1 Input Capture Interrupt Enable" edc:nzwidth="0x1"/>
+              <edc:AdjustPoint edc:offset="0x1"/>
+              <edc:SFRFieldDef edc:cname="OCIE1B" edc:desc="Timer/Counter1 Output CompareB Match Interrupt Enable" edc:nzwidth="0x1"/>
+              <edc:SFRFieldDef edc:cname="OCIE1A" edc:desc="Timer/Counter1 Output CompareA Match Interrupt Enable" edc:nzwidth="0x1"/>
+              <edc:SFRFieldDef edc:cname="TOIE1" edc:desc="Timer/Counter1 Overflow Interrupt Enable" edc:nzwidth="0x1"/>
+            </edc:SFRMode>
+            <edc:SFRMode edc:id="DS.1" ltx:memberofperipheral="TC2">
+              <edc:AdjustPoint edc:offset="0x2"/>
+              <edc:SFRFieldDef edc:cname="TOIE2" edc:desc="Timer/Counter2 Overflow Interrupt Enable" edc:nzwidth="0x1"/>
+              <edc:AdjustPoint edc:offset="0x1"/>
+              <edc:SFRFieldDef edc:cname="OCIE2" edc:desc="Timer/Counter2 Output Compare Match Interrupt Enable" edc:nzwidth="0x1"/>
+            </edc:SFRMode>
+            <edc:SFRMode edc:id="DS.2" ltx:memberofperipheral="TC0">
               <edc:SFRFieldDef edc:cname="OCIE0" edc:desc="Timer/Counter0 Output Compare Match Interrupt register" edc:nzwidth="0x1"/>
               <edc:SFRFieldDef edc:cname="TOIE0" edc:desc="Timer/Counter0 Overflow Interrupt Enable" edc:nzwidth="0x1"/>
             </edc:SFRMode>
           </edc:SFRModeList>
         </edc:SFRDef>
-        <edc:SFRDef edc:_addr="0x5A" edc:access="nnnnn---" edc:cname="GIFR" edc:nzwidth="0x8" ltx:memberofperipheral="EXINT">
+        <edc:SFRDef edc:_addr="0x5A" edc:access="nnnnn---" edc:cname="GIFR" edc:impl="0xF8" edc:nzwidth="0x8" ltx:memberofperipheral="EXINT">
           <edc:SFRModeList>
-            <edc:SFRMode edc:id="DS.0">
+            <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="EXINT">
               <edc:AdjustPoint edc:offset="0x3"/>
               <edc:SFRFieldDef edc:cname="PCIF" edc:desc="Pin Change Interrupt Flags" edc:nzwidth="0x2"/>
               <edc:SFRFieldDef edc:cname="INTF2" edc:desc="External Interrupt Flag 2" edc:nzwidth="0x1"/>
@@ -473,9 +629,9 @@
             </edc:SFRMode>
           </edc:SFRModeList>
         </edc:SFRDef>
-        <edc:SFRDef edc:_addr="0x5B" edc:access="nnnnn-nn" edc:cname="GICR" edc:nzwidth="0x8" ltx:memberofperipheral="EXINT">
+        <edc:SFRDef edc:_addr="0x5B" edc:access="nnnnn-nn" edc:cname="GICR" edc:impl="0xFB" edc:nzwidth="0x8" ltx:memberofperipheral="EXINT">
           <edc:SFRModeList>
-            <edc:SFRMode edc:id="DS.0">
+            <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="EXINT">
               <edc:SFRFieldDef edc:cname="IVCE" edc:desc="Interrupt Vector Change Enable" edc:nzwidth="0x1"/>
               <edc:SFRFieldDef edc:cname="IVSEL" edc:desc="Interrupt Vector Select" edc:nzwidth="0x1"/>
               <edc:AdjustPoint edc:offset="0x1"/>
@@ -486,19 +642,48 @@
             </edc:SFRMode>
           </edc:SFRModeList>
         </edc:SFRDef>
-        <edc:SFRDef edc:_addr="0x5C" edc:access="n---nnnn" edc:cname="UBRR1H" edc:nzwidth="0x8" ltx:memberofperipheral="USART1">
-          <edc:SFRModeList>
-            <edc:SFRMode edc:id="DS.0">
-              <edc:SFRFieldDef edc:cname="UBRR1" edc:desc="USART Baud Rate Register High bits" edc:nzwidth="0x4"/>
-              <edc:AdjustPoint edc:offset="0x3"/>
-              <edc:SFRFieldDef edc:cname="URSEL0" edc:desc="Register Select" edc:nzwidth="0x1"/>
-            </edc:SFRMode>
-          </edc:SFRModeList>
-        </edc:SFRDef>
+        <edc:MuxedSFRDef edc:_addr="0x5C" edc:nzwidth="0x8">
+          <edc:SelectSFR>
+            <edc:SFRDef edc:_addr="0x5C" edc:access="nnnnnnnn" edc:cname="UCSR1C" edc:nzwidth="0x8" ltx:memberofperipheral="USART1">
+              <edc:SFRModeList>
+                <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="USART1">
+                  <edc:SFRFieldDef edc:cname="UCPOL1" edc:desc="Clock Polarity" edc:nzwidth="0x1"/>
+                  <edc:SFRFieldDef edc:cname="UCSZ1" edc:desc="Character Size" edc:nzwidth="0x2"/>
+                  <edc:SFRFieldDef edc:cname="USBS1" edc:desc="Stop Bit Select" edc:nzwidth="0x1">
+                    <edc:SFRFieldSemantic edc:cname="VAL_0x00" edc:desc="1-bit" edc:when="(field &amp; 0x1) == 0x00"/>
+                    <edc:SFRFieldSemantic edc:cname="VAL_0x01" edc:desc="2-bit" edc:when="(field &amp; 0x1) == 0x01"/>
+                  </edc:SFRFieldDef>
+                  <edc:SFRFieldDef edc:cname="UPM1" edc:desc="Parity Mode Bits" edc:nzwidth="0x2">
+                    <edc:SFRFieldSemantic edc:cname="VAL_0x00" edc:desc="Disabled" edc:when="(field &amp; 0x3) == 0x00"/>
+                    <edc:SFRFieldSemantic edc:cname="VAL_0x01" edc:desc="Reserved" edc:when="(field &amp; 0x3) == 0x01"/>
+                    <edc:SFRFieldSemantic edc:cname="VAL_0x02" edc:desc="Enabled, Even Parity" edc:when="(field &amp; 0x3) == 0x02"/>
+                    <edc:SFRFieldSemantic edc:cname="VAL_0x03" edc:desc="Enabled, Odd Parity" edc:when="(field &amp; 0x3) == 0x03"/>
+                  </edc:SFRFieldDef>
+                  <edc:SFRFieldDef edc:cname="UMSEL1" edc:desc="USART Mode Select" edc:nzwidth="0x1">
+                    <edc:SFRFieldSemantic edc:cname="VAL_0x00" edc:desc="Asynchronous Operation" edc:when="(field &amp; 0x1) == 0x00"/>
+                    <edc:SFRFieldSemantic edc:cname="VAL_0x01" edc:desc="Synchronous Operation" edc:when="(field &amp; 0x1) == 0x01"/>
+                  </edc:SFRFieldDef>
+                  <edc:SFRFieldDef edc:cname="URSEL1" edc:desc="Register Select" edc:nzwidth="0x1"/>
+                </edc:SFRMode>
+              </edc:SFRModeList>
+            </edc:SFRDef>
+          </edc:SelectSFR>
+          <edc:SelectSFR>
+            <edc:SFRDef edc:_addr="0x5C" edc:access="n---nnnn" edc:cname="UBRR1H" edc:impl="0x8F" edc:nzwidth="0x8" ltx:memberofperipheral="USART1">
+              <edc:SFRModeList>
+                <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="USART1">
+                  <edc:SFRFieldDef edc:cname="UBRR1" edc:desc="USART Baud Rate Register High bits" edc:nzwidth="0x4"/>
+                  <edc:AdjustPoint edc:offset="0x3"/>
+                  <edc:SFRFieldDef edc:cname="URSEL0" edc:desc="Register Select" edc:nzwidth="0x1"/>
+                </edc:SFRMode>
+              </edc:SFRModeList>
+            </edc:SFRDef>
+          </edc:SelectSFR>
+        </edc:MuxedSFRDef>
         <edc:SFRDef edc:_addr="0x5D" edc:access="nnnnnnnnnnnnnnnn" edc:cname="SP" edc:nzwidth="0x10" ltx:memberofperipheral="CPU"/>
         <edc:SFRDef edc:_addr="0x5F" edc:access="nnnnnnnn" edc:cname="SREG" edc:nzwidth="0x8" ltx:memberofperipheral="CPU">
           <edc:SFRModeList>
-            <edc:SFRMode edc:id="DS.0">
+            <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="CPU">
               <edc:SFRFieldDef edc:cname="C" edc:desc="Carry Flag" edc:nzwidth="0x1"/>
               <edc:SFRFieldDef edc:cname="Z" edc:desc="Zero Flag" edc:nzwidth="0x1"/>
               <edc:SFRFieldDef edc:cname="N" edc:desc="Negative Flag" edc:nzwidth="0x1"/>
@@ -511,9 +696,9 @@
           </edc:SFRModeList>
         </edc:SFRDef>
         <edc:AdjustPoint edc:_addr="0x60" edc:offset="0x1"/>
-        <edc:SFRDef edc:_addr="0x61" edc:access="n---nnnn" edc:cname="CLKPR" edc:nzwidth="0x8" ltx:memberofperipheral="CPU">
+        <edc:SFRDef edc:_addr="0x61" edc:access="n---nnnn" edc:cname="CLKPR" edc:impl="0x8F" edc:nzwidth="0x8" ltx:memberofperipheral="CPU">
           <edc:SFRModeList>
-            <edc:SFRMode edc:id="DS.0">
+            <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="CPU">
               <edc:SFRFieldDef edc:cname="CLKPS" edc:desc="Clock Prescaler Select Bits" edc:nzwidth="0x4">
                 <edc:SFRFieldSemantic edc:cname="VAL_0x00" edc:desc="1" edc:when="(field &amp; 0xF) == 0x00"/>
                 <edc:SFRFieldSemantic edc:cname="VAL_0x01" edc:desc="2" edc:when="(field &amp; 0xF) == 0x01"/>
@@ -533,22 +718,22 @@
         <edc:AdjustPoint edc:_addr="0x62" edc:offset="0x9"/>
         <edc:SFRDef edc:_addr="0x6B" edc:access="nnnnnnnn" edc:cname="PCMSK0" edc:nzwidth="0x8" ltx:memberofperipheral="EXINT">
           <edc:SFRModeList>
-            <edc:SFRMode edc:id="DS.0">
+            <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="EXINT">
               <edc:SFRFieldDef edc:cname="PCINT" edc:desc="Pin Change Interrupt mask bits" edc:nzwidth="0x8"/>
             </edc:SFRMode>
           </edc:SFRModeList>
         </edc:SFRDef>
         <edc:SFRDef edc:_addr="0x6C" edc:access="nnnnnnnn" edc:cname="PCMSK1" edc:nzwidth="0x8" ltx:memberofperipheral="EXINT">
           <edc:SFRModeList>
-            <edc:SFRMode edc:id="DS.0">
+            <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="EXINT">
               <edc:SFRFieldDef edc:cname="PCINT" edc:desc="Pin Change Interrupt mask bits" edc:nzwidth="0x8"/>
             </edc:SFRMode>
           </edc:SFRModeList>
         </edc:SFRDef>
         <edc:AdjustPoint edc:_addr="0x6D" edc:offset="0xF"/>
-        <edc:SFRDef edc:_addr="0x7C" edc:access="--nnnn--" edc:cname="ETIFR" edc:nzwidth="0x8" ltx:memberofperipheral="TC3">
+        <edc:SFRDef edc:_addr="0x7C" edc:access="--nnnn--" edc:cname="ETIFR" edc:impl="0x3C" edc:nzwidth="0x8" ltx:memberofperipheral="TC3">
           <edc:SFRModeList>
-            <edc:SFRMode edc:id="DS.0">
+            <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="TC3">
               <edc:AdjustPoint edc:offset="0x2"/>
               <edc:SFRFieldDef edc:cname="TOV3" edc:desc="Timer/Counter3 Overflow Flag" edc:nzwidth="0x1"/>
               <edc:SFRFieldDef edc:cname="OCF3B" edc:desc="Output Compare Flag 3B" edc:nzwidth="0x1"/>
@@ -557,9 +742,9 @@
             </edc:SFRMode>
           </edc:SFRModeList>
         </edc:SFRDef>
-        <edc:SFRDef edc:_addr="0x7D" edc:access="--nnnn--" edc:cname="ETIMSK" edc:nzwidth="0x8" ltx:memberofperipheral="TC3">
+        <edc:SFRDef edc:_addr="0x7D" edc:access="--nnnn--" edc:cname="ETIMSK" edc:impl="0x3C" edc:nzwidth="0x8" ltx:memberofperipheral="TC3">
           <edc:SFRModeList>
-            <edc:SFRMode edc:id="DS.0">
+            <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="TC3">
               <edc:AdjustPoint edc:offset="0x2"/>
               <edc:SFRFieldDef edc:cname="TOIE3" edc:desc="Timer/Counter3 Overflow Interrupt Enable" edc:nzwidth="0x1"/>
               <edc:SFRFieldDef edc:cname="OCIE3B" edc:desc="Timer/Counter3 Output CompareB Match Interrupt Enable" edc:nzwidth="0x1"/>
@@ -574,9 +759,9 @@
         <edc:SFRDef edc:_addr="0x84" edc:access="nnnnnnnnnnnnnnnn" edc:cname="OCR3B" edc:nzwidth="0x10" ltx:memberofperipheral="TC3"/>
         <edc:SFRDef edc:_addr="0x86" edc:access="nnnnnnnnnnnnnnnn" edc:cname="OCR3A" edc:nzwidth="0x10" ltx:memberofperipheral="TC3"/>
         <edc:SFRDef edc:_addr="0x88" edc:access="nnnnnnnnnnnnnnnn" edc:cname="TCNT3" edc:nzwidth="0x10" ltx:memberofperipheral="TC3"/>
-        <edc:SFRDef edc:_addr="0x8A" edc:access="nn-nnnnn" edc:cname="TCCR3B" edc:nzwidth="0x8" ltx:memberofperipheral="TC3">
+        <edc:SFRDef edc:_addr="0x8A" edc:access="nn-nnnnn" edc:cname="TCCR3B" edc:impl="0xDF" edc:nzwidth="0x8" ltx:memberofperipheral="TC3">
           <edc:SFRModeList>
-            <edc:SFRMode edc:id="DS.0">
+            <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="TC3">
               <edc:SFRFieldDef edc:cname="CS3" edc:desc="Clock Select3 bits" edc:nzwidth="0x3">
                 <edc:SFRFieldSemantic edc:cname="VAL_0x00" edc:desc="No Clock Source (Stopped)" edc:when="(field &amp; 0x7) == 0x00"/>
                 <edc:SFRFieldSemantic edc:cname="VAL_0x01" edc:desc="Running, No Prescaling" edc:when="(field &amp; 0x7) == 0x01"/>
@@ -596,7 +781,7 @@
         </edc:SFRDef>
         <edc:SFRDef edc:_addr="0x8B" edc:access="nnnnnnnn" edc:cname="TCCR3A" edc:nzwidth="0x8" ltx:memberofperipheral="TC3">
           <edc:SFRModeList>
-            <edc:SFRMode edc:id="DS.0">
+            <edc:SFRMode edc:id="DS.0" ltx:memberofperipheral="TC3">
               <edc:SFRFieldDef edc:cname="WGM3" edc:desc="Pulse Width Modulator Select Bits" edc:nzwidth="0x2"/>
               <edc:SFRFieldDef edc:cname="FOC3B" edc:desc="Force Output Compare for Channel B" edc:nzwidth="0x1"/>
               <edc:SFRFieldDef edc:cname="FOC3A" edc:desc="Force Output Compare for Channel A" edc:nzwidth="0x1"/>
@@ -618,7 +803,7 @@
     <edc:ConfigFuseSector edc:beginaddr="0x0" edc:endaddr="0x3" edc:regionid="FUSES">
       <edc:DCRDef edc:_addr="0x0" edc:access="nnnnnnnn" edc:cname="LOW" edc:factorydefault="0x62" edc:impl="0xFF" edc:nzwidth="0x8" edc:unused="0x0" edc:useinchecksum="0xFF" ltx:memberofperipheral="FUSE">
         <edc:DCRModeList>
-          <edc:DCRMode edc:id="DS.0">
+          <edc:DCRMode edc:id="DS.0" ltx:memberofperipheral="FUSE">
             <edc:DCRFieldDef edc:cname="SUT_CKSEL" edc:desc="Select Clock Source" edc:nzwidth="0x6">
               <edc:DCRFieldSemantic edc:cname="EXTCLK_6CK_0MS" edc:desc="Ext. Clock; Start-up time: 6 CK + 0 ms" edc:when="(field &amp; 0x3F) == 0x00"/>
               <edc:DCRFieldSemantic edc:cname="EXTCLK_6CK_4MS1" edc:desc="Ext. Clock; Start-up time: 6 CK + 4.1 ms" edc:when="(field &amp; 0x3F) == 0x10"/>
@@ -671,32 +856,56 @@
               <edc:DCRFieldSemantic edc:cname="EXTXOSC_8MHZ_XX_16KCK_4MS1" edc:desc="Ext. Crystal Osc. 8.0-    MHz; Start-up time: 16K CK + 4.1 ms" edc:when="(field &amp; 0x3F) == 0x2F"/>
               <edc:DCRFieldSemantic edc:cname="EXTXOSC_8MHZ_XX_16KCK_65MS" edc:desc="Ext. Crystal Osc. 8.0-    MHz; Start-up time: 16K CK + 65 ms" edc:when="(field &amp; 0x3F) == 0x3F"/>
             </edc:DCRFieldDef>
-            <edc:DCRFieldDef edc:cname="CKOUT" edc:desc="Clock output on PORTB0" edc:nzwidth="0x1"/>
-            <edc:DCRFieldDef edc:cname="CKDIV8" edc:desc="Divide clock by 8 internally" edc:nzwidth="0x1"/>
+            <edc:DCRFieldDef edc:cname="CKOUT" edc:desc="Clock output on PORTB0" edc:nzwidth="0x1">
+              <edc:DCRFieldSemantic edc:cname="SET" edc:when="(field &amp; 0x1) == 0x0"/>
+              <edc:DCRFieldSemantic edc:cname="CLEAR" edc:when="(field &amp; 0x1) == 0x1"/>
+            </edc:DCRFieldDef>
+            <edc:DCRFieldDef edc:cname="CKDIV8" edc:desc="Divide clock by 8 internally" edc:nzwidth="0x1">
+              <edc:DCRFieldSemantic edc:cname="SET" edc:when="(field &amp; 0x1) == 0x0"/>
+              <edc:DCRFieldSemantic edc:cname="CLEAR" edc:when="(field &amp; 0x1) == 0x1"/>
+            </edc:DCRFieldDef>
           </edc:DCRMode>
         </edc:DCRModeList>
       </edc:DCRDef>
       <edc:DCRDef edc:_addr="0x1" edc:access="nnnnnnnn" edc:cname="HIGH" edc:factorydefault="0x99" edc:impl="0xFF" edc:nzwidth="0x8" edc:unused="0x0" edc:useinchecksum="0xFF" ltx:memberofperipheral="FUSE">
         <edc:DCRModeList>
-          <edc:DCRMode edc:id="DS.0">
-            <edc:DCRFieldDef edc:cname="BOOTRST" edc:desc="Boot Reset vector Enabled" edc:nzwidth="0x1"/>
+          <edc:DCRMode edc:id="DS.0" ltx:memberofperipheral="FUSE">
+            <edc:DCRFieldDef edc:cname="BOOTRST" edc:desc="Boot Reset vector Enabled" edc:nzwidth="0x1">
+              <edc:DCRFieldSemantic edc:cname="SET" edc:when="(field &amp; 0x1) == 0x0"/>
+              <edc:DCRFieldSemantic edc:cname="CLEAR" edc:when="(field &amp; 0x1) == 0x1"/>
+            </edc:DCRFieldDef>
             <edc:DCRFieldDef edc:cname="BOOTSZ" edc:desc="Select Boot Size" edc:nzwidth="0x2">
               <edc:DCRFieldSemantic edc:cname="128W_1F80" edc:desc="Boot Flash size=128 words start address=$1F80" edc:when="(field &amp; 0x3) == 0x03"/>
               <edc:DCRFieldSemantic edc:cname="256W_1F00" edc:desc="Boot Flash size=256 words start address=$1F00" edc:when="(field &amp; 0x3) == 0x02"/>
               <edc:DCRFieldSemantic edc:cname="512W_1E00" edc:desc="Boot Flash size=512 words start address=$1E00" edc:when="(field &amp; 0x3) == 0x01"/>
               <edc:DCRFieldSemantic edc:cname="1024W_1C00" edc:desc="Boot Flash size=1024 words start address=$1C00" edc:when="(field &amp; 0x3) == 0x00"/>
             </edc:DCRFieldDef>
-            <edc:DCRFieldDef edc:cname="EESAVE" edc:desc="Preserve EEPROM through the Chip Erase cycle" edc:nzwidth="0x1"/>
-            <edc:DCRFieldDef edc:cname="WDTON" edc:desc="Watchdog timer always on" edc:nzwidth="0x1"/>
-            <edc:DCRFieldDef edc:cname="SPIEN" edc:desc="Serial program downloading (SPI) enabled" edc:nzwidth="0x1"/>
-            <edc:DCRFieldDef edc:cname="JTAGEN" edc:desc="JTAG Interface Enabled" edc:nzwidth="0x1"/>
-            <edc:DCRFieldDef edc:cname="OCDEN" edc:desc="On-Chip Debug Enabled" edc:nzwidth="0x1"/>
+            <edc:DCRFieldDef edc:cname="EESAVE" edc:desc="Preserve EEPROM through the Chip Erase cycle" edc:nzwidth="0x1">
+              <edc:DCRFieldSemantic edc:cname="SET" edc:when="(field &amp; 0x1) == 0x0"/>
+              <edc:DCRFieldSemantic edc:cname="CLEAR" edc:when="(field &amp; 0x1) == 0x1"/>
+            </edc:DCRFieldDef>
+            <edc:DCRFieldDef edc:cname="WDTON" edc:desc="Watchdog timer always on" edc:nzwidth="0x1">
+              <edc:DCRFieldSemantic edc:cname="SET" edc:when="(field &amp; 0x1) == 0x0"/>
+              <edc:DCRFieldSemantic edc:cname="CLEAR" edc:when="(field &amp; 0x1) == 0x1"/>
+            </edc:DCRFieldDef>
+            <edc:DCRFieldDef edc:cname="SPIEN" edc:desc="Serial program downloading (SPI) enabled" edc:nzwidth="0x1">
+              <edc:DCRFieldSemantic edc:cname="SET" edc:when="(field &amp; 0x1) == 0x0"/>
+              <edc:DCRFieldSemantic edc:cname="CLEAR" edc:when="(field &amp; 0x1) == 0x1"/>
+            </edc:DCRFieldDef>
+            <edc:DCRFieldDef edc:cname="JTAGEN" edc:desc="JTAG Interface Enabled" edc:nzwidth="0x1">
+              <edc:DCRFieldSemantic edc:cname="SET" edc:when="(field &amp; 0x1) == 0x0"/>
+              <edc:DCRFieldSemantic edc:cname="CLEAR" edc:when="(field &amp; 0x1) == 0x1"/>
+            </edc:DCRFieldDef>
+            <edc:DCRFieldDef edc:cname="OCDEN" edc:desc="On-Chip Debug Enabled" edc:nzwidth="0x1">
+              <edc:DCRFieldSemantic edc:cname="SET" edc:when="(field &amp; 0x1) == 0x0"/>
+              <edc:DCRFieldSemantic edc:cname="CLEAR" edc:when="(field &amp; 0x1) == 0x1"/>
+            </edc:DCRFieldDef>
           </edc:DCRMode>
         </edc:DCRModeList>
       </edc:DCRDef>
       <edc:DCRDef edc:_addr="0x2" edc:access="---nnnn-" edc:cname="EXTENDED" edc:factorydefault="0xFF" edc:impl="0x1E" edc:nzwidth="0x8" edc:unused="0x0" edc:useinchecksum="0xFF" ltx:memberofperipheral="FUSE">
         <edc:DCRModeList>
-          <edc:DCRMode edc:id="DS.0">
+          <edc:DCRMode edc:id="DS.0" ltx:memberofperipheral="FUSE">
             <edc:AdjustPoint edc:offset="0x1"/>
             <edc:DCRFieldDef edc:cname="BODLEVEL" edc:desc="Brownout detector trigger level" edc:nzwidth="0x3">
               <edc:DCRFieldSemantic edc:cname="DISABLED" edc:desc="Brown-out detection disabled" edc:when="(field &amp; 0x7) == 0x07"/>
@@ -705,7 +914,10 @@
               <edc:DCRFieldSemantic edc:cname="2V7" edc:desc="Brown-out detection at VCC=2.7 V" edc:when="(field &amp; 0x7) == 0x05"/>
               <edc:DCRFieldSemantic edc:cname="4V3" edc:desc="Brown-out detection at VCC=4.3 V" edc:when="(field &amp; 0x7) == 0x04"/>
             </edc:DCRFieldDef>
-            <edc:DCRFieldDef edc:cname="M161C" edc:desc="ATmega161 compability mode" edc:nzwidth="0x1"/>
+            <edc:DCRFieldDef edc:cname="M161C" edc:desc="ATmega161 compability mode" edc:nzwidth="0x1">
+              <edc:DCRFieldSemantic edc:cname="SET" edc:when="(field &amp; 0x1) == 0x0"/>
+              <edc:DCRFieldSemantic edc:cname="CLEAR" edc:when="(field &amp; 0x1) == 0x1"/>
+            </edc:DCRFieldDef>
           </edc:DCRMode>
         </edc:DCRModeList>
       </edc:DCRDef>
@@ -713,9 +925,9 @@
   </edc:FusesSpace>
   <edc:LockbitsSpace edc:magicoffset="0x830000">
     <edc:ConfigFuseSector edc:beginaddr="0x0" edc:endaddr="0x1" edc:regionid="LOCKBITS">
-      <edc:DCRDef edc:_addr="0x0" edc:access="--nnnnnn" edc:cname="LOCKBIT" edc:factorydefault="0x0" edc:impl="0x3F" edc:nzwidth="0x8" edc:unused="0x0" edc:useinchecksum="0xFF" ltx:memberofperipheral="LOCKBIT">
+      <edc:DCRDef edc:_addr="0x0" edc:access="--nnnnnn" edc:cname="LOCKBIT" edc:factorydefault="0xFF" edc:impl="0x3F" edc:nzwidth="0x8" edc:unused="0x0" edc:useinchecksum="0xFF" ltx:memberofperipheral="LOCKBIT">
         <edc:DCRModeList>
-          <edc:DCRMode edc:id="DS.0">
+          <edc:DCRMode edc:id="DS.0" ltx:memberofperipheral="LOCKBIT">
             <edc:DCRFieldDef edc:cname="LB" edc:desc="Memory Lock" edc:nzwidth="0x2">
               <edc:DCRFieldSemantic edc:cname="PROG_VER_DISABLED" edc:desc="Further programming and verification disabled" edc:when="(field &amp; 0x3) == 0x00"/>
               <edc:DCRFieldSemantic edc:cname="PROG_DISABLED" edc:desc="Further programming disabled" edc:when="(field &amp; 0x3) == 0x02"/>

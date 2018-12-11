@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <package xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns:saxon="http://saxon.sf.net//"
          schemaVersion="1.3"
          xs:schemaLocation="http://www.atmel.com/schemas/pack-device-atmel-extension PACK.DEVICE.ATMEL.EXTENSION.xsd"
          xs:noNamespaceSchemaLocation="PACK.ATMEL.xsd">
@@ -9,6 +8,8 @@
    <name>ATmega_DFP</name>
    <description>Atmel ATmega Series Device Support</description>
    <releases>
+      <release version="1.3.300" date="2018-11-27">Corrected various caption typos. Corrected TCA0 event names for ATmega4809|4808|3209|3208|1609|1608|809|808. Added linker scripts for ATmega809. Added signals to ATmega-C-devices. Refactored away family header files, now there is one header file per device.</release>
+      <release version="1.2.272" date="2018-09-14">Corrected CLKCTRL signals, ALT out signals and interrupt edge triggering values for CCL and added SEQCTRL1 for ATmega4809, ATmega4808, ATmega3209 and ATmega3208. Corrected RW status on MCLKSTATUS register. Corrected TWI0 pins on mega324PB. Added ATmega1609, ATmega1608, ATmega809 and ATmega808. Corrected flash pagesizes in m64HVE2def.inc, m644RFR2def.inc, m1284RFR2def.inc, m88PBdef.inc, m324PBdef.inc, m2564RFR2def.inc, m168PBdef.inc and m328PBdef.inc. Size defines have been made unsigned in some headerfiles. Corrected variants, port signals, value-groups and pinout for various devices</release>
       <release version="1.2.209" date="2018-02-19">Corrected reset pin configurations and changed PORTMUX signal names for ATmega4809, ATmega4808, ATmega3209 and ATmega3208. Corrected TWI0 pins on mega324PB.</release>
       <release version="1.2.203" date="2017-12-15">Corrected register names for ATmega4809, ATmega4808, ATmega3209 and ATmega3208.</release>
       <release version="1.2.150" date="2017-09-27">Remove no-ascii characters from iomxx4.h. Added ATmega4809, ATmega4808, ATmega3209 and ATmega3208.</release>
@@ -29,21 +30,36 @@
    </keywords>
    <devices>
       <family Dfamily="ATmega" Dvendor="Atmel:3">
-         <device Dname="ATmega3290">
+         <device Dname="ATmega32U4">
             <processor Dcore="AVR8"
                        Dendian="Little-endian"
                        Dmpu="NO_MPU"
                        Dfpu="NO_FPU"/>
-            <compile header="include/avr/iom3290.h"/>
+            <compile header="include/avr/iom32u4.h"/>
             <environment name="atmel">
                <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension"
                              schemaVersion="1.0">
-                  <at:atdf name="atdf/ATmega3290.atdf"/>
-                  <at:variant ordercode="standard"
-                              vccmin="1.8"
+                  <at:atdf name="atdf/ATmega32U4.atdf"/>
+                  <at:variant ordercode="ATmega32U4-AU"
+                              vccmin="2.7"
                               vccmax="5.5"
-                              tempmin="0"
-                              tempmax="0"/>
+                              tempmin="-40"
+                              tempmax="85"/>
+                  <at:variant ordercode="ATmega32U4RC-AU"
+                              vccmin="2.7"
+                              vccmax="5.5"
+                              tempmin="-40"
+                              tempmax="85"/>
+                  <at:variant ordercode="ATmega32U4-MU"
+                              vccmin="2.7"
+                              vccmax="5.5"
+                              tempmin="-40"
+                              tempmax="85"/>
+                  <at:variant ordercode="ATmega32U4RC-MU"
+                              vccmin="2.7"
+                              vccmax="5.5"
+                              tempmin="-40"
+                              tempmax="85"/>
                   <at:memory start="0x0000"
                              size="0x8000"
                              type="flash"
@@ -98,7 +114,7 @@
                              address-space="data"/>
                   <at:memory name="IRAM"
                              start="0x0100"
-                             size="0x0800"
+                             size="0x0a00"
                              type="ram"
                              external="false"
                              address-space="data"/>
@@ -128,11 +144,8 @@
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk500"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
-                  <at:tool id="com.atmel.avrdbg.tool.simulator"/>
-                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATmega3290"/>
-                  <at:property name="com.atmel.avrdbg.tool.simulator.model.win32"
-                               value="simulator/win32/libatmega3290p.dll"/>
-                  <at:property name="com.atmel.gcc.options.mmcu" value="atmega3290"/>
+                  <at:tool id="com.atmel.avrdbg.tool.megadfu"/>
+                  <at:property name="com.atmel.gcc.options.mmcu" value="atmega32u4"/>
                   <at:project name="Barebone C Project">
                      <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
                         <at:template select="Main file (.c)"/>
@@ -155,13 +168,13 @@
             <environment name="microchip">
                <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension"
                                schemaVersion="1.0">
-                  <mchp:pic name="edc/ATmega3290.PIC"/>
+                  <mchp:pic name="edc/ATmega32U4.PIC"/>
                </mchp:extension>
             </environment>
-            <description>8-bit AVR Microcontroller, 32KB Flash, 100-pin, LCD Controller</description>
-            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=ATmega3290"
-                  title="Device page for ATmega3290"/>
-            <book name="https://www.microchip.com/wwwproducts/productds/ATmega3290"
+            <description>8-bit AVR Microcontroller, 32KB Flash, 44-pin, USB Controller</description>
+            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=ATmega32U4"
+                  title="Device page for ATmega32U4"/>
+            <book name="https://www.microchip.com/wwwproducts/productds/ATmega32U4"
                   title="Datasheet"/>
          </device>
          <device Dname="ATmega16M1">
@@ -174,11 +187,16 @@
                <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension"
                              schemaVersion="1.0">
                   <at:atdf name="atdf/ATmega16M1.atdf"/>
-                  <at:variant ordercode="standard"
+                  <at:variant ordercode="ATmega16M1-AU"
                               vccmin="2.7"
                               vccmax="5.5"
-                              tempmin="0"
-                              tempmax="0"/>
+                              tempmin="-40"
+                              tempmax="85"/>
+                  <at:variant ordercode="ATmega16M1-MU"
+                              vccmin="2.7"
+                              vccmax="5.5"
+                              tempmin="-40"
+                              tempmax="85"/>
                   <at:memory start="0x0000"
                              size="0x4000"
                              type="flash"
@@ -822,7 +840,7 @@
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
                   <at:tool id="com.atmel.avrdbg.tool.simulator"/>
-                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATMEGA3208"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATmega3208"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.win32"
                                value="simulator/win32/libattinyxe.dll"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.linux64"
@@ -970,7 +988,7 @@
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
                   <at:tool id="com.atmel.avrdbg.tool.simulator"/>
-                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATMEGA3209"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATmega3209"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.win32"
                                value="simulator/win32/libattinyxe.dll"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.linux64"
@@ -1425,60 +1443,70 @@
             <book name="https://www.microchip.com/wwwproducts/productds/ATmega16HVBrevB"
                   title="Datasheet"/>
          </device>
-         <device Dname="ATmega3290P">
+         <device Dname="ATmega1284">
             <processor Dcore="AVR8"
                        Dendian="Little-endian"
                        Dmpu="NO_MPU"
                        Dfpu="NO_FPU"/>
-            <compile header="include/avr/iom3290p.h"/>
+            <compile header="include/avr/iom1284.h"/>
             <environment name="atmel">
                <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension"
                              schemaVersion="1.0">
-                  <at:atdf name="atdf/ATmega3290P.atdf"/>
-                  <at:variant ordercode="standard"
+                  <at:atdf name="atdf/ATmega1284.atdf"/>
+                  <at:variant ordercode="ATmega1284-AU"
                               vccmin="1.8"
                               vccmax="5.5"
-                              tempmin="0"
-                              tempmax="0"/>
+                              tempmin="-40"
+                              tempmax="85"/>
+                  <at:variant ordercode="ATmega1284-PU"
+                              vccmin="1.8"
+                              vccmax="5.5"
+                              tempmin="-40"
+                              tempmax="85"/>
+                  <at:variant ordercode="ATmega1284-MU"
+                              vccmin="1.8"
+                              vccmax="5.5"
+                              tempmin="-40"
+                              tempmax="85"/>
                   <at:memory start="0x0000"
-                             size="0x8000"
+                             size="0x20000"
                              type="flash"
                              rw="RW"
                              exec="1"
                              name="FLASH"
-                             pagesize="0x80"
+                             pagesize="0x100"
                              address-space="prog"/>
-                  <at:memory start="0x7e00"
-                             size="0x0200"
-                             type="flash"
-                             rw="RW"
-                             exec="1"
-                             name="BOOT_SECTION_1"
-                             pagesize="0x80"
-                             address-space="prog"/>
-                  <at:memory start="0x7c00"
+                  <at:memory start="0x1fc00"
                              size="0x0400"
                              type="flash"
                              rw="RW"
                              exec="1"
-                             name="BOOT_SECTION_2"
-                             pagesize="0x80"
+                             name="BOOT_SECTION_1"
+                             pagesize="0x100"
                              address-space="prog"/>
-                  <at:memory start="0x7800"
+                  <at:memory start="0x1f800"
                              size="0x0800"
                              type="flash"
                              rw="RW"
                              exec="1"
-                             name="BOOT_SECTION_3"
-                             pagesize="0x80"
+                             name="BOOT_SECTION_2"
+                             pagesize="0x100"
                              address-space="prog"/>
-                  <at:memory start="0x7000"
+                  <at:memory start="0x1f000"
                              size="0x1000"
                              type="flash"
                              rw="RW"
                              exec="1"
+                             name="BOOT_SECTION_3"
+                             pagesize="0x100"
+                             address-space="prog"/>
+                  <at:memory start="0x1e000"
+                             size="0x2000"
+                             type="flash"
+                             rw="RW"
+                             exec="1"
                              name="BOOT_SECTION_4"
-                             pagesize="0x80"
+                             pagesize="0x100"
                              address-space="prog"/>
                   <at:memory external="false"
                              type="regs"
@@ -1494,17 +1522,17 @@
                              address-space="data"/>
                   <at:memory name="IRAM"
                              start="0x0100"
-                             size="0x0800"
+                             size="0x4000"
                              type="ram"
                              external="false"
                              address-space="data"/>
                   <at:memory start="0x0000"
-                             size="0x0400"
+                             size="0x1000"
                              type="eeprom"
                              rw="RW"
                              exec="0"
                              name="EEPROM"
-                             pagesize="0x04"
+                             pagesize="0x08"
                              address-space="eeprom"/>
                   <at:interface type="isp" name="ISP"/>
                   <at:interface type="hvpp" name="HVPP"/>
@@ -1525,10 +1553,10 @@
                   <at:tool id="com.atmel.avrdbg.tool.stk500"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
                   <at:tool id="com.atmel.avrdbg.tool.simulator"/>
-                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATmega3290P"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATmega1284"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.win32"
-                               value="simulator/win32/libatmega3290p.dll"/>
-                  <at:property name="com.atmel.gcc.options.mmcu" value="atmega3290p"/>
+                               value="simulator/win32/libatmega1284p.dll"/>
+                  <at:property name="com.atmel.gcc.options.mmcu" value="atmega1284"/>
                   <at:project name="Barebone C Project">
                      <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
                         <at:template select="Main file (.c)"/>
@@ -1551,13 +1579,13 @@
             <environment name="microchip">
                <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension"
                                schemaVersion="1.0">
-                  <mchp:pic name="edc/ATmega3290P.PIC"/>
+                  <mchp:pic name="edc/ATmega1284.PIC"/>
                </mchp:extension>
             </environment>
-            <description>8-bit picoPower AVR Microcontroller, 32KB Flash, 100-pin, LCD Controller</description>
-            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=ATmega3290P"
-                  title="Device page for ATmega3290P"/>
-            <book name="https://www.microchip.com/wwwproducts/productds/ATmega3290P"
+            <description>8-bit AVR Microcontroller, 128KB Flash, 40/44-pin</description>
+            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=ATmega1284"
+                  title="Device page for ATmega1284"/>
+            <book name="https://www.microchip.com/wwwproducts/productds/ATmega1284"
                   title="Datasheet"/>
          </device>
          <device Dname="ATmega88">
@@ -2195,30 +2223,30 @@
             <book name="https://www.microchip.com/wwwproducts/productds/ATmega8A"
                   title="Datasheet"/>
          </device>
-         <device Dname="AT90USB162">
+         <device Dname="ATmega3290P">
             <processor Dcore="AVR8"
                        Dendian="Little-endian"
                        Dmpu="NO_MPU"
                        Dfpu="NO_FPU"/>
-            <compile header="include/avr/iousb162.h"/>
+            <compile header="include/avr/iom3290p.h"/>
             <environment name="atmel">
                <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension"
                              schemaVersion="1.0">
-                  <at:atdf name="atdf/AT90USB162.atdf"/>
+                  <at:atdf name="atdf/ATmega3290P.atdf"/>
                   <at:variant ordercode="standard"
-                              vccmin="2.7"
+                              vccmin="1.8"
                               vccmax="5.5"
                               tempmin="0"
                               tempmax="0"/>
                   <at:memory start="0x0000"
-                             size="0x4000"
+                             size="0x8000"
                              type="flash"
                              rw="RW"
                              exec="1"
                              name="FLASH"
                              pagesize="0x80"
                              address-space="prog"/>
-                  <at:memory start="0x3e00"
+                  <at:memory start="0x7e00"
                              size="0x0200"
                              type="flash"
                              rw="RW"
@@ -2226,7 +2254,7 @@
                              name="BOOT_SECTION_1"
                              pagesize="0x80"
                              address-space="prog"/>
-                  <at:memory start="0x3c00"
+                  <at:memory start="0x7c00"
                              size="0x0400"
                              type="flash"
                              rw="RW"
@@ -2234,7 +2262,7 @@
                              name="BOOT_SECTION_2"
                              pagesize="0x80"
                              address-space="prog"/>
-                  <at:memory start="0x3800"
+                  <at:memory start="0x7800"
                              size="0x0800"
                              type="flash"
                              rw="RW"
@@ -2242,7 +2270,7 @@
                              name="BOOT_SECTION_3"
                              pagesize="0x80"
                              address-space="prog"/>
-                  <at:memory start="0x3000"
+                  <at:memory start="0x7000"
                              size="0x1000"
                              type="flash"
                              rw="RW"
@@ -2264,12 +2292,12 @@
                              address-space="data"/>
                   <at:memory name="IRAM"
                              start="0x0100"
-                             size="0x0200"
+                             size="0x0800"
                              type="ram"
                              external="false"
                              address-space="data"/>
                   <at:memory start="0x0000"
-                             size="0x0200"
+                             size="0x0400"
                              type="eeprom"
                              rw="RW"
                              exec="0"
@@ -2278,7 +2306,7 @@
                              address-space="eeprom"/>
                   <at:interface type="isp" name="ISP"/>
                   <at:interface type="hvpp" name="HVPP"/>
-                  <at:interface type="dw" name="debugWIRE"/>
+                  <at:interface type="megajtag" name="JTAG"/>
                   <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
                   <at:tool id="com.atmel.avrdbg.tool.avrdragon"/>
                   <at:tool id="com.atmel.avrdbg.tool.ispmk2"/>
@@ -2294,8 +2322,11 @@
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk500"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
-                  <at:tool id="com.atmel.avrdbg.tool.megadfu"/>
-                  <at:property name="com.atmel.gcc.options.mmcu" value="at90usb162"/>
+                  <at:tool id="com.atmel.avrdbg.tool.simulator"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATmega3290P"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.model.win32"
+                               value="simulator/win32/libatmega3290p.dll"/>
+                  <at:property name="com.atmel.gcc.options.mmcu" value="atmega3290p"/>
                   <at:project name="Barebone C Project">
                      <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
                         <at:template select="Main file (.c)"/>
@@ -2318,13 +2349,13 @@
             <environment name="microchip">
                <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension"
                                schemaVersion="1.0">
-                  <mchp:pic name="edc/AT90USB162.PIC"/>
+                  <mchp:pic name="edc/ATmega3290P.PIC"/>
                </mchp:extension>
             </environment>
-            <description>8-bit AVR Microcontroller, 16KB Flash, 32-pin, USB Controller</description>
-            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AT90USB162"
-                  title="Device page for AT90USB162"/>
-            <book name="https://www.microchip.com/wwwproducts/productds/AT90USB162"
+            <description>8-bit picoPower AVR Microcontroller, 32KB Flash, 100-pin, LCD Controller</description>
+            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=ATmega3290P"
+                  title="Device page for ATmega3290P"/>
+            <book name="https://www.microchip.com/wwwproducts/productds/ATmega3290P"
                   title="Datasheet"/>
          </device>
          <device Dname="ATmega644PA">
@@ -2802,36 +2833,21 @@
             <book name="https://www.microchip.com/wwwproducts/productds/ATmega64"
                   title="Datasheet"/>
          </device>
-         <device Dname="ATmega32U4">
+         <device Dname="ATmega3290">
             <processor Dcore="AVR8"
                        Dendian="Little-endian"
                        Dmpu="NO_MPU"
                        Dfpu="NO_FPU"/>
-            <compile header="include/avr/iom32u4.h"/>
+            <compile header="include/avr/iom3290.h"/>
             <environment name="atmel">
                <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension"
                              schemaVersion="1.0">
-                  <at:atdf name="atdf/ATmega32U4.atdf"/>
-                  <at:variant ordercode="ATmega32U4-AU"
-                              vccmin="2.7"
+                  <at:atdf name="atdf/ATmega3290.atdf"/>
+                  <at:variant ordercode="standard"
+                              vccmin="1.8"
                               vccmax="5.5"
-                              tempmin="-40"
-                              tempmax="85"/>
-                  <at:variant ordercode="ATmega32U4RC-AU"
-                              vccmin="2.7"
-                              vccmax="5.5"
-                              tempmin="-40"
-                              tempmax="85"/>
-                  <at:variant ordercode="ATmega32U4-MU"
-                              vccmin="2.7"
-                              vccmax="5.5"
-                              tempmin="-40"
-                              tempmax="85"/>
-                  <at:variant ordercode="ATmega32U4RC-MU"
-                              vccmin="2.7"
-                              vccmax="5.5"
-                              tempmin="-40"
-                              tempmax="85"/>
+                              tempmin="0"
+                              tempmax="0"/>
                   <at:memory start="0x0000"
                              size="0x8000"
                              type="flash"
@@ -2886,7 +2902,7 @@
                              address-space="data"/>
                   <at:memory name="IRAM"
                              start="0x0100"
-                             size="0x0a00"
+                             size="0x0800"
                              type="ram"
                              external="false"
                              address-space="data"/>
@@ -2916,8 +2932,11 @@
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk500"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
-                  <at:tool id="com.atmel.avrdbg.tool.megadfu"/>
-                  <at:property name="com.atmel.gcc.options.mmcu" value="atmega32u4"/>
+                  <at:tool id="com.atmel.avrdbg.tool.simulator"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATmega3290"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.model.win32"
+                               value="simulator/win32/libatmega3290p.dll"/>
+                  <at:property name="com.atmel.gcc.options.mmcu" value="atmega3290"/>
                   <at:project name="Barebone C Project">
                      <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
                         <at:template select="Main file (.c)"/>
@@ -2940,13 +2959,13 @@
             <environment name="microchip">
                <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension"
                                schemaVersion="1.0">
-                  <mchp:pic name="edc/ATmega32U4.PIC"/>
+                  <mchp:pic name="edc/ATmega3290.PIC"/>
                </mchp:extension>
             </environment>
-            <description>8-bit AVR Microcontroller, 32KB Flash, 44-pin, USB Controller</description>
-            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=ATmega32U4"
-                  title="Device page for ATmega32U4"/>
-            <book name="https://www.microchip.com/wwwproducts/productds/ATmega32U4"
+            <description>8-bit AVR Microcontroller, 32KB Flash, 100-pin, LCD Controller</description>
+            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=ATmega3290"
+                  title="Device page for ATmega3290"/>
+            <book name="https://www.microchip.com/wwwproducts/productds/ATmega3290"
                   title="Datasheet"/>
          </device>
          <device Dname="ATmega8">
@@ -4181,11 +4200,16 @@
                <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension"
                              schemaVersion="1.0">
                   <at:atdf name="atdf/ATmega32M1.atdf"/>
-                  <at:variant ordercode="standard"
+                  <at:variant ordercode="ATmega32M1-AU"
                               vccmin="2.7"
                               vccmax="5.5"
-                              tempmin="0"
-                              tempmax="0"/>
+                              tempmin="-40"
+                              tempmax="85"/>
+                  <at:variant ordercode="ATmega32M1-MU"
+                              vccmin="2.7"
+                              vccmax="5.5"
+                              tempmin="-40"
+                              tempmax="85"/>
                   <at:memory start="0x0000"
                              size="0x8000"
                              type="flash"
@@ -6026,7 +6050,7 @@
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
                   <at:tool id="com.atmel.avrdbg.tool.simulator"/>
-                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATMEGA4809"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATmega4809"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.win32"
                                value="simulator/win32/libattinyxe.dll"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.linux64"
@@ -6179,7 +6203,7 @@
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
                   <at:tool id="com.atmel.avrdbg.tool.simulator"/>
-                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATMEGA4808"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATmega4808"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.win32"
                                value="simulator/win32/libattinyxe.dll"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.linux64"
@@ -7839,6 +7863,307 @@
             <book name="https://www.microchip.com/wwwproducts/productds/ATmega3250A"
                   title="Datasheet"/>
          </device>
+         <device Dname="ATmega808">
+            <processor Dcore="AVR8X"
+                       Dendian="Little-endian"
+                       Dmpu="NO_MPU"
+                       Dfpu="NO_FPU"/>
+            <compile header="include/avr/iom808.h"/>
+            <environment name="atmel">
+               <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension"
+                             schemaVersion="1.0">
+                  <at:atdf name="atdf/ATmega808.atdf"/>
+                  <at:variant ordercode="ATmega808-AFR"
+                              vccmin="1.8"
+                              vccmax="5.0"
+                              tempmin="-40"
+                              tempmax="105"/>
+                  <at:variant ordercode="ATmega808-MFR"
+                              vccmin="1.8"
+                              vccmax="5.0"
+                              tempmin="-40"
+                              tempmax="105"/>
+                  <at:variant ordercode="ATmega808-XFR"
+                              vccmin="1.8"
+                              vccmax="5.0"
+                              tempmin="-40"
+                              tempmax="105"/>
+                  <at:memory exec="0"
+                             name="EEPROM"
+                             pagesize="0x20"
+                             rw="RW"
+                             size="0x0100"
+                             start="0x00001400"
+                             type="eeprom"
+                             address-space="data"/>
+                  <at:memory exec="0"
+                             name="FUSES"
+                             pagesize="0x20"
+                             rw="RW"
+                             size="0xA"
+                             start="0x00001280"
+                             type="fuses"
+                             address-space="data"/>
+                  <at:memory exec="0"
+                             name="INTERNAL_SRAM"
+                             rw="RW"
+                             size="0x0400"
+                             start="0x3c00"
+                             type="ram"
+                             address-space="data"/>
+                  <at:memory exec="0"
+                             name="IO"
+                             rw="RW"
+                             size="0x1100"
+                             start="0x00000000"
+                             type="io"
+                             address-space="data"/>
+                  <at:memory exec="0"
+                             name="LOCKBITS"
+                             pagesize="0x20"
+                             rw="RW"
+                             size="0x1"
+                             start="0x0000128A"
+                             type="lockbits"
+                             address-space="data"/>
+                  <at:memory exec="0"
+                             name="MAPPED_PROGMEM"
+                             pagesize="0x40"
+                             rw="R"
+                             size="0x2000"
+                             start="0x00004000"
+                             type="other"
+                             address-space="data"/>
+                  <at:memory exec="0"
+                             name="PROD_SIGNATURES"
+                             pagesize="0x40"
+                             rw="R"
+                             size="0x3D"
+                             start="0x00001103"
+                             type="signatures"
+                             address-space="data"/>
+                  <at:memory exec="0"
+                             name="SIGNATURES"
+                             pagesize="0x40"
+                             rw="R"
+                             size="0x3"
+                             start="0x00001100"
+                             type="signatures"
+                             address-space="data"/>
+                  <at:memory exec="0"
+                             name="USER_SIGNATURES"
+                             pagesize="0x20"
+                             rw="RW"
+                             size="0x20"
+                             start="0x00001300"
+                             type="user_signatures"
+                             address-space="data"/>
+                  <at:memory exec="1"
+                             name="PROGMEM"
+                             pagesize="0x40"
+                             rw="RW"
+                             size="0x2000"
+                             start="0x00000000"
+                             type="flash"
+                             address-space="prog"/>
+                  <at:interface type="updi" name="UPDI"/>
+                  <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
+                  <at:tool id="com.atmel.avrdbg.tool.medbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
+                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
+                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
+                  <at:tool id="com.atmel.avrdbg.tool.simulator"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATmega808"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.model.win32"
+                               value="simulator/win32/libattinyxg.dll"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.model.linux64"
+                               value="simulator/linux64/libattinyxg.so"/>
+                  <at:property name="com.atmel.gcc.options.mmcu" value="atmega808"/>
+                  <at:project name="Barebone C Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.c)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone Cpp Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.cpp)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone AVRASM Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.asm)"/>
+                     </at:component>
+                  </at:project>
+                  <at:prerequisite context="compiling" Tcompiler="GCC" component="AVR8-GCC"/>
+                  <at:prerequisite context="studio" component="Atmel Studio" version="7.0.1585"/>
+                  <at:prerequisite context="compiling" Tcompiler="AVRASM" component="AVRASM"/>
+               </at:extension>
+            </environment>
+            <environment name="microchip">
+               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension"
+                               schemaVersion="1.0">
+                  <mchp:pic name="edc/ATmega808.PIC"/>
+               </mchp:extension>
+            </environment>
+            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=ATmega808"
+                  title="Device page for ATmega808"/>
+            <book name="https://www.microchip.com/wwwproducts/productds/ATmega808"
+                  title="Datasheet"/>
+         </device>
+         <device Dname="ATmega809">
+            <processor Dcore="AVR8X"
+                       Dendian="Little-endian"
+                       Dmpu="NO_MPU"
+                       Dfpu="NO_FPU"/>
+            <compile header="include/avr/iom809.h"/>
+            <environment name="atmel">
+               <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension"
+                             schemaVersion="1.0">
+                  <at:atdf name="atdf/ATmega809.atdf"/>
+                  <at:variant ordercode="ATmega809-AFR"
+                              vccmin="1.8"
+                              vccmax="5.0"
+                              tempmin="-40"
+                              tempmax="105"/>
+                  <at:variant ordercode="ATmega809-MFR"
+                              vccmin="1.8"
+                              vccmax="5.0"
+                              tempmin="-40"
+                              tempmax="105"/>
+                  <at:memory exec="0"
+                             name="EEPROM"
+                             pagesize="0x20"
+                             rw="RW"
+                             size="0x0100"
+                             start="0x00001400"
+                             type="eeprom"
+                             address-space="data"/>
+                  <at:memory exec="0"
+                             name="FUSES"
+                             pagesize="0x20"
+                             rw="RW"
+                             size="0xA"
+                             start="0x00001280"
+                             type="fuses"
+                             address-space="data"/>
+                  <at:memory exec="0"
+                             name="INTERNAL_SRAM"
+                             rw="RW"
+                             size="0x0400"
+                             start="0x3c00"
+                             type="ram"
+                             address-space="data"/>
+                  <at:memory exec="0"
+                             name="IO"
+                             rw="RW"
+                             size="0x1100"
+                             start="0x00000000"
+                             type="io"
+                             address-space="data"/>
+                  <at:memory exec="0"
+                             name="LOCKBITS"
+                             pagesize="0x20"
+                             rw="RW"
+                             size="0x1"
+                             start="0x0000128A"
+                             type="lockbits"
+                             address-space="data"/>
+                  <at:memory exec="0"
+                             name="MAPPED_PROGMEM"
+                             pagesize="0x40"
+                             rw="R"
+                             size="0x2000"
+                             start="0x00004000"
+                             type="other"
+                             address-space="data"/>
+                  <at:memory exec="0"
+                             name="PROD_SIGNATURES"
+                             pagesize="0x40"
+                             rw="R"
+                             size="0x3D"
+                             start="0x00001103"
+                             type="signatures"
+                             address-space="data"/>
+                  <at:memory exec="0"
+                             name="SIGNATURES"
+                             pagesize="0x40"
+                             rw="R"
+                             size="0x3"
+                             start="0x00001100"
+                             type="signatures"
+                             address-space="data"/>
+                  <at:memory exec="0"
+                             name="USER_SIGNATURES"
+                             pagesize="0x20"
+                             rw="RW"
+                             size="0x20"
+                             start="0x00001300"
+                             type="user_signatures"
+                             address-space="data"/>
+                  <at:memory exec="1"
+                             name="PROGMEM"
+                             pagesize="0x40"
+                             rw="RW"
+                             size="0x2000"
+                             start="0x00000000"
+                             type="flash"
+                             address-space="prog"/>
+                  <at:interface type="updi" name="UPDI"/>
+                  <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
+                  <at:tool id="com.atmel.avrdbg.tool.medbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
+                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
+                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
+                  <at:tool id="com.atmel.avrdbg.tool.simulator"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATmega809"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.model.win32"
+                               value="simulator/win32/libattinyxg.dll"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.model.linux64"
+                               value="simulator/linux64/libattinyxg.so"/>
+                  <at:property name="com.atmel.gcc.options.mmcu" value="atmega809"/>
+                  <at:project name="Barebone C Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.c)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone Cpp Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.cpp)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone AVRASM Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.asm)"/>
+                     </at:component>
+                  </at:project>
+                  <at:prerequisite context="compiling" Tcompiler="GCC" component="AVR8-GCC"/>
+                  <at:prerequisite context="studio" component="Atmel Studio" version="7.0.1585"/>
+                  <at:prerequisite context="compiling" Tcompiler="AVRASM" component="AVRASM"/>
+               </at:extension>
+            </environment>
+            <environment name="microchip">
+               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension"
+                               schemaVersion="1.0">
+                  <mchp:pic name="edc/ATmega809.PIC"/>
+               </mchp:extension>
+            </environment>
+            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=ATmega809"
+                  title="Device page for ATmega809"/>
+            <book name="https://www.microchip.com/wwwproducts/productds/ATmega809"
+                  title="Datasheet"/>
+         </device>
          <device Dname="ATmega2560">
             <processor Dcore="AVR8"
                        Dendian="Little-endian"
@@ -8689,11 +9014,26 @@
                <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension"
                              schemaVersion="1.0">
                   <at:atdf name="atdf/ATmega644RFR2.atdf"/>
-                  <at:variant ordercode="standard"
+                  <at:variant ordercode="ATmega644RFR2-ZU"
                               vccmin="1.8"
                               vccmax="3.6"
-                              tempmin="0"
-                              tempmax="0"/>
+                              tempmin="-40"
+                              tempmax="85"/>
+                  <at:variant ordercode="ATmega644RFR2-ZUR"
+                              vccmin="1.8"
+                              vccmax="3.6"
+                              tempmin="-40"
+                              tempmax="85"/>
+                  <at:variant ordercode="ATmega644RFR2-ZF"
+                              vccmin="1.8"
+                              vccmax="3.6"
+                              tempmin="-40"
+                              tempmax="125"/>
+                  <at:variant ordercode="ATmega644RFR2-ZFR"
+                              vccmin="1.8"
+                              vccmax="3.6"
+                              tempmin="-40"
+                              tempmax="125"/>
                   <at:memory start="0x0000"
                              size="0x10000"
                              type="flash"
@@ -9221,11 +9561,16 @@
                <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension"
                              schemaVersion="1.0">
                   <at:atdf name="atdf/ATmega64C1.atdf"/>
-                  <at:variant ordercode="standard"
+                  <at:variant ordercode="ATmega64C1-AU"
                               vccmin="2.7"
                               vccmax="5.5"
-                              tempmin="0"
-                              tempmax="0"/>
+                              tempmin="-40"
+                              tempmax="85"/>
+                  <at:variant ordercode="ATmega64C1-MU"
+                              vccmin="2.7"
+                              vccmax="5.5"
+                              tempmin="-40"
+                              tempmax="85"/>
                   <at:memory start="0x0000"
                              size="0x10000"
                              type="flash"
@@ -9972,11 +10317,16 @@
                <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension"
                              schemaVersion="1.0">
                   <at:atdf name="atdf/ATmega32C1.atdf"/>
-                  <at:variant ordercode="standard"
+                  <at:variant ordercode="ATmega32C1-AU"
                               vccmin="2.7"
                               vccmax="5.5"
-                              tempmin="0"
-                              tempmax="0"/>
+                              tempmin="-40"
+                              tempmax="85"/>
+                  <at:variant ordercode="ATmega32C1-MU"
+                              vccmin="2.7"
+                              vccmax="5.5"
+                              tempmin="-40"
+                              tempmax="85"/>
                   <at:memory start="0x0000"
                              size="0x8000"
                              type="flash"
@@ -10795,11 +11145,26 @@
                <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension"
                              schemaVersion="1.0">
                   <at:atdf name="atdf/ATmega256RFR2.atdf"/>
-                  <at:variant ordercode="standard"
+                  <at:variant ordercode="ATmega256RFR2-ZU"
                               vccmin="1.8"
                               vccmax="3.6"
-                              tempmin="0"
-                              tempmax="0"/>
+                              tempmin="-40"
+                              tempmax="85"/>
+                  <at:variant ordercode="ATmega256RFR2-ZUR"
+                              vccmin="1.8"
+                              vccmax="3.6"
+                              tempmin="-40"
+                              tempmax="85"/>
+                  <at:variant ordercode="ATmega256RFR2-ZF"
+                              vccmin="1.8"
+                              vccmax="3.6"
+                              tempmin="-40"
+                              tempmax="125"/>
+                  <at:variant ordercode="ATmega256RFR2-ZFR"
+                              vccmin="1.8"
+                              vccmax="3.6"
+                              tempmin="-40"
+                              tempmax="125"/>
                   <at:memory start="0x0000"
                              size="0x40000"
                              type="flash"
@@ -10926,11 +11291,26 @@
                <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension"
                              schemaVersion="1.0">
                   <at:atdf name="atdf/ATmega1284RFR2.atdf"/>
-                  <at:variant ordercode="standard"
+                  <at:variant ordercode="ATmega1284RFR2-ZU"
                               vccmin="1.8"
                               vccmax="3.6"
-                              tempmin="0"
-                              tempmax="0"/>
+                              tempmin="-40"
+                              tempmax="85"/>
+                  <at:variant ordercode="ATmega1284RFR2-ZUR"
+                              vccmin="1.8"
+                              vccmax="3.6"
+                              tempmin="-40"
+                              tempmax="85"/>
+                  <at:variant ordercode="ATmega1284RFR2-ZF"
+                              vccmin="1.8"
+                              vccmax="3.6"
+                              tempmin="-40"
+                              tempmax="125"/>
+                  <at:variant ordercode="ATmega1284RFR2-ZFR"
+                              vccmin="1.8"
+                              vccmax="3.6"
+                              tempmin="-40"
+                              tempmax="125"/>
                   <at:memory start="0x0000"
                              size="0x20000"
                              type="flash"
@@ -11202,6 +11582,138 @@
             <book name="https://www.microchip.com/wwwproducts/productds/ATmega324A"
                   title="Datasheet"/>
          </device>
+         <device Dname="AT90USB162">
+            <processor Dcore="AVR8"
+                       Dendian="Little-endian"
+                       Dmpu="NO_MPU"
+                       Dfpu="NO_FPU"/>
+            <compile header="include/avr/iousb162.h"/>
+            <environment name="atmel">
+               <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension"
+                             schemaVersion="1.0">
+                  <at:atdf name="atdf/AT90USB162.atdf"/>
+                  <at:variant ordercode="standard"
+                              vccmin="2.7"
+                              vccmax="5.5"
+                              tempmin="0"
+                              tempmax="0"/>
+                  <at:memory start="0x0000"
+                             size="0x4000"
+                             type="flash"
+                             rw="RW"
+                             exec="1"
+                             name="FLASH"
+                             pagesize="0x80"
+                             address-space="prog"/>
+                  <at:memory start="0x3e00"
+                             size="0x0200"
+                             type="flash"
+                             rw="RW"
+                             exec="1"
+                             name="BOOT_SECTION_1"
+                             pagesize="0x80"
+                             address-space="prog"/>
+                  <at:memory start="0x3c00"
+                             size="0x0400"
+                             type="flash"
+                             rw="RW"
+                             exec="1"
+                             name="BOOT_SECTION_2"
+                             pagesize="0x80"
+                             address-space="prog"/>
+                  <at:memory start="0x3800"
+                             size="0x0800"
+                             type="flash"
+                             rw="RW"
+                             exec="1"
+                             name="BOOT_SECTION_3"
+                             pagesize="0x80"
+                             address-space="prog"/>
+                  <at:memory start="0x3000"
+                             size="0x1000"
+                             type="flash"
+                             rw="RW"
+                             exec="1"
+                             name="BOOT_SECTION_4"
+                             pagesize="0x80"
+                             address-space="prog"/>
+                  <at:memory external="false"
+                             type="regs"
+                             size="0x0020"
+                             start="0x0000"
+                             name="REGISTERS"
+                             address-space="data"/>
+                  <at:memory name="MAPPED_IO"
+                             start="0x0020"
+                             size="0x00e0"
+                             type="io"
+                             external="false"
+                             address-space="data"/>
+                  <at:memory name="IRAM"
+                             start="0x0100"
+                             size="0x0200"
+                             type="ram"
+                             external="false"
+                             address-space="data"/>
+                  <at:memory start="0x0000"
+                             size="0x0200"
+                             type="eeprom"
+                             rw="RW"
+                             exec="0"
+                             name="EEPROM"
+                             pagesize="0x04"
+                             address-space="eeprom"/>
+                  <at:interface type="isp" name="ISP"/>
+                  <at:interface type="hvpp" name="HVPP"/>
+                  <at:interface type="dw" name="debugWIRE"/>
+                  <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
+                  <at:tool id="com.atmel.avrdbg.tool.avrdragon"/>
+                  <at:tool id="com.atmel.avrdbg.tool.ispmk2"/>
+                  <at:tool id="com.atmel.avrdbg.tool.avrone"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagicemkii"/>
+                  <at:tool id="com.atmel.avrdbg.tool.medbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
+                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
+                  <at:tool id="com.atmel.avrdbg.tool.stk500"/>
+                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
+                  <at:tool id="com.atmel.avrdbg.tool.megadfu"/>
+                  <at:property name="com.atmel.gcc.options.mmcu" value="at90usb162"/>
+                  <at:project name="Barebone C Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.c)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone Cpp Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.cpp)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone AVRASM Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.asm)"/>
+                     </at:component>
+                  </at:project>
+                  <at:prerequisite context="compiling" Tcompiler="GCC" component="AVR8-GCC"/>
+                  <at:prerequisite context="compiling" Tcompiler="AVRASM" component="AVRASM"/>
+               </at:extension>
+            </environment>
+            <environment name="microchip">
+               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension"
+                               schemaVersion="1.0">
+                  <mchp:pic name="edc/AT90USB162.PIC"/>
+               </mchp:extension>
+            </environment>
+            <description>8-bit AVR Microcontroller, 16KB Flash, 32-pin, USB Controller</description>
+            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=AT90USB162"
+                  title="Device page for AT90USB162"/>
+            <book name="https://www.microchip.com/wwwproducts/productds/AT90USB162"
+                  title="Datasheet"/>
+         </device>
          <device Dname="ATmega324P">
             <processor Dcore="AVR8"
                        Dendian="Little-endian"
@@ -11392,6 +11904,146 @@
             <book name="https://www.microchip.com/wwwproducts/productds/ATmega324P"
                   title="Datasheet"/>
          </device>
+         <device Dname="ATmega649A">
+            <processor Dcore="AVR8"
+                       Dendian="Little-endian"
+                       Dmpu="NO_MPU"
+                       Dfpu="NO_FPU"/>
+            <compile header="include/avr/iom649a.h"/>
+            <environment name="atmel">
+               <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension"
+                             schemaVersion="1.0">
+                  <at:atdf name="atdf/ATmega649A.atdf"/>
+                  <at:variant ordercode="ATmega649A-AU"
+                              vccmin="1.8"
+                              vccmax="5.5"
+                              tempmin="-40"
+                              tempmax="85"/>
+                  <at:variant ordercode="ATmega649A-MU"
+                              vccmin="1.8"
+                              vccmax="5.5"
+                              tempmin="-40"
+                              tempmax="85"/>
+                  <at:memory start="0x0000"
+                             size="0x10000"
+                             type="flash"
+                             rw="RW"
+                             exec="1"
+                             name="FLASH"
+                             pagesize="0x100"
+                             address-space="prog"/>
+                  <at:memory start="0xfc00"
+                             size="0x0400"
+                             type="flash"
+                             rw="RW"
+                             exec="1"
+                             name="BOOT_SECTION_1"
+                             pagesize="0x100"
+                             address-space="prog"/>
+                  <at:memory start="0xf800"
+                             size="0x0800"
+                             type="flash"
+                             rw="RW"
+                             exec="1"
+                             name="BOOT_SECTION_2"
+                             pagesize="0x100"
+                             address-space="prog"/>
+                  <at:memory start="0xf000"
+                             size="0x1000"
+                             type="flash"
+                             rw="RW"
+                             exec="1"
+                             name="BOOT_SECTION_3"
+                             pagesize="0x100"
+                             address-space="prog"/>
+                  <at:memory start="0xe000"
+                             size="0x2000"
+                             type="flash"
+                             rw="RW"
+                             exec="1"
+                             name="BOOT_SECTION_4"
+                             pagesize="0x100"
+                             address-space="prog"/>
+                  <at:memory external="false"
+                             type="regs"
+                             size="0x0020"
+                             start="0x0000"
+                             name="REGISTERS"
+                             address-space="data"/>
+                  <at:memory name="MAPPED_IO"
+                             start="0x0020"
+                             size="0x00e0"
+                             type="io"
+                             external="false"
+                             address-space="data"/>
+                  <at:memory name="IRAM"
+                             start="0x0100"
+                             size="0x1000"
+                             type="ram"
+                             external="false"
+                             address-space="data"/>
+                  <at:memory start="0x0000"
+                             size="0x0800"
+                             type="eeprom"
+                             rw="RW"
+                             exec="0"
+                             name="EEPROM"
+                             pagesize="0x08"
+                             address-space="eeprom"/>
+                  <at:interface type="isp" name="ISP"/>
+                  <at:interface type="hvpp" name="HVPP"/>
+                  <at:interface type="megajtag" name="JTAG"/>
+                  <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
+                  <at:tool id="com.atmel.avrdbg.tool.avrdragon"/>
+                  <at:tool id="com.atmel.avrdbg.tool.ispmk2"/>
+                  <at:tool id="com.atmel.avrdbg.tool.avrone"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
+                  <at:tool id="com.atmel.avrdbg.tool.edbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
+                  <at:tool id="com.atmel.avrdbg.tool.jtagicemkii"/>
+                  <at:tool id="com.atmel.avrdbg.tool.medbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
+                  <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
+                  <at:tool id="com.atmel.avrdbg.tool.stk500"/>
+                  <at:tool id="com.atmel.avrdbg.tool.stk600"/>
+                  <at:tool id="com.atmel.avrdbg.tool.simulator"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATmega649A"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.model.win32"
+                               value="simulator/win32/libatmega6490p.dll"/>
+                  <at:property name="com.atmel.gcc.options.mmcu" value="atmega649a"/>
+                  <at:project name="Barebone C Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.c)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone Cpp Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.cpp)"/>
+                     </at:component>
+                  </at:project>
+                  <at:project name="Barebone AVRASM Project">
+                     <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
+                        <at:template select="Main file (.asm)"/>
+                     </at:component>
+                  </at:project>
+                  <at:prerequisite context="compiling" Tcompiler="GCC" component="AVR8-GCC"/>
+                  <at:prerequisite context="compiling" Tcompiler="AVRASM" component="AVRASM"/>
+               </at:extension>
+            </environment>
+            <environment name="microchip">
+               <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension"
+                               schemaVersion="1.0">
+                  <mchp:pic name="edc/ATmega649A.PIC"/>
+               </mchp:extension>
+            </environment>
+            <description>8-bit AVR Microcontroller, 64KB Flash, 64-pin, LCD Controller</description>
+            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=ATmega649A"
+                  title="Device page for ATmega649A"/>
+            <book name="https://www.microchip.com/wwwproducts/productds/ATmega649A"
+                  title="Datasheet"/>
+         </device>
          <device Dname="ATmega8HVA">
             <processor Dcore="AVR8"
                        Dendian="Little-endian"
@@ -11501,11 +12153,26 @@
                <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension"
                              schemaVersion="1.0">
                   <at:atdf name="atdf/ATmega128RFR2.atdf"/>
-                  <at:variant ordercode="standard"
+                  <at:variant ordercode="ATmega128RFR2-ZU"
                               vccmin="1.8"
                               vccmax="3.6"
-                              tempmin="0"
-                              tempmax="0"/>
+                              tempmin="-40"
+                              tempmax="85"/>
+                  <at:variant ordercode="ATmega128RFR2-ZUR"
+                              vccmin="1.8"
+                              vccmax="3.6"
+                              tempmin="-40"
+                              tempmax="85"/>
+                  <at:variant ordercode="ATmega128RFR2-ZF"
+                              vccmin="1.8"
+                              vccmax="3.6"
+                              tempmin="-40"
+                              tempmax="125"/>
+                  <at:variant ordercode="ATmega128RFR2-ZFR"
+                              vccmin="1.8"
+                              vccmax="3.6"
+                              tempmin="-40"
+                              tempmax="125"/>
                   <at:memory start="0x0000"
                              size="0x20000"
                              type="flash"
@@ -13678,11 +14345,16 @@
                <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension"
                              schemaVersion="1.0">
                   <at:atdf name="atdf/ATmega64M1.atdf"/>
-                  <at:variant ordercode="standard"
+                  <at:variant ordercode="ATmega64M1-AU"
                               vccmin="2.7"
                               vccmax="5.5"
-                              tempmin="0"
-                              tempmax="0"/>
+                              tempmin="-40"
+                              tempmax="85"/>
+                  <at:variant ordercode="ATmega64M1-MU"
+                              vccmin="2.7"
+                              vccmax="5.5"
+                              tempmin="-40"
+                              tempmax="85"/>
                   <at:memory start="0x0000"
                              size="0x10000"
                              type="flash"
@@ -14079,120 +14751,128 @@
             <book name="https://www.microchip.com/wwwproducts/productds/ATmega406"
                   title="Datasheet"/>
          </device>
-         <device Dname="ATmega1284">
-            <processor Dcore="AVR8"
+         <device Dname="ATmega1608">
+            <processor Dcore="AVR8X"
                        Dendian="Little-endian"
                        Dmpu="NO_MPU"
                        Dfpu="NO_FPU"/>
-            <compile header="include/avr/iom1284.h"/>
+            <compile header="include/avr/iom1608.h"/>
             <environment name="atmel">
                <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension"
                              schemaVersion="1.0">
-                  <at:atdf name="atdf/ATmega1284.atdf"/>
-                  <at:variant ordercode="ATmega1284-AU"
+                  <at:atdf name="atdf/ATmega1608.atdf"/>
+                  <at:variant ordercode="ATmega1608-AFR"
                               vccmin="1.8"
-                              vccmax="5.5"
+                              vccmax="5.0"
                               tempmin="-40"
-                              tempmax="85"/>
-                  <at:variant ordercode="ATmega1284-PU"
+                              tempmax="105"/>
+                  <at:variant ordercode="ATmega1608-MFR"
                               vccmin="1.8"
-                              vccmax="5.5"
+                              vccmax="5.0"
                               tempmin="-40"
-                              tempmax="85"/>
-                  <at:variant ordercode="ATmega1284-MU"
+                              tempmax="105"/>
+                  <at:variant ordercode="ATmega1608-XFR"
                               vccmin="1.8"
-                              vccmax="5.5"
+                              vccmax="5.0"
                               tempmin="-40"
-                              tempmax="85"/>
-                  <at:memory start="0x0000"
-                             size="0x20000"
-                             type="flash"
-                             rw="RW"
-                             exec="1"
-                             name="FLASH"
-                             pagesize="0x100"
-                             address-space="prog"/>
-                  <at:memory start="0x1fc00"
-                             size="0x0400"
-                             type="flash"
-                             rw="RW"
-                             exec="1"
-                             name="BOOT_SECTION_1"
-                             pagesize="0x100"
-                             address-space="prog"/>
-                  <at:memory start="0x1f800"
-                             size="0x0800"
-                             type="flash"
-                             rw="RW"
-                             exec="1"
-                             name="BOOT_SECTION_2"
-                             pagesize="0x100"
-                             address-space="prog"/>
-                  <at:memory start="0x1f000"
-                             size="0x1000"
-                             type="flash"
-                             rw="RW"
-                             exec="1"
-                             name="BOOT_SECTION_3"
-                             pagesize="0x100"
-                             address-space="prog"/>
-                  <at:memory start="0x1e000"
-                             size="0x2000"
-                             type="flash"
-                             rw="RW"
-                             exec="1"
-                             name="BOOT_SECTION_4"
-                             pagesize="0x100"
-                             address-space="prog"/>
-                  <at:memory external="false"
-                             type="regs"
-                             size="0x0020"
-                             start="0x0000"
-                             name="REGISTERS"
-                             address-space="data"/>
-                  <at:memory name="MAPPED_IO"
-                             start="0x0020"
-                             size="0x00e0"
-                             type="io"
-                             external="false"
-                             address-space="data"/>
-                  <at:memory name="IRAM"
-                             start="0x0100"
-                             size="0x4000"
-                             type="ram"
-                             external="false"
-                             address-space="data"/>
-                  <at:memory start="0x0000"
-                             size="0x1000"
-                             type="eeprom"
-                             rw="RW"
-                             exec="0"
+                              tempmax="105"/>
+                  <at:memory exec="0"
                              name="EEPROM"
-                             pagesize="0x08"
-                             address-space="eeprom"/>
-                  <at:interface type="isp" name="ISP"/>
-                  <at:interface type="hvpp" name="HVPP"/>
-                  <at:interface type="megajtag" name="JTAG"/>
+                             pagesize="0x20"
+                             rw="RW"
+                             size="0x0100"
+                             start="0x00001400"
+                             type="eeprom"
+                             address-space="data"/>
+                  <at:memory exec="0"
+                             name="FUSES"
+                             pagesize="0x20"
+                             rw="RW"
+                             size="0xA"
+                             start="0x00001280"
+                             type="fuses"
+                             address-space="data"/>
+                  <at:memory exec="0"
+                             name="INTERNAL_SRAM"
+                             rw="RW"
+                             size="0x0800"
+                             start="0x3800"
+                             type="ram"
+                             address-space="data"/>
+                  <at:memory exec="0"
+                             name="IO"
+                             rw="RW"
+                             size="0x1100"
+                             start="0x00000000"
+                             type="io"
+                             address-space="data"/>
+                  <at:memory exec="0"
+                             name="LOCKBITS"
+                             pagesize="0x20"
+                             rw="RW"
+                             size="0x1"
+                             start="0x0000128A"
+                             type="lockbits"
+                             address-space="data"/>
+                  <at:memory exec="0"
+                             name="MAPPED_PROGMEM"
+                             pagesize="0x40"
+                             rw="R"
+                             size="0x4000"
+                             start="0x00004000"
+                             type="other"
+                             address-space="data"/>
+                  <at:memory exec="0"
+                             name="PROD_SIGNATURES"
+                             pagesize="0x40"
+                             rw="R"
+                             size="0x3D"
+                             start="0x00001103"
+                             type="signatures"
+                             address-space="data"/>
+                  <at:memory exec="0"
+                             name="SIGNATURES"
+                             pagesize="0x40"
+                             rw="R"
+                             size="0x3"
+                             start="0x00001100"
+                             type="signatures"
+                             address-space="data"/>
+                  <at:memory exec="0"
+                             name="USER_SIGNATURES"
+                             pagesize="0x20"
+                             rw="RW"
+                             size="0x20"
+                             start="0x00001300"
+                             type="user_signatures"
+                             address-space="data"/>
+                  <at:memory exec="1"
+                             name="PROGMEM"
+                             pagesize="0x40"
+                             rw="RW"
+                             size="0x4000"
+                             start="0x00000000"
+                             type="flash"
+                             address-space="prog"/>
+                  <at:interface type="updi" name="UPDI"/>
                   <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
-                  <at:tool id="com.atmel.avrdbg.tool.avrdragon"/>
-                  <at:tool id="com.atmel.avrdbg.tool.ispmk2"/>
-                  <at:tool id="com.atmel.avrdbg.tool.avrone"/>
                   <at:tool id="com.atmel.avrdbg.tool.edbg"/>
                   <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
                   <at:tool id="com.atmel.avrdbg.tool.edbg"/>
                   <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
                   <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
-                  <at:tool id="com.atmel.avrdbg.tool.jtagicemkii"/>
                   <at:tool id="com.atmel.avrdbg.tool.medbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
                   <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
-                  <at:tool id="com.atmel.avrdbg.tool.stk500"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
                   <at:tool id="com.atmel.avrdbg.tool.simulator"/>
-                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATmega1284"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATmega1608"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.win32"
-                               value="simulator/win32/libatmega1284p.dll"/>
-                  <at:property name="com.atmel.gcc.options.mmcu" value="atmega1284"/>
+                               value="simulator/win32/libattinyxg.dll"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.model.linux64"
+                               value="simulator/linux64/libattinyxg.so"/>
+                  <at:property name="com.atmel.gcc.options.mmcu" value="atmega1608"/>
                   <at:project name="Barebone C Project">
                      <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
                         <at:template select="Main file (.c)"/>
@@ -14209,130 +14889,138 @@
                      </at:component>
                   </at:project>
                   <at:prerequisite context="compiling" Tcompiler="GCC" component="AVR8-GCC"/>
+                  <at:prerequisite context="studio" component="Atmel Studio" version="7.0.1585"/>
                   <at:prerequisite context="compiling" Tcompiler="AVRASM" component="AVRASM"/>
                </at:extension>
             </environment>
             <environment name="microchip">
                <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension"
                                schemaVersion="1.0">
-                  <mchp:pic name="edc/ATmega1284.PIC"/>
+                  <mchp:pic name="edc/ATmega1608.PIC"/>
                </mchp:extension>
             </environment>
-            <description>8-bit AVR Microcontroller, 128KB Flash, 40/44-pin</description>
-            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=ATmega1284"
-                  title="Device page for ATmega1284"/>
-            <book name="https://www.microchip.com/wwwproducts/productds/ATmega1284"
+            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=ATmega1608"
+                  title="Device page for ATmega1608"/>
+            <book name="https://www.microchip.com/wwwproducts/productds/ATmega1608"
                   title="Datasheet"/>
          </device>
-         <device Dname="ATmega649A">
-            <processor Dcore="AVR8"
+         <device Dname="ATmega1609">
+            <processor Dcore="AVR8X"
                        Dendian="Little-endian"
                        Dmpu="NO_MPU"
                        Dfpu="NO_FPU"/>
-            <compile header="include/avr/iom649a.h"/>
+            <compile header="include/avr/iom1609.h"/>
             <environment name="atmel">
                <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension"
                              schemaVersion="1.0">
-                  <at:atdf name="atdf/ATmega649A.atdf"/>
-                  <at:variant ordercode="ATmega649A-AU"
+                  <at:atdf name="atdf/ATmega1609.atdf"/>
+                  <at:variant ordercode="ATmega1609-AFR"
                               vccmin="1.8"
-                              vccmax="5.5"
+                              vccmax="5.0"
                               tempmin="-40"
-                              tempmax="85"/>
-                  <at:variant ordercode="ATmega649A-MU"
+                              tempmax="105"/>
+                  <at:variant ordercode="ATmega1609-MFR"
                               vccmin="1.8"
-                              vccmax="5.5"
+                              vccmax="5.0"
                               tempmin="-40"
-                              tempmax="85"/>
-                  <at:memory start="0x0000"
-                             size="0x10000"
-                             type="flash"
-                             rw="RW"
-                             exec="1"
-                             name="FLASH"
-                             pagesize="0x100"
-                             address-space="prog"/>
-                  <at:memory start="0xfc00"
-                             size="0x0400"
-                             type="flash"
-                             rw="RW"
-                             exec="1"
-                             name="BOOT_SECTION_1"
-                             pagesize="0x100"
-                             address-space="prog"/>
-                  <at:memory start="0xf800"
-                             size="0x0800"
-                             type="flash"
-                             rw="RW"
-                             exec="1"
-                             name="BOOT_SECTION_2"
-                             pagesize="0x100"
-                             address-space="prog"/>
-                  <at:memory start="0xf000"
-                             size="0x1000"
-                             type="flash"
-                             rw="RW"
-                             exec="1"
-                             name="BOOT_SECTION_3"
-                             pagesize="0x100"
-                             address-space="prog"/>
-                  <at:memory start="0xe000"
-                             size="0x2000"
-                             type="flash"
-                             rw="RW"
-                             exec="1"
-                             name="BOOT_SECTION_4"
-                             pagesize="0x100"
-                             address-space="prog"/>
-                  <at:memory external="false"
-                             type="regs"
-                             size="0x0020"
-                             start="0x0000"
-                             name="REGISTERS"
-                             address-space="data"/>
-                  <at:memory name="MAPPED_IO"
-                             start="0x0020"
-                             size="0x00e0"
-                             type="io"
-                             external="false"
-                             address-space="data"/>
-                  <at:memory name="IRAM"
-                             start="0x0100"
-                             size="0x1000"
-                             type="ram"
-                             external="false"
-                             address-space="data"/>
-                  <at:memory start="0x0000"
-                             size="0x0800"
-                             type="eeprom"
-                             rw="RW"
-                             exec="0"
+                              tempmax="105"/>
+                  <at:memory exec="0"
                              name="EEPROM"
-                             pagesize="0x08"
-                             address-space="eeprom"/>
-                  <at:interface type="isp" name="ISP"/>
-                  <at:interface type="hvpp" name="HVPP"/>
-                  <at:interface type="megajtag" name="JTAG"/>
+                             pagesize="0x20"
+                             rw="RW"
+                             size="0x0100"
+                             start="0x00001400"
+                             type="eeprom"
+                             address-space="data"/>
+                  <at:memory exec="0"
+                             name="FUSES"
+                             pagesize="0x20"
+                             rw="RW"
+                             size="0xA"
+                             start="0x00001280"
+                             type="fuses"
+                             address-space="data"/>
+                  <at:memory exec="0"
+                             name="INTERNAL_SRAM"
+                             rw="RW"
+                             size="0x0800"
+                             start="0x3800"
+                             type="ram"
+                             address-space="data"/>
+                  <at:memory exec="0"
+                             name="IO"
+                             rw="RW"
+                             size="0x1100"
+                             start="0x00000000"
+                             type="io"
+                             address-space="data"/>
+                  <at:memory exec="0"
+                             name="LOCKBITS"
+                             pagesize="0x20"
+                             rw="RW"
+                             size="0x1"
+                             start="0x0000128A"
+                             type="lockbits"
+                             address-space="data"/>
+                  <at:memory exec="0"
+                             name="MAPPED_PROGMEM"
+                             pagesize="0x40"
+                             rw="R"
+                             size="0x4000"
+                             start="0x00004000"
+                             type="other"
+                             address-space="data"/>
+                  <at:memory exec="0"
+                             name="PROD_SIGNATURES"
+                             pagesize="0x40"
+                             rw="R"
+                             size="0x3D"
+                             start="0x00001103"
+                             type="signatures"
+                             address-space="data"/>
+                  <at:memory exec="0"
+                             name="SIGNATURES"
+                             pagesize="0x40"
+                             rw="R"
+                             size="0x3"
+                             start="0x00001100"
+                             type="signatures"
+                             address-space="data"/>
+                  <at:memory exec="0"
+                             name="USER_SIGNATURES"
+                             pagesize="0x20"
+                             rw="RW"
+                             size="0x20"
+                             start="0x00001300"
+                             type="user_signatures"
+                             address-space="data"/>
+                  <at:memory exec="1"
+                             name="PROGMEM"
+                             pagesize="0x40"
+                             rw="RW"
+                             size="0x4000"
+                             start="0x00000000"
+                             type="flash"
+                             address-space="prog"/>
+                  <at:interface type="updi" name="UPDI"/>
                   <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
-                  <at:tool id="com.atmel.avrdbg.tool.avrdragon"/>
-                  <at:tool id="com.atmel.avrdbg.tool.ispmk2"/>
-                  <at:tool id="com.atmel.avrdbg.tool.avrone"/>
                   <at:tool id="com.atmel.avrdbg.tool.edbg"/>
                   <at:tool id="com.atmel.avrdbg.tool.edbgc"/>
                   <at:tool id="com.atmel.avrdbg.tool.edbg"/>
                   <at:tool id="com.atmel.avrdbg.tool.jtagicemk3"/>
                   <at:tool id="com.atmel.avrdbg.tool.jtagice3plus"/>
-                  <at:tool id="com.atmel.avrdbg.tool.jtagicemkii"/>
                   <at:tool id="com.atmel.avrdbg.tool.medbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
                   <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
-                  <at:tool id="com.atmel.avrdbg.tool.stk500"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
                   <at:tool id="com.atmel.avrdbg.tool.simulator"/>
-                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATmega649A"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATmega1609"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.win32"
-                               value="simulator/win32/libatmega6490p.dll"/>
-                  <at:property name="com.atmel.gcc.options.mmcu" value="atmega649a"/>
+                               value="simulator/win32/libattinyxg.dll"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.model.linux64"
+                               value="simulator/linux64/libattinyxg.so"/>
+                  <at:property name="com.atmel.gcc.options.mmcu" value="atmega1609"/>
                   <at:project name="Barebone C Project">
                      <at:component Cvendor="Atmel" Cclass="Device" Cgroup="Startup">
                         <at:template select="Main file (.c)"/>
@@ -14349,19 +15037,19 @@
                      </at:component>
                   </at:project>
                   <at:prerequisite context="compiling" Tcompiler="GCC" component="AVR8-GCC"/>
+                  <at:prerequisite context="studio" component="Atmel Studio" version="7.0.1585"/>
                   <at:prerequisite context="compiling" Tcompiler="AVRASM" component="AVRASM"/>
                </at:extension>
             </environment>
             <environment name="microchip">
                <mchp:extension xmlns:mchp="http://crownking/pack-device-microchip-extension"
                                schemaVersion="1.0">
-                  <mchp:pic name="edc/ATmega649A.PIC"/>
+                  <mchp:pic name="edc/ATmega1609.PIC"/>
                </mchp:extension>
             </environment>
-            <description>8-bit AVR Microcontroller, 64KB Flash, 64-pin, LCD Controller</description>
-            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=ATmega649A"
-                  title="Device page for ATmega649A"/>
-            <book name="https://www.microchip.com/wwwproducts/productds/ATmega649A"
+            <book name="https://www.microchip.com/wwwproducts/Devices.aspx?product=ATmega1609"
+                  title="Device page for ATmega1609"/>
+            <book name="https://www.microchip.com/wwwproducts/productds/ATmega1609"
                   title="Datasheet"/>
          </device>
          <device Dname="ATmega1280">
@@ -15137,11 +15825,26 @@
                <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension"
                              schemaVersion="1.0">
                   <at:atdf name="atdf/ATmega64RFR2.atdf"/>
-                  <at:variant ordercode="standard"
+                  <at:variant ordercode="ATmega64RFR2-ZU"
                               vccmin="1.8"
                               vccmax="3.6"
-                              tempmin="0"
-                              tempmax="0"/>
+                              tempmin="-40"
+                              tempmax="85"/>
+                  <at:variant ordercode="ATmega64RFR2-ZUR"
+                              vccmin="1.8"
+                              vccmax="3.6"
+                              tempmin="-40"
+                              tempmax="85"/>
+                  <at:variant ordercode="ATmega64RFR2-ZF"
+                              vccmin="1.8"
+                              vccmax="3.6"
+                              tempmin="-40"
+                              tempmax="125"/>
+                  <at:variant ordercode="ATmega64RFR2-ZFR"
+                              vccmin="1.8"
+                              vccmax="3.6"
+                              tempmin="-40"
+                              tempmax="125"/>
                   <at:memory start="0x0000"
                              size="0x10000"
                              type="flash"
@@ -16041,11 +16744,26 @@
                <at:extension xmlns:at="http://www.atmel.com/schemas/pack-device-atmel-extension"
                              schemaVersion="1.0">
                   <at:atdf name="atdf/ATmega2564RFR2.atdf"/>
-                  <at:variant ordercode="standard"
+                  <at:variant ordercode="ATmega2564RFR2-ZU"
                               vccmin="1.8"
                               vccmax="3.6"
-                              tempmin="0"
-                              tempmax="0"/>
+                              tempmin="-40"
+                              tempmax="85"/>
+                  <at:variant ordercode="ATmega2564RFR2-ZUR"
+                              vccmin="1.8"
+                              vccmax="3.6"
+                              tempmin="-40"
+                              tempmax="85"/>
+                  <at:variant ordercode="ATmega2564RFR2-ZF"
+                              vccmin="1.8"
+                              vccmax="3.6"
+                              tempmin="-40"
+                              tempmax="125"/>
+                  <at:variant ordercode="ATmega2564RFR2-ZFR"
+                              vccmin="1.8"
+                              vccmax="3.6"
+                              tempmin="-40"
+                              tempmax="125"/>
                   <at:memory start="0x0000"
                              size="0x40000"
                              type="flash"
@@ -18607,8 +19325,8 @@
       <condition id="AVRASM">
          <require Tcompiler="AVRASM"/>
       </condition>
-      <condition id="ATmega3290">
-         <require Dvendor="Atmel:3" Dname="ATmega3290"/>
+      <condition id="ATmega32U4">
+         <require Dvendor="Atmel:3" Dname="ATmega32U4"/>
       </condition>
       <condition id="ATmega16M1">
          <require Dvendor="Atmel:3" Dname="ATmega16M1"/>
@@ -18637,8 +19355,8 @@
       <condition id="ATmega16HVBrevB">
          <require Dvendor="Atmel:3" Dname="ATmega16HVBrevB"/>
       </condition>
-      <condition id="ATmega3290P">
-         <require Dvendor="Atmel:3" Dname="ATmega3290P"/>
+      <condition id="ATmega1284">
+         <require Dvendor="Atmel:3" Dname="ATmega1284"/>
       </condition>
       <condition id="ATmega88">
          <require Dvendor="Atmel:3" Dname="ATmega88"/>
@@ -18652,8 +19370,8 @@
       <condition id="ATmega8A">
          <require Dvendor="Atmel:3" Dname="ATmega8A"/>
       </condition>
-      <condition id="AT90USB162">
-         <require Dvendor="Atmel:3" Dname="AT90USB162"/>
+      <condition id="ATmega3290P">
+         <require Dvendor="Atmel:3" Dname="ATmega3290P"/>
       </condition>
       <condition id="ATmega644PA">
          <require Dvendor="Atmel:3" Dname="ATmega644PA"/>
@@ -18664,8 +19382,8 @@
       <condition id="ATmega64">
          <require Dvendor="Atmel:3" Dname="ATmega64"/>
       </condition>
-      <condition id="ATmega32U4">
-         <require Dvendor="Atmel:3" Dname="ATmega32U4"/>
+      <condition id="ATmega3290">
+         <require Dvendor="Atmel:3" Dname="ATmega3290"/>
       </condition>
       <condition id="ATmega8">
          <require Dvendor="Atmel:3" Dname="ATmega8"/>
@@ -18766,6 +19484,12 @@
       <condition id="ATmega3250A">
          <require Dvendor="Atmel:3" Dname="ATmega3250A"/>
       </condition>
+      <condition id="ATmega808">
+         <require Dvendor="Atmel:3" Dname="ATmega808"/>
+      </condition>
+      <condition id="ATmega809">
+         <require Dvendor="Atmel:3" Dname="ATmega809"/>
+      </condition>
       <condition id="ATmega2560">
          <require Dvendor="Atmel:3" Dname="ATmega2560"/>
       </condition>
@@ -18838,8 +19562,14 @@
       <condition id="ATmega324A">
          <require Dvendor="Atmel:3" Dname="ATmega324A"/>
       </condition>
+      <condition id="AT90USB162">
+         <require Dvendor="Atmel:3" Dname="AT90USB162"/>
+      </condition>
       <condition id="ATmega324P">
          <require Dvendor="Atmel:3" Dname="ATmega324P"/>
+      </condition>
+      <condition id="ATmega649A">
+         <require Dvendor="Atmel:3" Dname="ATmega649A"/>
       </condition>
       <condition id="ATmega8HVA">
          <require Dvendor="Atmel:3" Dname="ATmega8HVA"/>
@@ -18898,11 +19628,11 @@
       <condition id="ATmega406">
          <require Dvendor="Atmel:3" Dname="ATmega406"/>
       </condition>
-      <condition id="ATmega1284">
-         <require Dvendor="Atmel:3" Dname="ATmega1284"/>
+      <condition id="ATmega1608">
+         <require Dvendor="Atmel:3" Dname="ATmega1608"/>
       </condition>
-      <condition id="ATmega649A">
-         <require Dvendor="Atmel:3" Dname="ATmega649A"/>
+      <condition id="ATmega1609">
+         <require Dvendor="Atmel:3" Dname="ATmega1609"/>
       </condition>
       <condition id="ATmega1280">
          <require Dvendor="Atmel:3" Dname="ATmega1280"/>
@@ -18996,12 +19726,12 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
-                 condition="ATmega3290">
-         <description>Headers and startup code for Atmel ATmega3290</description>
+                 Cversion="1.3.0"
+                 condition="ATmega32U4">
+         <description>Headers and startup code for Atmel ATmega32U4</description>
          <files>
             <file condition="C" category="include" name="include"/>
-            <file condition="C" category="header" name="include/avr/iom3290.h"/>
+            <file condition="C" category="header" name="include/avr/iom32u4.h"/>
             <file condition="C Exe"
                   category="source"
                   name="templates/main.c"
@@ -19022,9 +19752,9 @@
                   name="templates/library.cpp"
                   attr="template"
                   select="Main file (.cpp)"/>
-            <file condition="GCC" category="libraryPrefix" name="gcc/dev/atmega3290"/>
+            <file condition="GCC" category="libraryPrefix" name="gcc/dev/atmega32u4"/>
             <file condition="AVRASM" category="include" name="avrasm/inc"/>
-            <file condition="AVRASM" category="header" name="avrasm/inc/m3290def.inc"/>
+            <file condition="AVRASM" category="header" name="avrasm/inc/m32u4def.inc"/>
             <file condition="AVRASM"
                   category="source"
                   name="avrasm/templates/main.asm"
@@ -19035,7 +19765,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega16M1">
          <description>Headers and startup code for Atmel ATmega16M1</description>
          <files>
@@ -19074,7 +19804,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="AT90USB646">
          <description>Headers and startup code for Atmel AT90USB646</description>
          <files>
@@ -19115,7 +19845,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="AT90USB647">
          <description>Headers and startup code for Atmel AT90USB647</description>
          <files>
@@ -19156,7 +19886,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega3290A">
          <description>Headers and startup code for Atmel ATmega3290A</description>
          <files>
@@ -19197,7 +19927,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega3208">
          <description>Headers and startup code for Atmel ATmega3208</description>
          <files>
@@ -19236,7 +19966,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega3209">
          <description>Headers and startup code for Atmel ATmega3209</description>
          <files>
@@ -19275,7 +20005,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega32HVBrevB">
          <description>Headers and startup code for Atmel ATmega32HVBrevB</description>
          <files>
@@ -19318,7 +20048,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega2561">
          <description>Headers and startup code for Atmel ATmega2561</description>
          <files>
@@ -19357,7 +20087,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega16HVBrevB">
          <description>Headers and startup code for Atmel ATmega16HVBrevB</description>
          <files>
@@ -19400,7 +20130,202 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
+                 condition="ATmega1284">
+         <description>Headers and startup code for Atmel ATmega1284</description>
+         <files>
+            <file condition="C" category="include" name="include"/>
+            <file condition="C" category="header" name="include/avr/iom1284.h"/>
+            <file condition="C Exe"
+                  category="source"
+                  name="templates/main.c"
+                  attr="template"
+                  select="Main file (.c)"/>
+            <file condition="C Exe"
+                  category="source"
+                  name="templates/main.cpp"
+                  attr="template"
+                  select="Main file (.cpp)"/>
+            <file condition="C Lib"
+                  category="source"
+                  name="templates/library.c"
+                  attr="template"
+                  select="Main file (.c)"/>
+            <file condition="C Lib"
+                  category="source"
+                  name="templates/library.cpp"
+                  attr="template"
+                  select="Main file (.cpp)"/>
+            <file condition="GCC" category="libraryPrefix" name="gcc/dev/atmega1284"/>
+            <file condition="AVRASM" category="include" name="avrasm/inc"/>
+            <file condition="AVRASM" category="header" name="avrasm/inc/m1284def.inc"/>
+            <file condition="AVRASM"
+                  category="source"
+                  name="avrasm/templates/main.asm"
+                  attr="template"
+                  select="Main file (.asm)"/>
+         </files>
+      </component>
+      <component Cvendor="Atmel"
+                 Cclass="Device"
+                 Cgroup="Startup"
+                 Cversion="1.3.0"
+                 condition="ATmega88">
+         <description>Headers and startup code for Atmel ATmega88</description>
+         <files>
+            <file condition="C" category="include" name="include"/>
+            <file condition="C" category="header" name="include/avr/iom88.h"/>
+            <file condition="C Exe"
+                  category="source"
+                  name="templates/main.c"
+                  attr="template"
+                  select="Main file (.c)"/>
+            <file condition="C Exe"
+                  category="source"
+                  name="templates/main.cpp"
+                  attr="template"
+                  select="Main file (.cpp)"/>
+            <file condition="C Lib"
+                  category="source"
+                  name="templates/library.c"
+                  attr="template"
+                  select="Main file (.c)"/>
+            <file condition="C Lib"
+                  category="source"
+                  name="templates/library.cpp"
+                  attr="template"
+                  select="Main file (.cpp)"/>
+            <file condition="GCC" category="libraryPrefix" name="gcc/dev/atmega88"/>
+            <file condition="AVRASM" category="include" name="avrasm/inc"/>
+            <file condition="AVRASM" category="header" name="avrasm/inc/m88def.inc"/>
+            <file condition="AVRASM"
+                  category="source"
+                  name="avrasm/templates/main.asm"
+                  attr="template"
+                  select="Main file (.asm)"/>
+         </files>
+      </component>
+      <component Cvendor="Atmel"
+                 Cclass="Device"
+                 Cgroup="Startup"
+                 Cversion="1.3.0"
+                 condition="ATmega329P">
+         <description>Headers and startup code for Atmel ATmega329P</description>
+         <files>
+            <file condition="C" category="include" name="include"/>
+            <file condition="C" category="header" name="include/avr/iom329p.h"/>
+            <file condition="C Exe"
+                  category="source"
+                  name="templates/main.c"
+                  attr="template"
+                  select="Main file (.c)"/>
+            <file condition="C Exe"
+                  category="source"
+                  name="templates/main.cpp"
+                  attr="template"
+                  select="Main file (.cpp)"/>
+            <file condition="C Lib"
+                  category="source"
+                  name="templates/library.c"
+                  attr="template"
+                  select="Main file (.c)"/>
+            <file condition="C Lib"
+                  category="source"
+                  name="templates/library.cpp"
+                  attr="template"
+                  select="Main file (.cpp)"/>
+            <file condition="GCC" category="libraryPrefix" name="gcc/dev/atmega329p"/>
+            <file condition="AVRASM" category="include" name="avrasm/inc"/>
+            <file condition="AVRASM" category="header" name="avrasm/inc/m329pdef.inc"/>
+            <file condition="AVRASM"
+                  category="source"
+                  name="avrasm/templates/main.asm"
+                  attr="template"
+                  select="Main file (.asm)"/>
+         </files>
+      </component>
+      <component Cvendor="Atmel"
+                 Cclass="Device"
+                 Cgroup="Startup"
+                 Cversion="1.3.0"
+                 condition="AT90CAN32">
+         <description>Headers and startup code for Atmel AT90CAN32</description>
+         <files>
+            <file condition="C" category="include" name="include"/>
+            <file condition="C" category="header" name="include/avr/iocan32.h"/>
+            <file condition="C Exe"
+                  category="source"
+                  name="templates/main.c"
+                  attr="template"
+                  select="Main file (.c)"/>
+            <file condition="C Exe"
+                  category="source"
+                  name="templates/main.cpp"
+                  attr="template"
+                  select="Main file (.cpp)"/>
+            <file condition="C Lib"
+                  category="source"
+                  name="templates/library.c"
+                  attr="template"
+                  select="Main file (.c)"/>
+            <file condition="C Lib"
+                  category="source"
+                  name="templates/library.cpp"
+                  attr="template"
+                  select="Main file (.cpp)"/>
+            <file condition="GCC" category="libraryPrefix" name="gcc/dev/at90can32"/>
+            <file condition="AVRASM" category="include" name="avrasm/inc"/>
+            <file condition="AVRASM" category="header" name="avrasm/inc/can32def.inc"/>
+            <file condition="AVRASM"
+                  category="source"
+                  name="avrasm/templates/main.asm"
+                  attr="template"
+                  select="Main file (.asm)"/>
+         </files>
+      </component>
+      <component Cvendor="Atmel"
+                 Cclass="Device"
+                 Cgroup="Startup"
+                 Cversion="1.3.0"
+                 condition="ATmega8A">
+         <description>Headers and startup code for Atmel ATmega8A</description>
+         <files>
+            <file condition="C" category="include" name="include"/>
+            <file condition="C" category="header" name="include/avr/iom8a.h"/>
+            <file condition="C Exe"
+                  category="source"
+                  name="templates/main.c"
+                  attr="template"
+                  select="Main file (.c)"/>
+            <file condition="C Exe"
+                  category="source"
+                  name="templates/main.cpp"
+                  attr="template"
+                  select="Main file (.cpp)"/>
+            <file condition="C Lib"
+                  category="source"
+                  name="templates/library.c"
+                  attr="template"
+                  select="Main file (.c)"/>
+            <file condition="C Lib"
+                  category="source"
+                  name="templates/library.cpp"
+                  attr="template"
+                  select="Main file (.cpp)"/>
+            <file condition="GCC" category="libraryPrefix" name="gcc/dev/atmega8a"/>
+            <file condition="AVRASM" category="include" name="avrasm/inc"/>
+            <file condition="AVRASM" category="header" name="avrasm/inc/m8adef.inc"/>
+            <file condition="AVRASM"
+                  category="source"
+                  name="avrasm/templates/main.asm"
+                  attr="template"
+                  select="Main file (.asm)"/>
+         </files>
+      </component>
+      <component Cvendor="Atmel"
+                 Cclass="Device"
+                 Cgroup="Startup"
+                 Cversion="1.3.0"
                  condition="ATmega3290P">
          <description>Headers and startup code for Atmel ATmega3290P</description>
          <files>
@@ -19441,204 +20366,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
-                 condition="ATmega88">
-         <description>Headers and startup code for Atmel ATmega88</description>
-         <files>
-            <file condition="C" category="include" name="include"/>
-            <file condition="C" category="header" name="include/avr/iom88.h"/>
-            <file condition="C Exe"
-                  category="source"
-                  name="templates/main.c"
-                  attr="template"
-                  select="Main file (.c)"/>
-            <file condition="C Exe"
-                  category="source"
-                  name="templates/main.cpp"
-                  attr="template"
-                  select="Main file (.cpp)"/>
-            <file condition="C Lib"
-                  category="source"
-                  name="templates/library.c"
-                  attr="template"
-                  select="Main file (.c)"/>
-            <file condition="C Lib"
-                  category="source"
-                  name="templates/library.cpp"
-                  attr="template"
-                  select="Main file (.cpp)"/>
-            <file condition="GCC" category="libraryPrefix" name="gcc/dev/atmega88"/>
-            <file condition="AVRASM" category="include" name="avrasm/inc"/>
-            <file condition="AVRASM" category="header" name="avrasm/inc/m88def.inc"/>
-            <file condition="AVRASM"
-                  category="source"
-                  name="avrasm/templates/main.asm"
-                  attr="template"
-                  select="Main file (.asm)"/>
-         </files>
-      </component>
-      <component Cvendor="Atmel"
-                 Cclass="Device"
-                 Cgroup="Startup"
-                 Cversion="1.2.0"
-                 condition="ATmega329P">
-         <description>Headers and startup code for Atmel ATmega329P</description>
-         <files>
-            <file condition="C" category="include" name="include"/>
-            <file condition="C" category="header" name="include/avr/iom329p.h"/>
-            <file condition="C Exe"
-                  category="source"
-                  name="templates/main.c"
-                  attr="template"
-                  select="Main file (.c)"/>
-            <file condition="C Exe"
-                  category="source"
-                  name="templates/main.cpp"
-                  attr="template"
-                  select="Main file (.cpp)"/>
-            <file condition="C Lib"
-                  category="source"
-                  name="templates/library.c"
-                  attr="template"
-                  select="Main file (.c)"/>
-            <file condition="C Lib"
-                  category="source"
-                  name="templates/library.cpp"
-                  attr="template"
-                  select="Main file (.cpp)"/>
-            <file condition="GCC" category="libraryPrefix" name="gcc/dev/atmega329p"/>
-            <file condition="AVRASM" category="include" name="avrasm/inc"/>
-            <file condition="AVRASM" category="header" name="avrasm/inc/m329pdef.inc"/>
-            <file condition="AVRASM"
-                  category="source"
-                  name="avrasm/templates/main.asm"
-                  attr="template"
-                  select="Main file (.asm)"/>
-         </files>
-      </component>
-      <component Cvendor="Atmel"
-                 Cclass="Device"
-                 Cgroup="Startup"
-                 Cversion="1.2.0"
-                 condition="AT90CAN32">
-         <description>Headers and startup code for Atmel AT90CAN32</description>
-         <files>
-            <file condition="C" category="include" name="include"/>
-            <file condition="C" category="header" name="include/avr/iocan32.h"/>
-            <file condition="C Exe"
-                  category="source"
-                  name="templates/main.c"
-                  attr="template"
-                  select="Main file (.c)"/>
-            <file condition="C Exe"
-                  category="source"
-                  name="templates/main.cpp"
-                  attr="template"
-                  select="Main file (.cpp)"/>
-            <file condition="C Lib"
-                  category="source"
-                  name="templates/library.c"
-                  attr="template"
-                  select="Main file (.c)"/>
-            <file condition="C Lib"
-                  category="source"
-                  name="templates/library.cpp"
-                  attr="template"
-                  select="Main file (.cpp)"/>
-            <file condition="GCC" category="libraryPrefix" name="gcc/dev/at90can32"/>
-            <file condition="AVRASM" category="include" name="avrasm/inc"/>
-            <file condition="AVRASM" category="header" name="avrasm/inc/can32def.inc"/>
-            <file condition="AVRASM"
-                  category="source"
-                  name="avrasm/templates/main.asm"
-                  attr="template"
-                  select="Main file (.asm)"/>
-         </files>
-      </component>
-      <component Cvendor="Atmel"
-                 Cclass="Device"
-                 Cgroup="Startup"
-                 Cversion="1.2.0"
-                 condition="ATmega8A">
-         <description>Headers and startup code for Atmel ATmega8A</description>
-         <files>
-            <file condition="C" category="include" name="include"/>
-            <file condition="C" category="header" name="include/avr/iom8a.h"/>
-            <file condition="C Exe"
-                  category="source"
-                  name="templates/main.c"
-                  attr="template"
-                  select="Main file (.c)"/>
-            <file condition="C Exe"
-                  category="source"
-                  name="templates/main.cpp"
-                  attr="template"
-                  select="Main file (.cpp)"/>
-            <file condition="C Lib"
-                  category="source"
-                  name="templates/library.c"
-                  attr="template"
-                  select="Main file (.c)"/>
-            <file condition="C Lib"
-                  category="source"
-                  name="templates/library.cpp"
-                  attr="template"
-                  select="Main file (.cpp)"/>
-            <file condition="GCC" category="libraryPrefix" name="gcc/dev/atmega8a"/>
-            <file condition="AVRASM" category="include" name="avrasm/inc"/>
-            <file condition="AVRASM" category="header" name="avrasm/inc/m8adef.inc"/>
-            <file condition="AVRASM"
-                  category="source"
-                  name="avrasm/templates/main.asm"
-                  attr="template"
-                  select="Main file (.asm)"/>
-         </files>
-      </component>
-      <component Cvendor="Atmel"
-                 Cclass="Device"
-                 Cgroup="Startup"
-                 Cversion="1.2.0"
-                 condition="AT90USB162">
-         <description>Headers and startup code for Atmel AT90USB162</description>
-         <files>
-            <file condition="C" category="include" name="include"/>
-            <file condition="C" category="header" name="include/avr/iousb162.h"/>
-            <file condition="C Exe"
-                  category="source"
-                  name="templates/main.c"
-                  attr="template"
-                  select="Main file (.c)"/>
-            <file condition="C Exe"
-                  category="source"
-                  name="templates/main.cpp"
-                  attr="template"
-                  select="Main file (.cpp)"/>
-            <file condition="C Lib"
-                  category="source"
-                  name="templates/library.c"
-                  attr="template"
-                  select="Main file (.c)"/>
-            <file condition="C Lib"
-                  category="source"
-                  name="templates/library.cpp"
-                  attr="template"
-                  select="Main file (.cpp)"/>
-            <file condition="GCC" category="libraryPrefix" name="gcc/dev/at90usb162"/>
-            <file condition="AVRASM" category="include" name="avrasm/inc"/>
-            <file condition="AVRASM"
-                  category="header"
-                  name="avrasm/inc/usb162def.inc"/>
-            <file condition="AVRASM"
-                  category="source"
-                  name="avrasm/templates/main.asm"
-                  attr="template"
-                  select="Main file (.asm)"/>
-         </files>
-      </component>
-      <component Cvendor="Atmel"
-                 Cclass="Device"
-                 Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega644PA">
          <description>Headers and startup code for Atmel ATmega644PA</description>
          <files>
@@ -19679,7 +20407,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega32U2">
          <description>Headers and startup code for Atmel ATmega32U2</description>
          <files>
@@ -19718,7 +20446,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega64">
          <description>Headers and startup code for Atmel ATmega64</description>
          <files>
@@ -19757,12 +20485,12 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
-                 condition="ATmega32U4">
-         <description>Headers and startup code for Atmel ATmega32U4</description>
+                 Cversion="1.3.0"
+                 condition="ATmega3290">
+         <description>Headers and startup code for Atmel ATmega3290</description>
          <files>
             <file condition="C" category="include" name="include"/>
-            <file condition="C" category="header" name="include/avr/iom32u4.h"/>
+            <file condition="C" category="header" name="include/avr/iom3290.h"/>
             <file condition="C Exe"
                   category="source"
                   name="templates/main.c"
@@ -19783,9 +20511,9 @@
                   name="templates/library.cpp"
                   attr="template"
                   select="Main file (.cpp)"/>
-            <file condition="GCC" category="libraryPrefix" name="gcc/dev/atmega32u4"/>
+            <file condition="GCC" category="libraryPrefix" name="gcc/dev/atmega3290"/>
             <file condition="AVRASM" category="include" name="avrasm/inc"/>
-            <file condition="AVRASM" category="header" name="avrasm/inc/m32u4def.inc"/>
+            <file condition="AVRASM" category="header" name="avrasm/inc/m3290def.inc"/>
             <file condition="AVRASM"
                   category="source"
                   name="avrasm/templates/main.asm"
@@ -19796,7 +20524,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega8">
          <description>Headers and startup code for Atmel ATmega8</description>
          <files>
@@ -19835,7 +20563,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega328P">
          <description>Headers and startup code for Atmel ATmega328P</description>
          <files>
@@ -19874,7 +20602,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega8515">
          <description>Headers and startup code for Atmel ATmega8515</description>
          <files>
@@ -19913,7 +20641,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega329A">
          <description>Headers and startup code for Atmel ATmega329A</description>
          <files>
@@ -19952,7 +20680,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega168">
          <description>Headers and startup code for Atmel ATmega168</description>
          <files>
@@ -19991,7 +20719,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega165A">
          <description>Headers and startup code for Atmel ATmega165A</description>
          <files>
@@ -20030,7 +20758,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="AT90CAN64">
          <description>Headers and startup code for Atmel AT90CAN64</description>
          <files>
@@ -20069,7 +20797,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="AT90USB82">
          <description>Headers and startup code for Atmel AT90USB82</description>
          <files>
@@ -20108,7 +20836,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega32M1">
          <description>Headers and startup code for Atmel ATmega32M1</description>
          <files>
@@ -20147,7 +20875,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega162">
          <description>Headers and startup code for Atmel ATmega162</description>
          <files>
@@ -20186,7 +20914,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega6450P">
          <description>Headers and startup code for Atmel ATmega6450P</description>
          <files>
@@ -20227,7 +20955,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega165P">
          <description>Headers and startup code for Atmel ATmega165P</description>
          <files>
@@ -20266,7 +20994,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega6450">
          <description>Headers and startup code for Atmel ATmega6450</description>
          <files>
@@ -20305,7 +21033,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega6450A">
          <description>Headers and startup code for Atmel ATmega6450A</description>
          <files>
@@ -20346,7 +21074,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega88A">
          <description>Headers and startup code for Atmel ATmega88A</description>
          <files>
@@ -20385,7 +21113,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="AT90PWM81">
          <description>Headers and startup code for Atmel AT90PWM81</description>
          <files>
@@ -20424,7 +21152,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega8U2">
          <description>Headers and startup code for Atmel ATmega8U2</description>
          <files>
@@ -20463,7 +21191,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega88P">
          <description>Headers and startup code for Atmel ATmega88P</description>
          <files>
@@ -20502,7 +21230,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega1284P">
          <description>Headers and startup code for Atmel ATmega1284P</description>
          <files>
@@ -20543,7 +21271,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega644P">
          <description>Headers and startup code for Atmel ATmega644P</description>
          <files>
@@ -20582,7 +21310,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega4809">
          <description>Headers and startup code for Atmel ATmega4809</description>
          <files>
@@ -20621,7 +21349,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega4808">
          <description>Headers and startup code for Atmel ATmega4808</description>
          <files>
@@ -20660,7 +21388,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="AT90PWM161">
          <description>Headers and startup code for Atmel AT90PWM161</description>
          <files>
@@ -20701,7 +21429,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega88PB">
          <description>Headers and startup code for Atmel ATmega88PB</description>
          <files>
@@ -20740,7 +21468,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega88PA">
          <description>Headers and startup code for Atmel ATmega88PA</description>
          <files>
@@ -20779,7 +21507,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega6490P">
          <description>Headers and startup code for Atmel ATmega6490P</description>
          <files>
@@ -20820,7 +21548,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega48">
          <description>Headers and startup code for Atmel ATmega48</description>
          <files>
@@ -20859,7 +21587,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega164A">
          <description>Headers and startup code for Atmel ATmega164A</description>
          <files>
@@ -20898,7 +21626,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega32HVB">
          <description>Headers and startup code for Atmel ATmega32HVB</description>
          <files>
@@ -20939,7 +21667,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega6490A">
          <description>Headers and startup code for Atmel ATmega6490A</description>
          <files>
@@ -20980,7 +21708,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega164P">
          <description>Headers and startup code for Atmel ATmega164P</description>
          <files>
@@ -21019,7 +21747,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="AT90PWM316">
          <description>Headers and startup code for Atmel AT90PWM316</description>
          <files>
@@ -21060,7 +21788,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega3250A">
          <description>Headers and startup code for Atmel ATmega3250A</description>
          <files>
@@ -21101,7 +21829,85 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
+                 condition="ATmega808">
+         <description>Headers and startup code for Atmel ATmega808</description>
+         <files>
+            <file condition="C" category="include" name="include"/>
+            <file condition="C" category="header" name="include/avr/iom808.h"/>
+            <file condition="C Exe"
+                  category="source"
+                  name="templates/main.c"
+                  attr="template"
+                  select="Main file (.c)"/>
+            <file condition="C Exe"
+                  category="source"
+                  name="templates/main.cpp"
+                  attr="template"
+                  select="Main file (.cpp)"/>
+            <file condition="C Lib"
+                  category="source"
+                  name="templates/library.c"
+                  attr="template"
+                  select="Main file (.c)"/>
+            <file condition="C Lib"
+                  category="source"
+                  name="templates/library.cpp"
+                  attr="template"
+                  select="Main file (.cpp)"/>
+            <file condition="GCC" category="libraryPrefix" name="gcc/dev/atmega808"/>
+            <file condition="AVRASM" category="include" name="avrasm/inc"/>
+            <file condition="AVRASM" category="header" name="avrasm/inc/m808def.inc"/>
+            <file condition="AVRASM"
+                  category="source"
+                  name="avrasm/templates/main.asm"
+                  attr="template"
+                  select="Main file (.asm)"/>
+         </files>
+      </component>
+      <component Cvendor="Atmel"
+                 Cclass="Device"
+                 Cgroup="Startup"
+                 Cversion="1.3.0"
+                 condition="ATmega809">
+         <description>Headers and startup code for Atmel ATmega809</description>
+         <files>
+            <file condition="C" category="include" name="include"/>
+            <file condition="C" category="header" name="include/avr/iom809.h"/>
+            <file condition="C Exe"
+                  category="source"
+                  name="templates/main.c"
+                  attr="template"
+                  select="Main file (.c)"/>
+            <file condition="C Exe"
+                  category="source"
+                  name="templates/main.cpp"
+                  attr="template"
+                  select="Main file (.cpp)"/>
+            <file condition="C Lib"
+                  category="source"
+                  name="templates/library.c"
+                  attr="template"
+                  select="Main file (.c)"/>
+            <file condition="C Lib"
+                  category="source"
+                  name="templates/library.cpp"
+                  attr="template"
+                  select="Main file (.cpp)"/>
+            <file condition="GCC" category="libraryPrefix" name="gcc/dev/atmega809"/>
+            <file condition="AVRASM" category="include" name="avrasm/inc"/>
+            <file condition="AVRASM" category="header" name="avrasm/inc/m809def.inc"/>
+            <file condition="AVRASM"
+                  category="source"
+                  name="avrasm/templates/main.asm"
+                  attr="template"
+                  select="Main file (.asm)"/>
+         </files>
+      </component>
+      <component Cvendor="Atmel"
+                 Cclass="Device"
+                 Cgroup="Startup"
+                 Cversion="1.3.0"
                  condition="ATmega2560">
          <description>Headers and startup code for Atmel ATmega2560</description>
          <files>
@@ -21140,7 +21946,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega645A">
          <description>Headers and startup code for Atmel ATmega645A</description>
          <files>
@@ -21179,7 +21985,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega3250P">
          <description>Headers and startup code for Atmel ATmega3250P</description>
          <files>
@@ -21220,7 +22026,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega8535">
          <description>Headers and startup code for Atmel ATmega8535</description>
          <files>
@@ -21259,7 +22065,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega645P">
          <description>Headers and startup code for Atmel ATmega645P</description>
          <files>
@@ -21298,7 +22104,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega16A">
          <description>Headers and startup code for Atmel ATmega16A</description>
          <files>
@@ -21337,7 +22143,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega644RFR2">
          <description>Headers and startup code for Atmel ATmega644RFR2</description>
          <files>
@@ -21380,7 +22186,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega325A">
          <description>Headers and startup code for Atmel ATmega325A</description>
          <files>
@@ -21419,7 +22225,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega128RFA1">
          <description>Headers and startup code for Atmel ATmega128RFA1</description>
          <files>
@@ -21462,7 +22268,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega165PA">
          <description>Headers and startup code for Atmel ATmega165PA</description>
          <files>
@@ -21503,7 +22309,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega64C1">
          <description>Headers and startup code for Atmel ATmega64C1</description>
          <files>
@@ -21542,7 +22348,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega168PB">
          <description>Headers and startup code for Atmel ATmega168PB</description>
          <files>
@@ -21583,7 +22389,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega168PA">
          <description>Headers and startup code for Atmel ATmega168PA</description>
          <files>
@@ -21624,7 +22430,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega325P">
          <description>Headers and startup code for Atmel ATmega325P</description>
          <files>
@@ -21663,7 +22469,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega32">
          <description>Headers and startup code for Atmel ATmega32</description>
          <files>
@@ -21702,7 +22508,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega32C1">
          <description>Headers and startup code for Atmel ATmega32C1</description>
          <files>
@@ -21741,7 +22547,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega169PA">
          <description>Headers and startup code for Atmel ATmega169PA</description>
          <files>
@@ -21782,7 +22588,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="AT90USB1286">
          <description>Headers and startup code for Atmel AT90USB1286</description>
          <files>
@@ -21823,7 +22629,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="AT90USB1287">
          <description>Headers and startup code for Atmel AT90USB1287</description>
          <files>
@@ -21864,7 +22670,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="AT90PWM1">
          <description>Headers and startup code for Atmel AT90PWM1</description>
          <files>
@@ -21903,7 +22709,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="AT90PWM3B">
          <description>Headers and startup code for Atmel AT90PWM3B</description>
          <files>
@@ -21942,7 +22748,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega256RFR2">
          <description>Headers and startup code for Atmel ATmega256RFR2</description>
          <files>
@@ -21985,7 +22791,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega1284RFR2">
          <description>Headers and startup code for Atmel ATmega1284RFR2</description>
          <files>
@@ -22028,7 +22834,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega324A">
          <description>Headers and startup code for Atmel ATmega324A</description>
          <files>
@@ -22067,7 +22873,48 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
+                 condition="AT90USB162">
+         <description>Headers and startup code for Atmel AT90USB162</description>
+         <files>
+            <file condition="C" category="include" name="include"/>
+            <file condition="C" category="header" name="include/avr/iousb162.h"/>
+            <file condition="C Exe"
+                  category="source"
+                  name="templates/main.c"
+                  attr="template"
+                  select="Main file (.c)"/>
+            <file condition="C Exe"
+                  category="source"
+                  name="templates/main.cpp"
+                  attr="template"
+                  select="Main file (.cpp)"/>
+            <file condition="C Lib"
+                  category="source"
+                  name="templates/library.c"
+                  attr="template"
+                  select="Main file (.c)"/>
+            <file condition="C Lib"
+                  category="source"
+                  name="templates/library.cpp"
+                  attr="template"
+                  select="Main file (.cpp)"/>
+            <file condition="GCC" category="libraryPrefix" name="gcc/dev/at90usb162"/>
+            <file condition="AVRASM" category="include" name="avrasm/inc"/>
+            <file condition="AVRASM"
+                  category="header"
+                  name="avrasm/inc/usb162def.inc"/>
+            <file condition="AVRASM"
+                  category="source"
+                  name="avrasm/templates/main.asm"
+                  attr="template"
+                  select="Main file (.asm)"/>
+         </files>
+      </component>
+      <component Cvendor="Atmel"
+                 Cclass="Device"
+                 Cgroup="Startup"
+                 Cversion="1.3.0"
                  condition="ATmega324P">
          <description>Headers and startup code for Atmel ATmega324P</description>
          <files>
@@ -22106,7 +22953,46 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
+                 condition="ATmega649A">
+         <description>Headers and startup code for Atmel ATmega649A</description>
+         <files>
+            <file condition="C" category="include" name="include"/>
+            <file condition="C" category="header" name="include/avr/iom649a.h"/>
+            <file condition="C Exe"
+                  category="source"
+                  name="templates/main.c"
+                  attr="template"
+                  select="Main file (.c)"/>
+            <file condition="C Exe"
+                  category="source"
+                  name="templates/main.cpp"
+                  attr="template"
+                  select="Main file (.cpp)"/>
+            <file condition="C Lib"
+                  category="source"
+                  name="templates/library.c"
+                  attr="template"
+                  select="Main file (.c)"/>
+            <file condition="C Lib"
+                  category="source"
+                  name="templates/library.cpp"
+                  attr="template"
+                  select="Main file (.cpp)"/>
+            <file condition="GCC" category="libraryPrefix" name="gcc/dev/atmega649a"/>
+            <file condition="AVRASM" category="include" name="avrasm/inc"/>
+            <file condition="AVRASM" category="header" name="avrasm/inc/m649adef.inc"/>
+            <file condition="AVRASM"
+                  category="source"
+                  name="avrasm/templates/main.asm"
+                  attr="template"
+                  select="Main file (.asm)"/>
+         </files>
+      </component>
+      <component Cvendor="Atmel"
+                 Cclass="Device"
+                 Cgroup="Startup"
+                 Cversion="1.3.0"
                  condition="ATmega8HVA">
          <description>Headers and startup code for Atmel ATmega8HVA</description>
          <files>
@@ -22145,7 +23031,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega128RFR2">
          <description>Headers and startup code for Atmel ATmega128RFR2</description>
          <files>
@@ -22188,7 +23074,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="AT90PWM2B">
          <description>Headers and startup code for Atmel AT90PWM2B</description>
          <files>
@@ -22227,7 +23113,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega3250">
          <description>Headers and startup code for Atmel ATmega3250</description>
          <files>
@@ -22266,7 +23152,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega169P">
          <description>Headers and startup code for Atmel ATmega169P</description>
          <files>
@@ -22305,7 +23191,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega6490">
          <description>Headers and startup code for Atmel ATmega6490</description>
          <files>
@@ -22344,7 +23230,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega329">
          <description>Headers and startup code for Atmel ATmega329</description>
          <files>
@@ -22383,7 +23269,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega328">
          <description>Headers and startup code for Atmel ATmega328</description>
          <files>
@@ -22422,7 +23308,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega64HVE2">
          <description>Headers and startup code for Atmel ATmega64HVE2</description>
          <files>
@@ -22465,7 +23351,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega325">
          <description>Headers and startup code for Atmel ATmega325</description>
          <files>
@@ -22504,7 +23390,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega128">
          <description>Headers and startup code for Atmel ATmega128</description>
          <files>
@@ -22543,7 +23429,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega645">
          <description>Headers and startup code for Atmel ATmega645</description>
          <files>
@@ -22582,7 +23468,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega169A">
          <description>Headers and startup code for Atmel ATmega169A</description>
          <files>
@@ -22621,7 +23507,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega3290PA">
          <description>Headers and startup code for Atmel ATmega3290PA</description>
          <files>
@@ -22664,7 +23550,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega16">
          <description>Headers and startup code for Atmel ATmega16</description>
          <files>
@@ -22703,7 +23589,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega64A">
          <description>Headers and startup code for Atmel ATmega64A</description>
          <files>
@@ -22742,7 +23628,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega64M1">
          <description>Headers and startup code for Atmel ATmega64M1</description>
          <files>
@@ -22781,7 +23667,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega328PB">
          <description>Headers and startup code for Atmel ATmega328PB</description>
          <files>
@@ -22822,7 +23708,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega406">
          <description>Headers and startup code for Atmel ATmega406</description>
          <files>
@@ -22861,12 +23747,12 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
-                 condition="ATmega1284">
-         <description>Headers and startup code for Atmel ATmega1284</description>
+                 Cversion="1.3.0"
+                 condition="ATmega1608">
+         <description>Headers and startup code for Atmel ATmega1608</description>
          <files>
             <file condition="C" category="include" name="include"/>
-            <file condition="C" category="header" name="include/avr/iom1284.h"/>
+            <file condition="C" category="header" name="include/avr/iom1608.h"/>
             <file condition="C Exe"
                   category="source"
                   name="templates/main.c"
@@ -22887,9 +23773,9 @@
                   name="templates/library.cpp"
                   attr="template"
                   select="Main file (.cpp)"/>
-            <file condition="GCC" category="libraryPrefix" name="gcc/dev/atmega1284"/>
+            <file condition="GCC" category="libraryPrefix" name="gcc/dev/atmega1608"/>
             <file condition="AVRASM" category="include" name="avrasm/inc"/>
-            <file condition="AVRASM" category="header" name="avrasm/inc/m1284def.inc"/>
+            <file condition="AVRASM" category="header" name="avrasm/inc/m1608def.inc"/>
             <file condition="AVRASM"
                   category="source"
                   name="avrasm/templates/main.asm"
@@ -22900,12 +23786,12 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
-                 condition="ATmega649A">
-         <description>Headers and startup code for Atmel ATmega649A</description>
+                 Cversion="1.3.0"
+                 condition="ATmega1609">
+         <description>Headers and startup code for Atmel ATmega1609</description>
          <files>
             <file condition="C" category="include" name="include"/>
-            <file condition="C" category="header" name="include/avr/iom649a.h"/>
+            <file condition="C" category="header" name="include/avr/iom1609.h"/>
             <file condition="C Exe"
                   category="source"
                   name="templates/main.c"
@@ -22926,9 +23812,9 @@
                   name="templates/library.cpp"
                   attr="template"
                   select="Main file (.cpp)"/>
-            <file condition="GCC" category="libraryPrefix" name="gcc/dev/atmega649a"/>
+            <file condition="GCC" category="libraryPrefix" name="gcc/dev/atmega1609"/>
             <file condition="AVRASM" category="include" name="avrasm/inc"/>
-            <file condition="AVRASM" category="header" name="avrasm/inc/m649adef.inc"/>
+            <file condition="AVRASM" category="header" name="avrasm/inc/m1609def.inc"/>
             <file condition="AVRASM"
                   category="source"
                   name="avrasm/templates/main.asm"
@@ -22939,7 +23825,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega1280">
          <description>Headers and startup code for Atmel ATmega1280</description>
          <files>
@@ -22978,7 +23864,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega1281">
          <description>Headers and startup code for Atmel ATmega1281</description>
          <files>
@@ -23017,7 +23903,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega329PA">
          <description>Headers and startup code for Atmel ATmega329PA</description>
          <files>
@@ -23058,7 +23944,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega325PA">
          <description>Headers and startup code for Atmel ATmega325PA</description>
          <files>
@@ -23099,7 +23985,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega168P">
          <description>Headers and startup code for Atmel ATmega168P</description>
          <files>
@@ -23138,7 +24024,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega64RFR2">
          <description>Headers and startup code for Atmel ATmega64RFR2</description>
          <files>
@@ -23181,7 +24067,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega128A">
          <description>Headers and startup code for Atmel ATmega128A</description>
          <files>
@@ -23220,7 +24106,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega324PA">
          <description>Headers and startup code for Atmel ATmega324PA</description>
          <files>
@@ -23261,7 +24147,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega324PB">
          <description>Headers and startup code for Atmel ATmega324PB</description>
          <files>
@@ -23302,7 +24188,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="AT90CAN128">
          <description>Headers and startup code for Atmel AT90CAN128</description>
          <files>
@@ -23343,7 +24229,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega16U4">
          <description>Headers and startup code for Atmel ATmega16U4</description>
          <files>
@@ -23382,7 +24268,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega2564RFR2">
          <description>Headers and startup code for Atmel ATmega2564RFR2</description>
          <files>
@@ -23425,7 +24311,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega168A">
          <description>Headers and startup code for Atmel ATmega168A</description>
          <files>
@@ -23464,7 +24350,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega16U2">
          <description>Headers and startup code for Atmel ATmega16U2</description>
          <files>
@@ -23503,7 +24389,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega644A">
          <description>Headers and startup code for Atmel ATmega644A</description>
          <files>
@@ -23542,7 +24428,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="AT90PWM216">
          <description>Headers and startup code for Atmel AT90PWM216</description>
          <files>
@@ -23583,7 +24469,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega164PA">
          <description>Headers and startup code for Atmel ATmega164PA</description>
          <files>
@@ -23624,7 +24510,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega649">
          <description>Headers and startup code for Atmel ATmega649</description>
          <files>
@@ -23663,7 +24549,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega649P">
          <description>Headers and startup code for Atmel ATmega649P</description>
          <files>
@@ -23702,7 +24588,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega640">
          <description>Headers and startup code for Atmel ATmega640</description>
          <files>
@@ -23741,7 +24627,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega644">
          <description>Headers and startup code for Atmel ATmega644</description>
          <files>
@@ -23780,7 +24666,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega48PB">
          <description>Headers and startup code for Atmel ATmega48PB</description>
          <files>
@@ -23819,7 +24705,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega48PA">
          <description>Headers and startup code for Atmel ATmega48PA</description>
          <files>
@@ -23858,7 +24744,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega48A">
          <description>Headers and startup code for Atmel ATmega48A</description>
          <files>
@@ -23897,7 +24783,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega16HVA">
          <description>Headers and startup code for Atmel ATmega16HVA</description>
          <files>
@@ -23938,7 +24824,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega16HVB">
          <description>Headers and startup code for Atmel ATmega16HVB</description>
          <files>
@@ -23979,7 +24865,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega48P">
          <description>Headers and startup code for Atmel ATmega48P</description>
          <files>
@@ -24018,7 +24904,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega3250PA">
          <description>Headers and startup code for Atmel ATmega3250PA</description>
          <files>
@@ -24061,7 +24947,7 @@
       <component Cvendor="Atmel"
                  Cclass="Device"
                  Cgroup="Startup"
-                 Cversion="1.2.0"
+                 Cversion="1.3.0"
                  condition="ATmega32A">
          <description>Headers and startup code for Atmel ATmega32A</description>
          <files>

@@ -516,7 +516,7 @@
     </module>
     <module caption="Lockbits" name="LOCKBIT">
       <register-group caption="Lockbits" name="LOCKBIT">
-        <register caption="" name="LOCKBIT" offset="0x00" size="1">
+        <register caption="" name="LOCKBIT" offset="0x00" size="1" initval="0xFF">
           <bitfield caption="Memory Lock" mask="0x03" name="LB" values="ENUM_LB"/>
           <bitfield caption="Boot Loader Protection Mode" mask="0x0C" name="BLB0" values="ENUM_BLB"/>
           <bitfield caption="Boot Loader Protection Mode" mask="0x30" name="BLB1" values="ENUM_BLB2"/>
@@ -1008,6 +1008,7 @@
         <register caption="Store Program Memory Control and Status Register" name="SPMCSR" offset="0x57" size="1">
           <bitfield caption="SPM Interrupt Enable" mask="0x80" name="SPMIE"/>
           <bitfield caption="Read-While-Write Section Busy" mask="0x40" name="RWWSB"/>
+          <bitfield caption="Signature Row Read" mask="0x20" name="SIGRD"/>
           <bitfield caption="Read-While-Write section read enable" mask="0x10" name="RWWSRE"/>
           <bitfield caption="Boot Lock Bit Set" mask="0x08" name="BLBSET"/>
           <bitfield caption="Page Write" mask="0x04" name="PGWRT"/>
@@ -1017,9 +1018,9 @@
         <register caption="MCU Control Register" name="MCUCR" offset="0x55" size="1">
           <bitfield caption="BOD Sleep" mask="0x40" name="BODS"/>
           <bitfield caption="BOD Sleep Enable" mask="0x20" name="BODSE"/>
-          <bitfield caption="" mask="0x10" name="PUD"/>
-          <bitfield caption="" mask="0x02" name="IVSEL"/>
-          <bitfield caption="" mask="0x01" name="IVCE"/>
+          <bitfield caption="Pull-up Disable" mask="0x10" name="PUD"/>
+          <bitfield caption="Interrupt Vector Select" mask="0x02" name="IVSEL"/>
+          <bitfield caption="Interrupt Vector Change Enable" mask="0x01" name="IVCE"/>
         </register>
         <register caption="MCU Status Register" name="MCUSR" offset="0x54" size="1">
           <bitfield caption="Watchdog Reset Flag" mask="0x08" name="WDRF"/>

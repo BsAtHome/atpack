@@ -9,17 +9,18 @@
    <name>ATtiny_DFP</name>
    <description>Atmel ATtiny Series Device Support</description>
    <releases>
+      <release version="1.3.229" date="2018-09-17">Corrected signatures for ATtiny402 and ATtiny412. Typo corrections in captions. Corrected RW status on MCLKSTATUS register. Added initval-attribute for most registers in several devices. Made headerfile size defines unsigned. Corrected flash pagesizes in assembler include files for several devices.</release>
       <release version="1.3.172" date="2018-02-19">Added TWSSRA bitfields for ATtiny20 and ATtiny40. Corrected Fuse register group size for ATtiny1607-family, ATtiny1617-family and ATtiny3217-family.</release>
       <release version="1.3.169" date="2017-12-18">Added support for ATtiny1607, ATtiny1606, ATtiny1604, ATtiny807, ATtiny806, ATtiny804, ATtiny406, ATtiny404, ATtiny402, ATtiny204 and ATtiny202.</release>
       <release version="1.3.147" date="2017-10-02">Updated AVR8X simulator models.</release>
       <release version="1.3.132" date="2017-07-04">Added CCP signature for ATtiny102 and ATtiny104. Renamed interrupt ADC_ADC to ADC for ATtiny40. Renamed interrupt ANA_COMP to ANALOG_COMP for ATtiny48 and ATtiny88. Added Hi-/Lo-byte-address defines for 16-bit registers in assembler include files for the new tiny's. Added simulator model for ATtiny3217, ATtiny3216 and ATtiny3214.</release>
       <release version="1.2.118" date="2017-02-21">Added support for ATtiny3217, ATtiny3216, ATtiny3214, ATtiny1617, ATtiny1616, ATtiny1614, ATtiny416, ATtiny414, ATtiny412, ATtiny214 and ATtiny212.</release>
-      <release version="1.2.112">Updated header files for ATtiny417, ATtiny814, ATtiny816 and ATtiny817. Simulator support for the same devices. Added support for ATtiny1617 and ATtiny1616.</release>
-      <release version="1.1.102">Added ATtiny417, ATtiny814, ATtiny816, and ATtiny817. Added GCC assembler support for ATtiny11, ATtiny12, and ATtiny15.</release>
-      <release version="1.0.79">Added ATtiny102, ATtiny104, ATtiny80 and ATtiny840. Updated documentation links.</release>
-      <release version="1.0.78">Added ATtiny102, ATtiny104, ATtiny80 and ATtiny840. Updated documentation links.</release>
-      <release version="1.0.71">Fix simulator load issue for ATtiny85, ATtiny43U, ATtiny88, ATtiny1634, ATtiny45, ATtiny48, ATtiny40, ATtiny25, and ATtiny20.</release>
-      <release version="1.0.70">Initial release.</release>
+      <release version="1.2.112" date="2016-12-06">Updated header files for ATtiny417, ATtiny814, ATtiny816 and ATtiny817. Simulator support for the same devices. Added support for ATtiny1617 and ATtiny1616.</release>
+      <release version="1.1.102" date="2016-09-29">Added ATtiny417, ATtiny814, ATtiny816, and ATtiny817. Added GCC assembler support for ATtiny11, ATtiny12, and ATtiny15.</release>
+      <release version="1.0.79" date="2016-04-11">Added ATtiny102, ATtiny104, ATtiny80 and ATtiny840. Updated documentation links.</release>
+      <release version="1.0.78" date="2016-02-18">Added ATtiny102, ATtiny104, ATtiny80 and ATtiny840. Updated documentation links.</release>
+      <release version="1.0.71" date="2015-11-06">Fix simulator load issue for ATtiny85, ATtiny43U, ATtiny88, ATtiny1634, ATtiny45, ATtiny48, ATtiny40, ATtiny25, and ATtiny20.</release>
+      <release version="1.0.70" date="2015-10-28">Initial release.</release>
    </releases>
    <keywords>
       <keyword>Atmel</keyword>
@@ -126,6 +127,7 @@
                   <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
                   <at:tool id="com.atmel.avrdbg.tool.ispmk2"/>
                   <at:tool id="com.atmel.avrdbg.tool.medbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
                   <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
@@ -584,6 +586,7 @@
                   <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
                   <at:tool id="com.atmel.avrdbg.tool.ispmk2"/>
                   <at:tool id="com.atmel.avrdbg.tool.medbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
                   <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
@@ -970,7 +973,7 @@
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
                   <at:tool id="com.atmel.avrdbg.tool.simulator"/>
-                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATTINY202"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATtiny202"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.win32"
                                value="simulator/win32/libattinyxb.dll"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.linux64"
@@ -1118,7 +1121,7 @@
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
                   <at:tool id="com.atmel.avrdbg.tool.simulator"/>
-                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATTINY204"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATtiny204"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.win32"
                                value="simulator/win32/libattinyxb.dll"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.linux64"
@@ -1726,6 +1729,7 @@
                   <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
                   <at:tool id="com.atmel.avrdbg.tool.ispmk2"/>
                   <at:tool id="com.atmel.avrdbg.tool.medbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
                   <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
@@ -2406,7 +2410,7 @@
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
                   <at:tool id="com.atmel.avrdbg.tool.simulator"/>
-                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATTINY3217"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATtiny3217"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.win32"
                                value="simulator/win32/libattinyxd.dll"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.linux64"
@@ -2554,7 +2558,7 @@
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
                   <at:tool id="com.atmel.avrdbg.tool.simulator"/>
-                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATTINY3216"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATtiny3216"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.win32"
                                value="simulator/win32/libattinyxd.dll"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.linux64"
@@ -2807,7 +2811,7 @@
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
                   <at:tool id="com.atmel.avrdbg.tool.simulator"/>
-                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATTINY3214"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATtiny3214"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.win32"
                                value="simulator/win32/libattinyxd.dll"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.linux64"
@@ -2960,7 +2964,7 @@
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
                   <at:tool id="com.atmel.avrdbg.tool.simulator"/>
-                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATTINY814"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATtiny814"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.win32"
                                value="simulator/win32/libattinyxa.dll"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.linux64"
@@ -3114,7 +3118,7 @@
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
                   <at:tool id="com.atmel.avrdbg.tool.simulator"/>
-                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATTINY817"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATtiny817"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.win32"
                                value="simulator/win32/libattinyxa.dll"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.linux64"
@@ -3278,7 +3282,7 @@
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
                   <at:tool id="com.atmel.avrdbg.tool.simulator"/>
-                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATTINY816"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATtiny816"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.win32"
                                value="simulator/win32/libattinyxa.dll"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.linux64"
@@ -3715,7 +3719,7 @@
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
                   <at:tool id="com.atmel.avrdbg.tool.simulator"/>
-                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATTINY1614"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATtiny1614"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.win32"
                                value="simulator/win32/libattinyxc.dll"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.linux64"
@@ -3863,7 +3867,7 @@
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
                   <at:tool id="com.atmel.avrdbg.tool.simulator"/>
-                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATTINY1617"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATtiny1617"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.win32"
                                value="simulator/win32/libattinyxc.dll"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.linux64"
@@ -4021,7 +4025,7 @@
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
                   <at:tool id="com.atmel.avrdbg.tool.simulator"/>
-                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATTINY1616"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATtiny1616"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.win32"
                                value="simulator/win32/libattinyxc.dll"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.linux64"
@@ -4179,7 +4183,7 @@
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
                   <at:tool id="com.atmel.avrdbg.tool.simulator"/>
-                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATTINY406"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATtiny406"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.win32"
                                value="simulator/win32/libattinyxb.dll"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.linux64"
@@ -4457,7 +4461,7 @@
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
                   <at:tool id="com.atmel.avrdbg.tool.simulator"/>
-                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATTINY404"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATtiny404"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.win32"
                                value="simulator/win32/libattinyxb.dll"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.linux64"
@@ -4720,7 +4724,7 @@
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
                   <at:tool id="com.atmel.avrdbg.tool.simulator"/>
-                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATTINY402"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATtiny402"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.win32"
                                value="simulator/win32/libattinyxb.dll"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.linux64"
@@ -5092,6 +5096,7 @@
                   <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
                   <at:tool id="com.atmel.avrdbg.tool.ispmk2"/>
                   <at:tool id="com.atmel.avrdbg.tool.medbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
                   <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
@@ -5453,7 +5458,7 @@
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
                   <at:tool id="com.atmel.avrdbg.tool.simulator"/>
-                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATTINY214"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATtiny214"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.win32"
                                value="simulator/win32/libattinyxb.dll"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.linux64"
@@ -5601,7 +5606,7 @@
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
                   <at:tool id="com.atmel.avrdbg.tool.simulator"/>
-                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATTINY212"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATtiny212"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.win32"
                                value="simulator/win32/libattinyxb.dll"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.linux64"
@@ -5710,6 +5715,7 @@
                   <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
                   <at:tool id="com.atmel.avrdbg.tool.ispmk2"/>
                   <at:tool id="com.atmel.avrdbg.tool.medbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
                   <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
@@ -6049,7 +6055,7 @@
                              rw="RW"
                              size="0x20"
                              start="0x00001300"
-                             type="signatures"
+                             type="user_signatures"
                              address-space="data"/>
                   <at:memory exec="1"
                              name="PROGMEM"
@@ -6072,7 +6078,7 @@
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
                   <at:tool id="com.atmel.avrdbg.tool.simulator"/>
-                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATTINY807"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATtiny807"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.win32"
                                value="simulator/win32/libattinyxf.dll"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.linux64"
@@ -6587,7 +6593,7 @@
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
                   <at:tool id="com.atmel.avrdbg.tool.simulator"/>
-                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATTINY416"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATtiny416"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.win32"
                                value="simulator/win32/libattinyxb.dll"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.linux64"
@@ -6722,7 +6728,7 @@
                              rw="RW"
                              size="0x20"
                              start="0x00001300"
-                             type="signatures"
+                             type="user_signatures"
                              address-space="data"/>
                   <at:memory exec="1"
                              name="PROGMEM"
@@ -6745,7 +6751,7 @@
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
                   <at:tool id="com.atmel.avrdbg.tool.simulator"/>
-                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATTINY806"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATtiny806"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.win32"
                                value="simulator/win32/libattinyxf.dll"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.linux64"
@@ -6854,6 +6860,7 @@
                   <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
                   <at:tool id="com.atmel.avrdbg.tool.ispmk2"/>
                   <at:tool id="com.atmel.avrdbg.tool.medbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
                   <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
@@ -6983,7 +6990,7 @@
                              rw="RW"
                              size="0x20"
                              start="0x00001300"
-                             type="signatures"
+                             type="user_signatures"
                              address-space="data"/>
                   <at:memory exec="1"
                              name="PROGMEM"
@@ -7006,7 +7013,7 @@
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
                   <at:tool id="com.atmel.avrdbg.tool.simulator"/>
-                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATTINY804"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATtiny804"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.win32"
                                value="simulator/win32/libattinyxf.dll"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.linux64"
@@ -7503,6 +7510,7 @@
                   <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
                   <at:tool id="com.atmel.avrdbg.tool.ispmk2"/>
                   <at:tool id="com.atmel.avrdbg.tool.medbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
                   <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
@@ -7642,7 +7650,7 @@
                              rw="RW"
                              size="0x20"
                              start="0x00001300"
-                             type="signatures"
+                             type="user_signatures"
                              address-space="data"/>
                   <at:memory exec="1"
                              name="PROGMEM"
@@ -7665,7 +7673,7 @@
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
                   <at:tool id="com.atmel.avrdbg.tool.simulator"/>
-                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATTINY1606"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATtiny1606"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.win32"
                                value="simulator/win32/libattinyxf.dll"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.linux64"
@@ -7790,7 +7798,7 @@
                              rw="RW"
                              size="0x20"
                              start="0x00001300"
-                             type="signatures"
+                             type="user_signatures"
                              address-space="data"/>
                   <at:memory exec="1"
                              name="PROGMEM"
@@ -7813,7 +7821,7 @@
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
                   <at:tool id="com.atmel.avrdbg.tool.simulator"/>
-                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATTINY1607"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATtiny1607"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.win32"
                                value="simulator/win32/libattinyxf.dll"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.linux64"
@@ -7938,7 +7946,7 @@
                              rw="RW"
                              size="0x20"
                              start="0x00001300"
-                             type="signatures"
+                             type="user_signatures"
                              address-space="data"/>
                   <at:memory exec="1"
                              name="PROGMEM"
@@ -7961,7 +7969,7 @@
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
                   <at:tool id="com.atmel.avrdbg.tool.simulator"/>
-                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATTINY1604"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATtiny1604"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.win32"
                                value="simulator/win32/libattinyxf.dll"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.linux64"
@@ -8214,7 +8222,7 @@
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
                   <at:tool id="com.atmel.avrdbg.tool.simulator"/>
-                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATTINY414"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATtiny414"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.win32"
                                value="simulator/win32/libattinyxb.dll"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.linux64"
@@ -8362,7 +8370,7 @@
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
                   <at:tool id="com.atmel.avrdbg.tool.simulator"/>
-                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATTINY417"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATtiny417"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.win32"
                                value="simulator/win32/libattinyxa.dll"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.linux64"
@@ -8625,6 +8633,7 @@
                   <at:tool id="com.atmel.avrdbg.tool.atmelice"/>
                   <at:tool id="com.atmel.avrdbg.tool.ispmk2"/>
                   <at:tool id="com.atmel.avrdbg.tool.medbg"/>
+                  <at:tool id="com.atmel.avrdbg.tool.nedbg"/>
                   <at:tool id="com.atmel.avrdbg.tool.pickit4"/>
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
@@ -8777,7 +8786,7 @@
                   <at:tool id="com.atmel.avrdbg.tool.powerdebugger"/>
                   <at:tool id="com.atmel.avrdbg.tool.stk600"/>
                   <at:tool id="com.atmel.avrdbg.tool.simulator"/>
-                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATTINY412"/>
+                  <at:property name="com.atmel.avrdbg.tool.simulator.key" value="ATtiny412"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.win32"
                                value="simulator/win32/libattinyxb.dll"/>
                   <at:property name="com.atmel.avrdbg.tool.simulator.model.linux64"

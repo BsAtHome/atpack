@@ -274,7 +274,7 @@
               <signal group="X" index="13" function="default" pad="PB3"/>
               <signal group="X" index="14" function="default" pad="PB4"/>
               <signal group="X" index="15" function="default" pad="PB5"/>
-			  
+
 			  <signal group="Y" index="00" function="default" pad="PC0"/>
               <signal group="Y" index="01" function="default" pad="PC1"/>
               <signal group="Y" index="02" function="default" pad="PC2"/>
@@ -636,7 +636,7 @@
     </module>
     <module caption="" name="LOCKBIT">
       <register-group caption="" name="LOCKBIT">
-        <register caption="" name="LOCKBIT" offset="0x00" size="1">
+        <register caption="" name="LOCKBIT" offset="0x00" size="1" initval="0xFF">
           <bitfield caption="Memory Lock" mask="0x03" name="LB" values="ENUM_LB"/>
           <bitfield caption="Boot Loader Protection Mode" mask="0x0C" name="BLB0" values="ENUM_BLB"/>
           <bitfield caption="Boot Loader Protection Mode" mask="0x30" name="BLB1" values="ENUM_BLB2"/>
@@ -849,7 +849,8 @@
           <bitfield caption="Timer/Counter3 Overflow Interrupt Enable" mask="0x01" name="TOIE3"/>
         </register>
         <register caption="Timer/Counter3 Interrupt Flag register" name="TIFR3" offset="0x38" size="1" ocd-rw="R">
-              <bitfield caption="Output Compare Flag 3B" mask="0x04" name="OCF3B"/>
+          <bitfield caption="Timer/Counter3 Input Capture Flag" mask="0x20" name="ICF3"/>
+          <bitfield caption="Output Compare Flag 3B" mask="0x04" name="OCF3B"/>
           <bitfield caption="Output Compare Flag 3A" mask="0x02" name="OCF3A"/>
           <bitfield caption="Timer/Counter3 Overflow Flag" mask="0x01" name="TOV3"/>
         </register>
@@ -882,14 +883,15 @@
           <bitfield caption="Timer/Counter4 Overflow Interrupt Enable" mask="0x01" name="TOIE4"/>
         </register>
         <register caption="Timer/Counter4 Interrupt Flag register" name="TIFR4" offset="0x39" size="1" ocd-rw="R">
-              <bitfield caption="Output Compare Flag 4B" mask="0x04" name="OCF4B"/>
+          <bitfield caption="Timer/Counter4 Input Capture Flag" mask="0x20" name="ICF4"/>
+          <bitfield caption="Output Compare Flag 4B" mask="0x04" name="OCF4B"/>
           <bitfield caption="Output Compare Flag 4A" mask="0x02" name="OCF4A"/>
           <bitfield caption="Timer/Counter4 Overflow Flag" mask="0x01" name="TOV4"/>
         </register>
         <register caption="Timer/Counter4 Control Register A" name="TCCR4A" offset="0xA0" size="1">
           <bitfield caption="Compare Output Mode bits" mask="0xC0" name="COM4A"/>
           <bitfield caption="Compare Output Mode bits" mask="0x30" name="COM4B"/>
-          <bitfield caption="Waveform Genration Mode" mask="0x03" name="WGM4"/>
+          <bitfield caption="Waveform Generation Mode" mask="0x03" name="WGM4"/>
         </register>
         <register caption="Timer/Counter4 Control Register B" name="TCCR4B" offset="0xA1" size="1">
           <bitfield caption="Input Capture Noise Canceler" mask="0x80" name="ICNC4"/>
